@@ -1,0 +1,20 @@
+{
+  "editions": [
+    {
+      "slug": "johnsoncounty",
+      "name": "Johnson County",
+      "issuu_name": "johnson_county",
+      "state": "KS",
+      "slug_pattern": "{edition}_{state}_{month}_{year}",
+      "months_available": [8, 9, 10, 11, 12, 1, 2, 3],
+      "notes": "Pages 62+ are typically blank"
+    },
+    {
+      "slug": "manhattan",
+      "name": "Manhattan",
+      "issuu_name": "manhattan",
+      "state": "KS",
+      "slug_pattern": "{edition}_{state}_{month}_{year}"
+    }
+  ]
+}

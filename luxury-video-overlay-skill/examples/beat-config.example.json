@@ -1,0 +1,67 @@
+{
+  "videoSrc": "edited_base.mp4",
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "duration_seconds": 180,
+  "sfx_volume": 0.32,
+  "default_sfx": {
+    "number_counter": "sfx/soft-bing.mp3",
+    "gp_preloader_card": "sfx/riser-whoosh.mp3",
+    "bullet_reveal": "sfx/paper-crumple.mp3",
+    "fade_up_key": "sfx/soft-bing.mp3",
+    "full_screen_statement": "sfx/low-hit.mp3",
+    "recap": "sfx/soft-whoosh.mp3"
+  },
+  "ticker": {
+    "start": 0,
+    "duration": 180,
+    "items": [
+      "Join the Community",
+      "AI Automations",
+      "In-Person Networking",
+      "Warm Outreach",
+      "Coaching"
+    ],
+    "emphasis": "Join the Community"
+  },
+  "beats": [
+    {
+      "start": 3,
+      "duration": 4,
+      "kind": "number_counter",
+      "eyebrow": "Long-form focus",
+      "title": "Two mistakes",
+      "goldTitle": "new founders make",
+      "numberTarget": 2,
+      "numberLabel": "Errors to avoid",
+      "numberSubLabel": "Market first, then offer",
+      "side": "center",
+      "zoom": 1.08
+    },
+    {
+      "start": 11,
+      "duration": 5,
+      "kind": "bullet_reveal",
+      "eyebrow": "Mistake 01",
+      "title": "The logic sounds right",
+      "goldTitle": "until it meets reality",
+      "bullets": [
+        "No first clients yet",
+        "No local proof to transfer",
+        "Online outreach starts cold"
+      ],
+      "returnSfx": "sfx/soft-whoosh.mp3"
+    },
+    {
+      "start": 24,
+      "duration": 5,
+      "kind": "full_screen_statement",
+      "eyebrow": "Practical rule",
+      "title": "Start where trust",
+      "goldTitle": "can transfer fastest",
+      "body": "Let early proof compound through real conversations.",
+      "side": "center"
+    }
+  ]
+}

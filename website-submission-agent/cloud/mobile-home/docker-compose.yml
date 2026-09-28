@@ -1,0 +1,49 @@
+services:
+  mobile-home-submission-agent:
+    build:
+      context: ../..
+      dockerfile: cloud/mobile-home/Dockerfile
+    environment:
+      CAMPAIGN_CONFIG_PATH: "/data/config/campaign.json"
+      CAMPAIGN_CONFIG_JSON: "${CAMPAIGN_CONFIG_JSON:-}"
+      CAMPAIGN_CONFIG_B64: "${CAMPAIGN_CONFIG_B64:-}"
+      CAMPAIGN_CONFIG_URL: "${CAMPAIGN_CONFIG_URL:-}"
+      CAMPAIGN_NAME: "mobile-home"
+      RUN_ID_PREFIX: "mh"
+      TEMPLATE_FLAG: "--exact-mobile-home-template"
+      BROWSER_CHANNEL: "chromium"
+      HEADLESS: "true"
+      RUN_MODE: "loop"
+      SOURCE_CSV: "/data/input/mobile-home-full-queue.csv"
+      QUEUE_CSV_B64: ""
+      QUEUE_CSV_TEXT: ""
+      QUEUE_CSV_URL: ""
+      QUEUE_SKIP_ROWS: "6426"
+      RESULTS_ROOT: "/data/runs"
+      STATE_FILE: "/data/state/mobile-home-resume-after-6426-state.json"
+      BATCH_LIMIT: "25"
+      LOOP_SLEEP_SECONDS: "300"
+      SENDER_NAME: ""
+      SENDER_EMAIL: ""
+      SENDER_PHONE: ""
+      SENDER_ADDRESS: "1455 Clearview Drive"
+      SENDER_CITY: "McKinney"
+      SENDER_STATE: "TX"
+      SENDER_POSTAL_CODE: "75072"
+      SUBJECT: "Michigan mobile home case study"
+      DRY_RUN: "false"
+      REVIEW_BEFORE_SUBMIT: "false"
+      CAPSOLVER_API_KEY: ""
+      SUMMARY_FILE: "/data/state/latest-summary.json"
+      WORKER_STATUS_FILE: "/data/state/latest-worker-status.json"
+      WORKER_EVENTS_FILE: "/data/state/worker-events.jsonl"
+      STATUS_SERVER_ENABLED: "false"
+      STATUS_HOST: "0.0.0.0"
+      STATUS_PORT: "8080"
+      STATUS_AUTH_TOKEN: ""
+    volumes:
+      - mobile-home-submission-data:/data
+    restart: unless-stopped
+
+volumes:
+  mobile-home-submission-data:

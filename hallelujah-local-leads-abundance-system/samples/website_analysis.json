@@ -1,0 +1,54 @@
+{
+  "slug": "delta-vega-capital",
+  "description": "Delta Vega Capital - A professional site targeting investors and business owners. Built with Brizy page builder. 4 content sections, 6 images, 2 CTA buttons. Nav: Home, About, Services, Contact. Dark scheme (#09240F primary, #c4842a accent). 2 fonts (Playfair Display, Source Sans Pro).",
+  "scores": {
+    "visual_hierarchy": 7,
+    "layout": 8,
+    "cta": 6,
+    "typography": 8,
+    "color": 7,
+    "social_proof": 2,
+    "content": 7,
+    "modern_features": 5,
+    "imagery": 7,
+    "overall": 6.3
+  },
+  "gaps": [
+    "No testimonials or social proof - missing trust signals",
+    "Built with brizy page builder - template-looking design",
+    "No animations or transitions - feels static and dated",
+    "Only 2 CTA buttons - needs primary CTA in hero + secondary CTAs throughout"
+  ],
+  "strengths": [
+    "Has hero section with call-to-action",
+    "Good page structure with 4 sections",
+    "Contact information present",
+    "Social media links present"
+  ],
+  "html_analysis": {
+    "sections": 4,
+    "headings": [
+      {"tag": "h1", "text": "Strategic Investment Advisory"},
+      {"tag": "h2", "text": "Our Services"},
+      {"tag": "h2", "text": "Why Choose Delta Vega"},
+      {"tag": "h2", "text": "Get In Touch"}
+    ],
+    "images_count": 6,
+    "word_count": 320,
+    "has_hero": true,
+    "has_testimonials": false,
+    "has_footer": true,
+    "builder_name": "brizy"
+  },
+  "recommended_components": [
+    "scroll-reveal",
+    "glassmorphism",
+    "gradient-text",
+    "gold-gradient-line",
+    "sticky-blur-nav",
+    "counter-stats",
+    "pill-glow"
+  ],
+  "recommended_palette": "finance-law",
+  "recommended_inspiration": "delta-vega-luxury"
+}

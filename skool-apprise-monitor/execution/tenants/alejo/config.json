@@ -1,0 +1,82 @@
+{
+  "tenant_id": "alejo",
+  "community_slug": "TODO_alejo_skool_slug",
+  "display_name": "Alejo (TODO: fill in display name)",
+  "schedule": "08:00/14:00/20:00 EST",
+
+  "members": {
+    "max_pages_per_run": 3,
+    "churn_threshold_days": 14,
+    "max_enrich_per_run": 20,
+    "enrich_cache_days": 30
+  },
+
+  "scoring": {
+    "financial": {
+      "enabled": true,
+      "threshold_alert": 45,
+      "tiers": {"A": 70, "B": 45, "C": 25}
+    },
+    "heroes_arc_icp": {
+      "enabled": true,
+      "threshold_alert": 60,
+      "tiers": {"A": 80, "B": 60, "C": 40}
+    }
+  },
+
+  "posts": {
+    "enabled": true,
+    "lookback_hours": 8,
+    "monetary_win_keywords": [
+      "closed", "landed", "signed", "made $", "earned", "first client",
+      "revenue", "paid", "invoice", "contract", "deal", "sale", "client win",
+      "booked", "sold", "new client", "new contract", "recurring", "MRR", "ARR"
+    ],
+    "antigravity_keywords": [
+      "anti-gravity", "antigravity", "anti gravity", "florian", "florianrolke",
+      "alejo", "TODO_add_alejo_specific_keywords"
+    ]
+  },
+
+  "alerts": {
+    "florian": {
+      "email": "you@example.com",
+      "receives": [
+        "new_qualified_member",
+        "churn_qualified_member",
+        "monetary_win",
+        "antigravity_mention"
+      ],
+      "desktop_push": "ntfy://ntfy.sh/skool-icp-cb311748",
+      "include_draft": true
+    },
+    "alejo": {
+      "email": "TODO_alejo_email@example.com",
+      "receives": [
+        "new_qualified_member",
+        "churn_qualified_member",
+        "monetary_win"
+      ],
+      "include_draft": false
+    }
+  },
+
+  "messaging": {
+    "mode": "draft_email_to_florian",
+    "model": "anthropic/claude-haiku-4.5",
+    "tone_template": "TODO: Define Alejo's tone for outreach DMs. 3-4 sentences. No emojis.",
+    "include_post_matches": true,
+    "max_post_matches": 2
+  },
+
+  "notifications": {
+    "apprise_url": "https://notify.florianrolke.com"
+  },
+
+  "vectorization": {
+    "enabled": true,
+    "supabase_table": "skool_posts_alejo",
+    "embedding_model": "text-embedding-3-small",
+    "embedding_dims": 1536
+  }
+}

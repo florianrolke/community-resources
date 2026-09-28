@@ -1,0 +1,38 @@
+{
+  "production_stats": {
+    "total_businesses_scraped": 40000,
+    "total_linkedin_profiles_found": 5000,
+    "total_clients_deployed": 16,
+    "total_markets": 12,
+    "markets": [
+      "New York (NY)", "Kansas City (KS/MO)", "Charlotte-Durham (NC)",
+      "Dallas-Fort Worth (TX)", "Northern California", "Michigan",
+      "Arizona", "New Jersey", "Miami-Fort Lauderdale (FL)",
+      "Atlanta (GA)", "London (UK)", "Perth (Australia)"
+    ],
+    "chamber_platforms_supported": 6,
+    "bni_portals_supported": 11,
+    "python_scripts_consolidated": "80+ into ~20",
+    "skills_documented": 16
+  },
+  "hit_rates": {
+    "bni_linkedin": "92%",
+    "chamber_linkedin_growthzone": "56-100%",
+    "chamber_linkedin_atlas": "95%+",
+    "chamber_linkedin_average": "30-66%",
+    "magazine_linkedin": "60%",
+    "magazine_website": "90%",
+    "bni_website": "99.6%"
+  },
+  "weekly_output": {
+    "linkedin_prospects": 100,
+    "personalized_email_drafts": 5,
+    "chamber_contact_messages": 5,
+    "lead_context_cards": 110
+  },
+  "monthly_cost": {
+    "minimum": "$0 (chamber + BNI scraping only)",
+    "recommended": "$16-35 (all 4 pillars)",
+    "maximum": "$50 (with Perplexity deep research)"
+  }
+}

@@ -1,0 +1,70 @@
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    env_file: ../.env
+    environment:
+      DATA_DIR: /app/data
+      NEO4J_URI: bolt://neo4j:7687
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../data:/app/data
+    depends_on:
+      neo4j:
+        condition: service_healthy
+    command: uvicorn apps.api.main:app --host 0.0.0.0 --port 8080
+
+  worker:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    env_file: ../.env
+    environment:
+      DATA_DIR: /app/data
+      NEO4J_URI: bolt://neo4j:7687
+    volumes:
+      - ../data:/app/data
+    depends_on:
+      neo4j:
+        condition: service_healthy
+    command: python apps/worker/main.py
+
+  scheduler:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    env_file: ../.env
+    environment:
+      DATA_DIR: /app/data
+      NEO4J_URI: bolt://neo4j:7687
+    volumes:
+      - ../data:/app/data
+    depends_on:
+      neo4j:
+        condition: service_healthy
+    command: python apps/scheduler/main.py
+
+  neo4j:
+    image: neo4j:5-community
+    environment:
+      NEO4J_AUTH: neo4j/${NEO4J_PASSWORD:-meeting-intelligence-password}
+      NEO4J_server_memory_heap_initial__size: 512m
+      NEO4J_server_memory_heap_max__size: 1G
+      NEO4J_server_memory_pagecache_size: 512m
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+    healthcheck:
+      test: ["CMD-SHELL", "wget -O /dev/null -q http://localhost:7474 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  neo4j_data:
+  neo4j_logs:

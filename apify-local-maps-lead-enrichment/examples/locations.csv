@@ -1,0 +1,5 @@
+location_id,city,county,state,state_abbr,geo_text
+tx_harris_houston,Houston,Harris County,Texas,TX,Houston Harris County Texas
+tx_dallas_dallas,Dallas,Dallas County,Texas,TX,Dallas Dallas County Texas
+fl_miami_miami,Miami,Miami-Dade County,Florida,FL,Miami Miami-Dade County Florida
+

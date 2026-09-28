@@ -1,0 +1,5 @@
+requests>=2.31
+python-dotenv>=1.0
+Pillow>=10.0
+# optional, only for scripts/verify.py (headless scrub check)
+# playwright>=1.40

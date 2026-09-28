@@ -1,0 +1,29 @@
+[project]
+name = "meeting-intelligence-community"
+version = "0.1.0"
+description = "Self-hosted Fathom meeting summaries, Google Doc drafts, Gmail drafts, and Neo4j transcript vectorization."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115.0",
+  "uvicorn[standard]>=0.30.0",
+  "requests>=2.32.0",
+  "python-dotenv>=1.0.1",
+  "neo4j>=5.23.0",
+  "openai>=1.40.0",
+  "google-generativeai>=0.7.2",
+  "google-auth>=2.33.0",
+  "google-auth-oauthlib>=1.2.1",
+  "google-api-python-client>=2.140.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3.0", "ruff>=0.5.0"]
+modal = ["modal>=0.64.0"]
+
+[tool.pytest.ini_options]
+pythonpath = ["packages"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120

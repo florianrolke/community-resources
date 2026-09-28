@@ -1,0 +1,5 @@
+# Binder builder needs nothing beyond the standard library.
+# These are for the optional scrape and enrich steps.
+playwright>=1.40.0     # scraping conference sites
+requests>=2.31.0       # Tavily / Exa / Apify
+python-dotenv>=1.0.0   # reading .env

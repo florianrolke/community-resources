@@ -1,0 +1,30 @@
+{
+  "industry_name": "example specialty resellers",
+  "maps_actor_id": "solidcode~google-maps-scraper-2-5-per-1-000-results",
+  "search_terms": [
+    "mobile home dealer",
+    "manufactured home dealer",
+    "mobile homes for sale",
+    "manufactured homes for sale"
+  ],
+  "include_terms": [
+    "mobile home",
+    "manufactured home",
+    "modular home",
+    "dealer"
+  ],
+  "exclude_terms": [
+    "single family",
+    "cash home buyer",
+    "real estate agent",
+    "apartment"
+  ],
+  "rank_buckets": {
+    "top_3": 3,
+    "top_10": 10,
+    "top_20": 20
+  },
+  "batch_size_queries": 100,
+  "max_results_per_query": 20
+}
+

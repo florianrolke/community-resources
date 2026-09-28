@@ -1,0 +1,17 @@
+.env
+.env.*
+!.env.example
+credentials.json
+token.json
+youtube_token.json
+*.log
+__pycache__/
+.pytest_cache/
+.venv/
+venv/
+.tmp/
+reports/raw/
+browser-state/
+playwright/.auth/
+data/*
+!data/.gitkeep

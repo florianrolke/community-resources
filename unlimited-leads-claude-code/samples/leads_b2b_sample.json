@@ -1,0 +1,44 @@
+[
+  {
+    "first_name": "Dana",
+    "last_name": "Okafor",
+    "name": "Dana Okafor",
+    "job_title": "Owner",
+    "company": "Riverbend Roofing",
+    "company_website": "https://riverbendroofing.example.com",
+    "email": "dana@riverbendroofing.example.com",
+    "linkedin": "https://www.linkedin.com/in/example-dana-okafor",
+    "location": "Mobile, Alabama",
+    "headline": "Owner at Riverbend Roofing",
+    "company_description": "Residential and commercial roofing, Gulf Coast.",
+    "_source": "linkedin-search"
+  },
+  {
+    "first_name": "Marcus",
+    "last_name": "Whitfield",
+    "name": "Marcus Whitfield",
+    "job_title": "Founder",
+    "company": "Delta Signworks",
+    "company_website": "https://deltasignworks.example.com",
+    "email": "marcus@deltasignworks.example.com",
+    "linkedin": "https://www.linkedin.com/in/example-marcus-whitfield",
+    "location": "Tuscaloosa, Alabama",
+    "headline": "Founder, Delta Signworks",
+    "company_description": "Custom signage and vehicle wraps.",
+    "_source": "linkedin-search"
+  },
+  {
+    "first_name": "Priya",
+    "last_name": "Raghavan",
+    "name": "Priya Raghavan",
+    "job_title": "Managing Partner",
+    "company": "Copperline Accounting",
+    "company_website": "https://copperline.example.com",
+    "email": "",
+    "linkedin": "https://www.linkedin.com/in/example-priya-raghavan",
+    "location": "Birmingham, Alabama",
+    "headline": "Managing Partner at Copperline Accounting",
+    "company_description": "Bookkeeping and tax for trades businesses.",
+    "_source": "linkedin-search"
+  }
+]

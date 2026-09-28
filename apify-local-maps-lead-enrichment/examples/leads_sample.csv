@@ -1,0 +1,4 @@
+place_id,business_name,address,city,state,phone,website,google_categories
+sample-place-1,Example Roofing Co,"100 Main St, Houston, TX",Houston,TX,(555) 010-1000,https://example-roofing.test,Roofing contractor
+sample-place-2,Sample Roof Repair,"200 Oak Ave, Dallas, TX",Dallas,TX,,https://sample-roof.test,Roofing contractor; Construction company
+

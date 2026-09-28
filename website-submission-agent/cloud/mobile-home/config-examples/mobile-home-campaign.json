@@ -1,0 +1,35 @@
+{
+  "campaign_name": "mobile-home",
+  "run_id_prefix": "mh",
+  "queue": {
+    "source_csv": "/data/input/mobile-home-strict-form-submission-queue.csv",
+    "url": ""
+  },
+  "runtime": {
+    "run_mode": "loop",
+    "batch_limit": 25,
+    "loop_sleep_seconds": 300,
+    "agent_timeout_seconds": 1800,
+    "browser_channel": "chromium",
+    "headless": true,
+    "delay_seconds": 3,
+    "dry_run": false,
+    "review_before_submit": false
+  },
+  "sender": {
+    "name": "Florian Rolke",
+    "email": "you@example.com",
+    "phone": "714 485 0838",
+    "address": "1455 Clearview Drive",
+    "city": "McKinney",
+    "state": "TX",
+    "postal_code": "75072"
+  },
+  "subject": "Michigan mobile home case study",
+  "template_flag": "--exact-mobile-home-template",
+  "results_root": "/data/runs",
+  "state_file": "/data/state/mobile-home-worker-state.json",
+  "summary_file": "/data/state/latest-summary.json",
+  "worker_status_file": "/data/state/latest-worker-status.json",
+  "worker_events_file": "/data/state/worker-events.jsonl"
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "label": "AD 1 - referral loop / ceiling water stain",
+    "stem": "example_referral_ceiling-stain",
+    "prompt": "Photorealistic vertical Meta advertisement photo. Scene: looking up at a white residential ceiling with a large brown water ring stain spreading from a corner, the paint beginning to bubble; a stepladder stands beneath it in a dim hallway lit by late-afternoon light. At the top: a solid dark navy rounded headline bar spanning the full width, with bold white condensed uppercase text on one or two lines reading exactly 'GET PAID FOR WHAT YOU ALREADY SEE', all text white. All text must be spelled exactly as specified. No other text, no logos, no faces, no watermarks."
+  },
+  {
+    "label": "AD 2 - the-fix-was-cheap / buckled wood floor",
+    "stem": "example_cheap-part_buckled-floor",
+    "prompt": "Photorealistic vertical Meta advertisement photo. Scene: buckled, cupping wood floorboards in a living room, a thin sheet of water creeping out from the base of a wall, warm table-lamp light raking across the warped boards so the damage reads clearly. At the top: a solid dark navy rounded headline bar spanning the full width, with bold white condensed uppercase text reading exactly 'THE LEAK WAS THE CHEAP PART.', all text white. The word LEAK is spelled L-E-A-K (a water leak, the plumbing word - NOT 'LEEK' the vegetable). All text must be spelled exactly as specified. No other text, no logos, no faces, no watermarks."
+  }
+]

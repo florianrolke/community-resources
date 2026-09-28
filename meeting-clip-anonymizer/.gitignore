@@ -1,0 +1,8 @@
+﻿__pycache__/
+*.pyc
+config.json
+*.mp4
+*.wav
+vad_full.wav
+seg_*/
+assets/

@@ -1,0 +1,19 @@
+# Secrets - never commit
+.env
+
+# Your own face / brand images (drop them in assets/, they stay local)
+assets/*.png
+assets/*.jpg
+assets/*.jpeg
+assets/*.webp
+!assets/.gitkeep
+
+# Generated thumbnails + logs
+output/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store

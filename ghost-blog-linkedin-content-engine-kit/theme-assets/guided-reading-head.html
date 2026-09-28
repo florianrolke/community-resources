@@ -1,0 +1,510 @@
+﻿<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --fr-bg: #ffffff;
+  --fr-soft: #f7f8fa;
+  --fr-ink: #17212f;
+  --fr-muted: #657282;
+  --fr-line: #dfe5ec;
+  --fr-line-soft: #edf1f5;
+  --fr-primary: #0b2742;
+  --fr-accent: #b58a34;
+  --fr-accent-soft: #fbf4e5;
+  --fr-reading: 760px;
+}
+
+.fr-article-shell {
+  background: var(--fr-bg);
+  color: var(--fr-ink);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  margin: 0 auto;
+  padding: 0 0 64px;
+}
+
+.fr-authority-header,
+.fr-content-section,
+.fr-final-architecture {
+  max-width: var(--fr-reading);
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.fr-authority-header {
+  padding-top: 44px;
+  padding-bottom: 12px;
+}
+
+.fr-eyebrow {
+  color: var(--fr-accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  margin: 0 0 14px;
+  text-transform: uppercase;
+}
+
+.fr-content-title {
+  color: var(--fr-primary);
+  font-family: Lora, Georgia, "Times New Roman", serif;
+  font-size: clamp(2.15rem, 5vw, 3.35rem);
+  font-weight: 650;
+  letter-spacing: 0;
+  line-height: 1.08;
+  margin: 0 0 16px;
+}
+
+.fr-meta-row {
+  align-items: center;
+  border-bottom: 1px solid var(--fr-line);
+  color: var(--fr-muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 14px;
+  gap: 8px 12px;
+  line-height: 1.5;
+  margin: 0 0 28px;
+  padding-bottom: 18px;
+}
+
+.fr-meta-row span:not(:last-child)::after {
+  color: var(--fr-line);
+  content: "/";
+  margin-left: 12px;
+}
+
+.fr-content-section,
+.fr-final-architecture {
+  padding-top: 24px;
+}
+
+.fr-content-section p,
+.fr-final-architecture p,
+.fr-content-section li,
+.fr-final-architecture li {
+  color: var(--fr-ink);
+  font-size: 18px;
+  line-height: 1.78;
+}
+
+.fr-content-section p,
+.fr-final-architecture p {
+  margin: 0 0 24px;
+}
+
+.fr-content-section h2,
+.fr-final-architecture h2 {
+  color: var(--fr-primary);
+  font-family: Lora, Georgia, "Times New Roman", serif;
+  font-size: clamp(1.55rem, 3vw, 2rem);
+  font-weight: 650;
+  letter-spacing: 0;
+  line-height: 1.2;
+  margin: 46px 0 14px;
+}
+
+.fr-content-section h2::after,
+.fr-final-architecture h2::after {
+  background: var(--fr-accent);
+  content: "";
+  display: block;
+  height: 2px;
+  margin-top: 12px;
+  width: 52px;
+}
+
+.fr-content-section h3,
+.fr-final-architecture h3 {
+  color: var(--fr-primary);
+  font-family: Lora, Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+  font-weight: 650;
+  line-height: 1.28;
+  margin: 32px 0 10px;
+}
+
+.fr-content-section h4,
+.fr-final-architecture h4 {
+  color: var(--fr-primary);
+  font-size: 1rem;
+  font-weight: 750;
+  line-height: 1.4;
+  margin: 22px 0 8px;
+}
+
+.fr-content-section a,
+.fr-final-architecture a,
+.fr-authority-header a {
+  color: var(--fr-primary);
+  font-weight: 700;
+  text-decoration-color: rgba(181, 138, 52, 0.45);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.fr-content-section a:hover,
+.fr-final-architecture a:hover,
+.fr-authority-header a:hover {
+  color: var(--fr-accent);
+}
+
+.fr-cta-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.fr-btn {
+  align-items: center;
+  background: var(--fr-primary);
+  border: 1px solid var(--fr-primary);
+  border-radius: 6px;
+  color: #ffffff !important;
+  display: inline-flex;
+  font-size: 15px;
+  font-weight: 800;
+  justify-content: center;
+  line-height: 1.2;
+  min-height: 46px;
+  padding: 13px 18px;
+  text-decoration: none !important;
+  transition: background 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+
+.fr-btn:hover {
+  background: #06192d;
+  border-color: #06192d;
+  color: #ffffff !important;
+}
+
+.fr-btn-secondary {
+  background: #ffffff;
+  border-color: var(--fr-line);
+  color: var(--fr-primary) !important;
+}
+
+.fr-btn-secondary:hover {
+  background: var(--fr-soft);
+  border-color: var(--fr-primary);
+  color: var(--fr-primary) !important;
+}
+
+.fr-inline-cta {
+  background: var(--fr-soft);
+  border: 1px solid var(--fr-line);
+  border-left: 4px solid var(--fr-primary);
+  border-radius: 6px;
+  margin: 32px 0;
+  padding: 22px 24px;
+}
+
+.fr-inline-cta h3 {
+  margin-top: 0;
+}
+
+.fr-video-embed {
+  border: 1px solid var(--fr-line);
+  border-radius: 6px;
+  margin: 28px 0;
+  overflow: hidden;
+}
+
+.fr-video-embed iframe {
+  aspect-ratio: 16 / 9;
+  border: 0;
+  display: block;
+  width: 100%;
+}
+
+.fr-video-embed figcaption {
+  background: var(--fr-soft);
+  border-top: 1px solid var(--fr-line);
+  color: var(--fr-muted);
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0;
+  padding: 10px 14px;
+}
+
+.fr-bluf,
+.fr-guide-toc,
+.fr-audience-box,
+.fr-section-faq,
+.fr-glossary-callout,
+.fr-related-posts,
+.fr-final-faq,
+.fr-cta-box,
+.fr-systems-cta {
+  border: 1px solid var(--fr-line);
+  border-radius: 6px;
+  margin: 24px 0;
+  padding: 22px 24px;
+}
+
+.fr-bluf {
+  background: var(--fr-accent-soft);
+  border-left: 4px solid var(--fr-accent);
+}
+
+.fr-guide-toc,
+.fr-audience-box,
+.fr-section-faq,
+.fr-glossary-callout,
+.fr-related-posts,
+.fr-final-faq {
+  background: var(--fr-soft);
+}
+
+.fr-bluf h2,
+.fr-guide-toc h2,
+.fr-section-faq h3,
+.fr-final-faq h2,
+.fr-related-posts h2,
+.fr-cta-box h2,
+.fr-glossary-callout h2,
+.fr-systems-cta h2 {
+  color: var(--fr-primary);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+
+.fr-bluf h2::after,
+.fr-guide-toc h2::after,
+.fr-section-faq h3::after,
+.fr-final-faq h2::after,
+.fr-related-posts h2::after,
+.fr-cta-box h2::after,
+.fr-glossary-callout h2::after,
+.fr-systems-cta h2::after {
+  display: none;
+}
+
+.fr-bluf p,
+.fr-guide-toc li,
+.fr-audience-box,
+.fr-section-faq p,
+.fr-final-faq p,
+.fr-related-posts li,
+.fr-glossary-callout p,
+.fr-systems-cta p,
+.fr-cta-box p {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.fr-section-faq .fr-faq-item h4,
+.fr-final-faq .fr-faq-item h3 {
+  color: var(--fr-primary);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.42;
+  margin: 0 0 8px;
+  text-transform: none;
+}
+
+.fr-section-faq .fr-faq-item p,
+.fr-final-faq .fr-faq-item p {
+  color: var(--fr-ink);
+  font-size: 16px;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.fr-section-faq .fr-faq-item + .fr-faq-item,
+.fr-final-faq .fr-faq-item + .fr-faq-item {
+  margin-top: 18px;
+}
+
+.fr-guide-toc ol,
+.fr-related-posts ul {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.fr-guide-toc li,
+.fr-related-posts li {
+  margin: 7px 0;
+}
+
+.fr-audience-box strong {
+  color: var(--fr-primary);
+}
+
+.fr-reference-table {
+  border: 1px solid var(--fr-line);
+  border-collapse: collapse;
+  margin: 28px 0;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.fr-reference-table caption {
+  color: var(--fr-muted);
+  caption-side: bottom;
+  font-size: 13px;
+  line-height: 1.55;
+  padding-top: 10px;
+  text-align: left;
+}
+
+.fr-reference-table th,
+.fr-reference-table td {
+  border-bottom: 1px solid var(--fr-line-soft);
+  padding: 13px 14px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.fr-reference-table th {
+  background: var(--fr-primary);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.fr-reference-table td {
+  font-size: 15px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.fr-reference-table tr:nth-child(even) td {
+  background: var(--fr-soft);
+}
+
+.fr-reference-table tbody th {
+  background: var(--fr-soft);
+  color: var(--fr-primary);
+}
+
+.fr-definition-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  margin: 24px 0;
+}
+
+.fr-definition-card {
+  border: 1px solid var(--fr-line);
+  border-radius: 6px;
+  padding: 18px;
+}
+
+.fr-definition-card strong {
+  color: var(--fr-primary);
+  display: block;
+  font-family: Lora, Georgia, "Times New Roman", serif;
+  font-size: 1.18rem;
+  font-weight: 650;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+.fr-definition-card p {
+  color: var(--fr-muted);
+  font-size: 15px;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.fr-faq-item {
+  border-top: 1px solid var(--fr-line);
+  padding-top: 18px;
+}
+
+.fr-faq-item:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.fr-systems-cta,
+.fr-cta-box {
+  background: var(--fr-primary);
+  border-color: var(--fr-primary);
+  color: #ffffff;
+}
+
+.fr-systems-cta h2,
+.fr-cta-box h2,
+.fr-systems-cta p,
+.fr-cta-box p {
+  color: #ffffff;
+}
+
+.fr-systems-cta .fr-btn,
+.fr-cta-box .fr-btn {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: var(--fr-primary) !important;
+}
+
+.fr-systems-cta .fr-btn:hover,
+.fr-cta-box .fr-btn:hover {
+  background: var(--fr-soft);
+  border-color: var(--fr-soft);
+}
+
+.fr-source-list {
+  border-top: 1px solid var(--fr-line);
+  color: var(--fr-muted);
+  font-size: 15px;
+  margin-top: 40px;
+  padding-top: 20px;
+}
+
+.fr-source-list ol {
+  padding-left: 22px;
+}
+
+@media (max-width: 760px) {
+  .fr-authority-header,
+  .fr-content-section,
+  .fr-final-architecture {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .fr-content-title {
+    font-size: 2rem;
+  }
+
+  .fr-content-section p,
+  .fr-final-architecture p,
+  .fr-content-section li,
+  .fr-final-architecture li {
+    font-size: 17px;
+  }
+
+  .fr-bluf,
+  .fr-guide-toc,
+  .fr-audience-box,
+  .fr-section-faq,
+  .fr-glossary-callout,
+  .fr-related-posts,
+  .fr-final-faq,
+  .fr-cta-box,
+  .fr-systems-cta {
+    padding: 18px;
+  }
+
+  .fr-reference-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    table-layout: auto;
+  }
+}
+</style>
+

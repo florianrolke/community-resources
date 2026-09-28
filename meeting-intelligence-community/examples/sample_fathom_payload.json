@@ -1,0 +1,45 @@
+{
+  "recording_id": "sample-001",
+  "title": "Meeting between Your Name and Alex Example",
+  "recording_start_time": "2026-06-02T15:00:00Z",
+  "recorded_by": {
+    "email": "you@example.com"
+  },
+  "calendar_invitees": [
+    {
+      "name": "Alex Example",
+      "email": "alex@example.com",
+      "is_external": true,
+      "matched_speaker_display_name": "Alex Example"
+    }
+  ],
+  "default_summary": {
+    "markdown_formatted": "Alex and the host discussed outreach copy, client onboarding, and next week's delivery plan."
+  },
+  "action_items": [
+    {
+      "text": "Alex will send the current onboarding checklist.",
+      "assignee": "Alex Example"
+    }
+  ],
+  "transcript": [
+    {
+      "speaker": {
+        "display_name": "Your Name"
+      },
+      "text": "Today let's review the LinkedIn outreach copy and the onboarding checklist."
+    },
+    {
+      "speaker": {
+        "display_name": "Alex Example"
+      },
+      "text": "The main blocker is that the first message is too generic. I want it to sound specific to the prospect."
+    },
+    {
+      "speaker": {
+        "display_name": "Your Name"
+      },
+      "text": "Good. We will rewrite the first message, define the follow-up sequence, and use the checklist for next week's delivery."
+    }
+  ]
+}

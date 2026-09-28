@@ -1,0 +1,30 @@
+{
+  "sender_name": "Your Name",
+  "next_meeting_default_days": 7,
+  "footer_template": "Wishing you much success - I'll see you in our next meeting on {next_meeting_date}!",
+  "reject_main_points_phrases": [
+    "strategic pivot",
+    "strategic shift",
+    "current business priorities",
+    "next steps from the call",
+    "opportunity pipeline",
+    "recent successes",
+    "strategy and tactics",
+    "technical requirements"
+  ],
+  "reject_first_paragraph_phrases": [
+    "game-changer",
+    "game changer",
+    "unlock your",
+    "seamless",
+    "synergy"
+  ],
+  "watch_phrases": [
+    "strategic",
+    "transition",
+    "scaling",
+    "implementation",
+    "optimization",
+    "framework"
+  ]
+}

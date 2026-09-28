@@ -1,0 +1,72 @@
+{
+  "tenant_id": "aiautomationsbyjack",
+  "community_slug": "aiautomationsbyjack",
+  "display_name": "AI Automations by Jack",
+  "schedule": "08:00/14:00/20:00 EST",
+
+  "members": {
+    "max_pages_per_run": 3,
+    "churn_threshold_days": 14,
+    "max_enrich_per_run": 20,
+    "enrich_cache_days": 30
+  },
+
+  "scoring": {
+    "financial": {
+      "enabled": true,
+      "threshold_alert": 45,
+      "tiers": {"A": 70, "B": 45, "C": 25}
+    },
+    "heroes_arc_icp": {
+      "enabled": true,
+      "threshold_alert": 60,
+      "tiers": {"A": 80, "B": 60, "C": 40}
+    }
+  },
+
+  "posts": {
+    "enabled": true,
+    "lookback_hours": 8,
+    "monetary_win_keywords": [
+      "closed", "landed", "signed", "made $", "earned", "first client",
+      "revenue", "paid", "invoice", "contract", "deal", "sale", "client win",
+      "booked", "sold", "new client", "new contract", "recurring", "MRR", "ARR"
+    ],
+    "antigravity_keywords": [
+      "anti-gravity", "antigravity", "anti gravity", "florian", "florianrolke"
+    ]
+  },
+
+  "alerts": {
+    "florian": {
+      "email": "you@example.com",
+      "receives": [
+        "new_qualified_member",
+        "churn_qualified_member",
+        "monetary_win",
+        "antigravity_mention"
+      ],
+      "desktop_push": "ntfy://push.florianrolke.com/skool-alerts",
+      "include_draft": true
+    },
+  },
+
+  "messaging": {
+    "mode": "draft_email_to_florian",
+    "model": "anthropic/claude-haiku-4.5",
+    "tone_template": "You are Florian, a sharp AI operator and community builder. Write a short (3-4 sentence) first-touch DM to a Skool member. Tone: direct, warm, curious — never salesy. Reference 1 specific detail from their profile. End with a simple open question about their business. No emojis. No 'I hope this message finds you well'. Get straight to the point.",
+    "include_post_matches": true,
+    "max_post_matches": 2
+  },
+
+  "notifications": {
+    "apprise_url": "https://notify.florianrolke.com"
+  },
+
+  "vectorization": {
+    "enabled": true,
+    "supabase_table": "skool_posts_jack",
+    "embedding_model": "text-embedding-3-small",
+    "embedding_dims": 1536
+  }
+}

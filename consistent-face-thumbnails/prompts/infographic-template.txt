@@ -1,0 +1,13 @@
+The scene is ONE premium, photorealistic 3D infographic card, shot slightly from above with real depth-of-field and soft shadows, like a product photo. Premium objects are arranged above a printed matte card lying on a clean, well-lit surface. It must look physically photographed and collector-grade, never flat or obviously AI-generated.
+
+HEADLINE: render one short, high-tension line in bold condensed uppercase - mostly white with the key word in a bright accent color, subtle 3D depth, one underline accent. It is the biggest text on the card.
+
+DATA: on the printed card, show the core numbers of the insight as a short, clean, structured list - at most 5 rows. Keep the numbers minimal and crisp.
+
+PROPS: add a few photorealistic miniature objects above the card that make the data physical - one clear metaphor sized to echo the numbers (for example stacks scaled to each value). One metaphor only, never a cluttered set.
+
+STRUCTURE: arrange the data as either two contrasting columns or a finite numbered system, so the viewer can locate themselves and feels they are holding a complete map worth saving.
+
+CONSTRAINTS: exactly one insight per image, mobile-legible at small size, no clutter, no extra icons, no watermark, and text must never sit over a face.
+
+FACE (optional): if a face reference is provided, place that exact person at the right edge of the card, EXACT face and natural expression unaltered - do not alter or augment their facial features in any way. If no face reference is given, omit the person entirely.

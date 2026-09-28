@@ -1,0 +1,7 @@
+{
+  "Alex Example": {
+    "email": "alex@example.com",
+    "aliases": ["Alex"]
+  },
+  "alex": "alex@example.com"
+}

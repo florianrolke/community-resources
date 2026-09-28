@@ -1,0 +1,565 @@
+{
+  "videoSrc": "two-mistakes-new-ai-agency-owners-make.mp4",
+  "fps": 30,
+  "width": 640,
+  "height": 360,
+  "durationFrames": 5691,
+  "overlays": [
+    {
+      "kind": "number_counter",
+      "startFrame": 84,
+      "durationFrames": 132,
+      "eyebrow": "Long-form focus",
+      "title": "Two mistakes",
+      "goldTitle": "new AI agency founders make",
+      "numberTarget": 2,
+      "numberLabel": "Errors to avoid",
+      "numberSubLabel": "Market first, then offer",
+      "accentColor": "#c9a96e",
+      "side": "center"
+    },
+    {
+      "kind": "gp_preloader_card",
+      "startFrame": 240,
+      "durationFrames": 162,
+      "eyebrow": "Mistake 01",
+      "title": "Do not mistake",
+      "goldTitle": "money for access",
+      "body": "American business owners may have budgets, but cold trust is still expensive.",
+      "accentColor": "#c9a96e",
+      "side": "left",
+      "revealSpeed": "fast"
+    },
+    {
+      "kind": "bullet_reveal",
+      "startFrame": 564,
+      "durationFrames": 180,
+      "eyebrow": "The Italy example",
+      "title": "The logic sounds right",
+      "goldTitle": "until it meets reality",
+      "bullets": [
+        "No first clients yet",
+        "No local proof to transfer",
+        "Online outreach starts cold"
+      ],
+      "accentColor": "#c9a96e",
+      "side": "left"
+    },
+    {
+      "kind": "full_screen_statement",
+      "startFrame": 936,
+      "durationFrames": 162,
+      "eyebrow": "Currency arbitrage",
+      "title": "The math can be true.",
+      "goldTitle": "The sales path can still fail.",
+      "body": "Higher budgets do not remove the need for credibility, context, and warm access.",
+      "accentColor": "#c9a96e",
+      "side": "center"
+    },
+    {
+      "kind": "fade_up_key",
+      "startFrame": 1314,
+      "durationFrames": 132,
+      "eyebrow": "Practical rule",
+      "title": "Start where trust",
+      "goldTitle": "can transfer fastest",
+      "body": "A local market lets early proof compound through real conversations.",
+      "accentColor": "#f6d27f",
+      "side": "left"
+    },
+    {
+      "kind": "bullet_reveal",
+      "startFrame": 1674,
+      "durationFrames": 192,
+      "eyebrow": "Warm rooms",
+      "title": "Find business owners",
+      "goldTitle": "already gathered",
+      "bullets": [
+        "Chamber of commerce",
+        "BNI, Rotary, Lions Club",
+        "Monthly association events"
+      ],
+      "accentColor": "#c9a96e",
+      "side": "left"
+    },
+    {
+      "kind": "delta_panel",
+      "startFrame": 2058,
+      "durationFrames": 162,
+      "eyebrow": "Avoid this room",
+      "title": "Startup hubs",
+      "goldTitle": "mentor beginners",
+      "body": "Established operators with current problems are the better first market.",
+      "accentColor": "#b87333",
+      "side": "left"
+    },
+    {
+      "kind": "bullet_reveal",
+      "startFrame": 2460,
+      "durationFrames": 186,
+      "eyebrow": "Association filter",
+      "title": "Use niches as",
+      "goldTitle": "market listening posts",
+      "bullets": [
+        "Roofing association",
+        "Accounting association",
+        "Real estate association"
+      ],
+      "accentColor": "#c9a96e",
+      "side": "left"
+    },
+    {
+      "kind": "number_counter",
+      "startFrame": 3114,
+      "durationFrames": 144,
+      "eyebrow": "Mistake 02",
+      "title": "The second trap",
+      "goldTitle": "is the obvious buyer",
+      "numberTarget": 2,
+      "numberLabel": "Second point",
+      "numberSubLabel": "Marketing agencies may need you least",
+      "accentColor": "#c9a96e",
+      "side": "center"
+    },
+    {
+      "kind": "gp_preloader_card",
+      "startFrame": 3336,
+      "durationFrames": 174,
+      "eyebrow": "Marketing agencies",
+      "title": "Already disrupted.",
+      "goldTitle": "Already adopting.",
+      "body": "They understand the tools and may be the least hungry implementation buyer.",
+      "accentColor": "#c9a96e",
+      "side": "left",
+      "revealSpeed": "fast"
+    },
+    {
+      "kind": "full_screen_statement",
+      "startFrame": 3660,
+      "durationFrames": 162,
+      "eyebrow": "Target market",
+      "title": "Do not chase",
+      "goldTitle": "the already-converted.",
+      "body": "Find the market that needs the outcome, not the market that already speaks the tool language.",
+      "accentColor": "#c9a96e",
+      "side": "center"
+    },
+    {
+      "kind": "bullet_reveal",
+      "startFrame": 3990,
+      "durationFrames": 198,
+      "eyebrow": "Bad-fit examples",
+      "title": "Some markets are",
+      "goldTitle": "harder than they look",
+      "bullets": [
+        "Real estate: not always brokers",
+        "Barbers: better as referrers",
+        "Restaurants: tough to serve"
+      ],
+      "accentColor": "#c9a96e",
+      "side": "left"
+    },
+    {
+      "kind": "fade_up_key",
+      "startFrame": 4356,
+      "durationFrames": 144,
+      "eyebrow": "This is the key",
+      "title": "Right market first.",
+      "goldTitle": "Offer second.",
+      "body": "The cleanest offer is built after you understand where urgency and access already exist.",
+      "accentColor": "#f6d27f",
+      "side": "left"
+    },
+    {
+      "kind": "bullet_reveal",
+      "startFrame": 4686,
+      "durationFrames": 186,
+      "eyebrow": "Decision rule",
+      "title": "Choose by",
+      "goldTitle": "proof potential",
+      "bullets": [
+        "Can you reach the buyer?",
+        "Can they feel the pain now?",
+        "Can one result travel?"
+      ],
+      "accentColor": "#c9a96e",
+      "side": "left"
+    },
+    {
+      "kind": "full_screen_statement",
+      "startFrame": 5046,
+      "durationFrames": 174,
+      "eyebrow": "Operating principle",
+      "title": "We do not guess niches.",
+      "goldTitle": "We engineer proof.",
+      "body": "The first market should make trust, urgency, and referrals easier instead of harder.",
+      "accentColor": "#c9a96e",
+      "side": "center"
+    },
+    {
+      "kind": "recap",
+      "startFrame": 5400,
+      "durationFrames": 162,
+      "eyebrow": "Recap",
+      "title": "Two mistakes.",
+      "goldTitle": "One correction.",
+      "body": "Avoid cold access markets and already-converted buyers. Start where proof can compound.",
+      "accentColor": "#c9a96e",
+      "side": "left"
+    }
+  ],
+  "tickerBands": [
+    {
+      "startFrame": 0,
+      "durationFrames": 5691,
+      "items": [
+        "Join the Community",
+        "AI Automations by Jack",
+        "In-Person Networking",
+        "Warm Outreach",
+        "Coach Florian"
+      ],
+      "emphasis": "Join the Community"
+    }
+  ],
+  "sfxCues": [
+    {
+      "id": "ticker-enter",
+      "startFrame": 0,
+      "file": "sfx/luxury-sweep.wav",
+      "volume": 0.11
+    },
+    {
+      "id": "counter-open",
+      "startFrame": 84,
+      "file": "sfx/luxury-ding.wav",
+      "volume": 0.15
+    },
+    {
+      "id": "return-whoosh-00",
+      "startFrame": 211,
+      "file": "sfx/luxury-whoosh.wav",
+      "volume": 0.095
+    },
+    {
+      "id": "mistake-01-shimmer",
+      "startFrame": 240,
+      "file": "sfx/luxury-shimmer.wav",
+      "volume": 0.14
+    },
+    {
+      "id": "mistake-01-whoosh",
+      "startFrame": 306,
+      "file": "sfx/luxury-whoosh.wav",
+      "volume": 0.12
+    },
+    {
+      "id": "return-whoosh-01",
+      "startFrame": 397,
+      "file": "sfx/luxury-whoosh.wav",
+      "volume": 0.095
+    },
+    {
+      "id": "jumpcut-decision-click",
+      "startFrame": 465,
+      "file": "sfx/luxury-click.wav",
+      "volume": 0.11
+    },
+    {
+      "id": "italy-paper-1",
+      "startFrame": 591,
+      "file": "sfx/luxury-paper.wav",
+      "volume": 0.15
+    },
+    {
+      "id": "italy-paper-2",
+      "startFrame": 603,
+      "file": "sfx/luxury-paper.wav",
+      "volume": 0.13
+    },
+    {
+      "id": "italy-paper-3",
+      "startFrame": 615,
+      "file": "sfx/luxury-paper.wav",
+      "volume": 0.13
+    },
+    {
+      "id": "return-whoosh-02",
+      "startFrame": 739,
+      "file": "sfx/luxury-whoosh.wav",
+      "volume": 0.095
+    },
+    {
+      "id": "currency-thump",
+      "startFrame": 936,
+      "file": "sfx/luxury-thump.wav",
+      "volume": 0.14
+    },
+    {
+      "id": "return-whoosh-03",
+      "startFrame": 1093,
+      "file": "sfx/luxury-whoosh.wav",
+      "volume": 0.095
+    },
+    {
+      "id": "jumpcut-experience-click",
+      "startFrame": 1200,
+      "file": "sfx/luxury-click.wav",
+      "volume": 0.11
+    },
+    {
+      "id": "trust-ding",
+      "startFrame": 1332,
+      "file": "sfx/luxury-ding.wav",
+      "volume": 0.15
+    },
+    {
+      "id": "jumpcut-practical-click",
+      "startFrame": 1356,
+      "file": "sfx/luxury-click.wav",
+      "volume": 0.1
+    },
+    {
+      "id": "return-whoosh-04",
+      "startFrame": 1441,
+      "file": "sfx/luxury-whoosh.wav",
+      "volume": 0.095
+    },
+    {
+      "id": "warm-paper-1",
+      "startFrame": 1698,
+      "file": "sfx/luxury-paper.wav",
+      "volume": 0.15
+    },
+    {
+      "id": "warm-paper-2",
+      "startFrame": 1710,
+      "file": "sfx/luxury-paper.wav",
+      "volume": 0.13
+    },
+    {
+      "id": "warm-paper-3",
+      "startFrame": 1722,
+      "file": "sfx/luxury-paper.wav",
+      "volume": 0.13
+    },
+    {
+      "id": "return-whoosh-05",
+      "startFrame": 1861,
+      "file": "sfx/luxury-whoosh.wav",
+      "volume": 0.095
+    },
+    {
+      "id": "startup-thump",
+      "startFrame": 2058,
+      "file": "sfx/luxury-thump.wav",
+      "volume": 0.14
+    },
+    {
+      "id": "return-whoosh-06",
+      "startFrame": 2215,
+      "file": "sfx/luxury-whoosh.wav",
+      "volume": 0.095
+    },
+    {
+      "id": "assoc-paper-1",
+      "startFrame": 2484,
+      "file": "sfx/luxury-paper.wav",
+      "volume": 0.15
+    },
+    {
+      "id": "assoc-paper-2",
+      "startFrame": 2496,
+      "file": "sfx/luxury-paper.wav",
+      "volume": 0.13
+    },
+    {
+      "id": "assoc-paper-3",
+      "startFrame": 2508,
+      "file": "sfx/luxury-paper.wav",
+      "volume": 0.13
+    },
+    {
+      "id": "return-whoosh-07",
+      "startFrame": 2641,
+      "file": "sfx/luxury-whoosh.wav",
+      "volume": 0.095
+    },
+    {
+      "id": "second-counter",
+      "startFrame": 3114,
+      "file": "sfx/luxury-ding.wav",
+      "volume": 0.15
+    },
+    {
+      "id": "return-whoosh-08",
+      "startFrame": 3253,
+      "file": "sfx/luxury-whoosh.wav",
+      "volume": 0.095
+    },
+    {
+      "id": "agency-shimmer",
+      "startFrame": 3336,
+      "file": "sfx/luxury-shimmer.wav",
+      "volume": 0.14
+    },
+    {
+      "id": "return-whoosh-09",
+      "startFrame": 3505,
+      "file": "sfx/luxury-whoosh.wav",
+      "volume": 0.095
+    },
+    {
+      "id": "converted-thump",
+      "startFrame": 3660,
+      "file": "sfx/luxury-thump.wav",
+      "volume": 0.14
+    },
+    {
+      "id": "jumpcut-market-click",
+      "startFrame": 3804,
+      "file": "sfx/luxury-click.wav",
+      "volume": 0.1
+    },
+    {
+      "id": "return-whoosh-10",
+      "startFrame": 3817,
+      "file": "sfx/luxury-whoosh.wav",
+      "volume": 0.095
+    },
+    {
+      "id": "badfit-paper-1",
+      "startFrame": 4014,
+      "file": "sfx/luxury-paper.wav",
+      "volume": 0.15
+    },
+    {
+      "id": "badfit-paper-2",
+      "startFrame": 4026,
+      "file": "sfx/luxury-paper.wav",
+      "volume": 0.13
+    },
+    {
+      "id": "badfit-paper-3",
+      "startFrame": 4038,
+      "file": "sfx/luxury-paper.wav",
+      "volume": 0.13
+    },
+    {
+      "id": "return-whoosh-11",
+      "startFrame": 4183,
+      "file": "sfx/luxury-whoosh.wav",
+      "volume": 0.095
+    },
+    {
+      "id": "key-ding",
+      "startFrame": 4374,
+      "file": "sfx/luxury-ding.wav",
+      "volume": 0.16
+    },
+    {
+      "id": "jumpcut-dozens-click",
+      "startFrame": 4485,
+      "file": "sfx/luxury-click.wav",
+      "volume": 0.1
+    },
+    {
+      "id": "return-whoosh-12",
+      "startFrame": 4495,
+      "file": "sfx/luxury-whoosh.wav",
+      "volume": 0.095
+    },
+    {
+      "id": "proof-paper-1",
+      "startFrame": 4710,
+      "file": "sfx/luxury-paper.wav",
+      "volume": 0.15
+    },
+    {
+      "id": "proof-paper-2",
+      "startFrame": 4722,
+      "file": "sfx/luxury-paper.wav",
+      "volume": 0.13
+    },
+    {
+      "id": "proof-paper-3",
+      "startFrame": 4734,
+      "file": "sfx/luxury-paper.wav",
+      "volume": 0.13
+    },
+    {
+      "id": "return-whoosh-13",
+      "startFrame": 4867,
+      "file": "sfx/luxury-whoosh.wav",
+      "volume": 0.095
+    },
+    {
+      "id": "engineer-thump",
+      "startFrame": 5046,
+      "file": "sfx/luxury-thump.wav",
+      "volume": 0.14
+    },
+    {
+      "id": "return-whoosh-14",
+      "startFrame": 5215,
+      "file": "sfx/luxury-whoosh.wav",
+      "volume": 0.095
+    },
+    {
+      "id": "recap-whoosh",
+      "startFrame": 5400,
+      "file": "sfx/luxury-whoosh.wav",
+      "volume": 0.13
+    },
+    {
+      "id": "return-whoosh-15",
+      "startFrame": 5557,
+      "file": "sfx/luxury-whoosh.wav",
+      "volume": 0.095
+    }
+  ],
+  "videoEffects": {
+    "jumpCuts": [
+      {
+        "id": "decision-punch-in",
+        "startFrame": 465,
+        "durationFrames": 38,
+        "zoom": 1.12,
+        "reason": "Transcript phrase: \"He made the decision...\"",
+        "resetFrame": 564
+      },
+      {
+        "id": "experience-punch-in",
+        "startFrame": 1200,
+        "durationFrames": 44,
+        "zoom": 1.14,
+        "reason": "Transcript phrase: \"That is where life experience comes in\"",
+        "resetFrame": 1314
+      },
+      {
+        "id": "practical-reset-punch",
+        "startFrame": 1356,
+        "durationFrames": 33,
+        "zoom": 1.08,
+        "reason": "Emphasis phrase: \"Practically speaking\"",
+        "resetFrame": 1674
+      },
+      {
+        "id": "right-market-punch",
+        "startFrame": 3804,
+        "durationFrames": 33,
+        "zoom": 1.1,
+        "reason": "Emphasis phrase: \"right target market\"",
+        "resetFrame": 3990
+      },
+      {
+        "id": "heard-dozens-punch",
+        "startFrame": 4485,
+        "durationFrames": 36,
+        "zoom": 1.1,
+        "reason": "Emphasis phrase: \"multiple dozens of times\"",
+        "resetFrame": 4686
+      }
+    ]
+  }
+}

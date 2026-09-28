@@ -1,0 +1,22 @@
+# Hallelujah Local Leads Abundance System — Dependencies
+
+# Core (all pillars)
+playwright>=1.40.0        # Browser automation for chambers + BNI scraping
+beautifulsoup4>=4.12.0    # HTML parsing
+requests>=2.31.0          # HTTP requests
+python-dotenv>=1.0.0      # .env file loading
+
+# Enrichment engine
+exa-py>=1.0.0             # Exa AI search API (LinkedIn/website discovery)
+
+# Magazine pillar only
+firecrawl-py>=0.0.16      # Issuu page screenshots
+anthropic>=0.18.0         # Claude Haiku vision for ad detection
+Pillow>=10.0.0            # Image processing
+numpy>=1.24.0             # Brightness analysis for Issuu chrome removal
+
+# Outreach pillar
+capsolver>=1.0.0          # CAPTCHA solving (reCAPTCHA, hCaptcha, Turnstile)
+
+# Optional
+tavily-python>=0.3.0      # Tavily search (enrichment fallback)

@@ -1,0 +1,24 @@
+{
+  "portal": "bni-nc.com",
+  "region": "North Carolina",
+  "chapters": [
+    {
+      "name": "Power Players",
+      "slug": "power-players",
+      "url": "https://bni-nc.com/chapters/power-players",
+      "meeting_day": "Tuesday",
+      "meeting_time": "7:00 AM",
+      "city": "Charlotte",
+      "state": "NC"
+    },
+    {
+      "name": "Executive Network",
+      "slug": "executive-network",
+      "url": "https://bni-nc.com/chapters/executive-network",
+      "meeting_day": "Wednesday",
+      "meeting_time": "11:30 AM",
+      "city": "Durham",
+      "state": "NC"
+    }
+  ]
+}

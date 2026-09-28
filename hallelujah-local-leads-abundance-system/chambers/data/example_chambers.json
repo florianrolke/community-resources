@@ -1,0 +1,41 @@
+{
+  "chambers": [
+    {
+      "slug": "kc-metro",
+      "name": "Greater Kansas City Chamber of Commerce",
+      "city": "Kansas City",
+      "state": "MO",
+      "website": "https://kcchamber.com",
+      "directory_url": "https://greaterkansascitychamberofcommerce-dev.growthzoneapp.com/memberdirectory",
+      "platform": "GrowthZone",
+      "public_directory": true,
+      "notes": "Full search + category + radius filtering"
+    },
+    {
+      "slug": "olathe",
+      "name": "Olathe Chamber of Commerce",
+      "city": "Olathe",
+      "state": "KS",
+      "website": "https://olathe.org",
+      "directory_url": "https://business.olathe.org/list",
+      "platform": "ChamberMaster",
+      "public_directory": true,
+      "notes": "A-Z navigation via searchalpha"
+    },
+    {
+      "slug": "overland-park",
+      "name": "Overland Park Chamber of Commerce",
+      "city": "Overland Park",
+      "state": "KS",
+      "website": "https://opchamber.org",
+      "directory_url": "https://business.opchamber.org/list",
+      "platform": "ChamberMaster",
+      "public_directory": true
+    }
+  ],
+  "metadata": {
+    "region": "Kansas City Metro",
+    "last_updated": "2026-03-16",
+    "total_chambers": 3
+  }
+}

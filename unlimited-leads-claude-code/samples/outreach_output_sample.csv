@@ -1,0 +1,26 @@
+﻿first_name,last_name,name,job_title,company,company_website,email,linkedin,location,headline,company_description,_source,fact1,explanation1,fact2,explanation2,fact3,explanation3,fact4,explanation4,fact5,explanation5,facts_found,needs_research,_tool_calls,EmailSubject,EmailOpener,CustomEmail,LinkedIN Req,outreach_status
+Dana,Okafor,Dana Okafor,Owner,Riverbend Roofing,https://riverbendroofing.example.com,dana@riverbendroofing.example.com,https://www.linkedin.com/in/example-dana-okafor,"Mobile, Alabama",Owner at Riverbend Roofing,"Residential and commercial roofing, Gulf Coast.",linkedin-search,Opened a second location in Daphne in the last quarter,"Source: company blog post, riverbendroofing.example.com/news",Hiring three additional crew members,Source: careers page,Named a preferred contractor by a regional insurer,Source: press page,Runs a storm-damage inspection programme,Source: services page,Family-run since 1998,Source: about page,5,False,4,Quick question about Riverbend Roofing's Daphne location,I noticed Riverbend Roofing recently opened a second location in Daphne.,"Hi Dana,
+
+I noticed Riverbend Roofing recently opened a second location in Daphne.
+
+Most companies scaling this fast hit the same bottleneck: leads going cold because nobody follows up past email one.
+
+We helped a 12-truck HVAC company in Mobile solve this and saw 31 extra booked jobs in 60 days in 60 days.
+
+Worth a 15-min chat to see if we can do the same for Riverbend Roofing?
+
+Your Name
+",Saw you just opened a second location in Daphne - I work with Riverbend-sized teams on lead flow and would value comparing notes.,ok
+Marcus,Whitfield,Marcus Whitfield,Founder,Delta Signworks,https://deltasignworks.example.com,marcus@deltasignworks.example.com,https://www.linkedin.com/in/example-marcus-whitfield,"Tuscaloosa, Alabama","Founder, Delta Signworks",Custom signage and vehicle wraps.,linkedin-search,Added large-format printing this year,Source: deltasignworks.example.com/equipment,Works with regional restaurant groups,Source: portfolio page,,,,,,,2,False,6,Quick question about Delta Signworks' large-format printing,I noticed Delta Signworks recently added large-format printing.,"Hi Marcus,
+
+I noticed Delta Signworks recently added large-format printing.
+
+Most companies scaling this fast hit the same bottleneck: leads going cold because nobody follows up past email one.
+
+We helped a 12-truck HVAC company in Mobile solve this and saw 31 extra booked jobs in 60 days in 60 days.
+
+Worth a 15-min chat to see if we can do the same for Delta Signworks?
+
+Your Name
+",Saw you just added large-format printing - I work with Delta-sized teams on lead flow and would value comparing notes.,ok
+Priya,Raghavan,Priya Raghavan,Managing Partner,Copperline Accounting,https://copperline.example.com,,https://www.linkedin.com/in/example-priya-raghavan,"Birmingham, Alabama",Managing Partner at Copperline Accounting,Bookkeeping and tax for trades businesses.,linkedin-search,,,,,,,,,,,0,True,8,,,,,skipped: no research facts

@@ -1,0 +1,111 @@
+{
+  "style": "proposal",
+  "lang": "en",
+  "brand": "Acme × You",
+  "title": "The Acme Content Engine — proposal",
+  "description": "A demo client proposal built with the story-telling-header scroll-scrub hero.",
+  "palette": {
+    "ink": "#0e1a28",
+    "ink_2": "#152030",
+    "gold": "#c9a068",
+    "gold_bright": "#dcb87e",
+    "cream": "#f2e8dc"
+  },
+  "fonts": { "serif": "Merriweather", "sans": "Outfit", "display": "Playfair Display" },
+  "nav": [],
+  "hero": {
+    "track_height": "520vh",
+    "eyebrow": "Proposal · Prepared for Acme Co.",
+    "scroll_hint": "Scroll to ascend",
+    "scroll_hint_last": "See the plan ↓",
+    "cta_primary": { "label": "Let's go", "href": "mailto:you@example.com?subject=Let%27s%20go" },
+    "cta_secondary": { "label": "Read the proposal", "href": "#body" },
+    "stats": [
+      { "value": "25 yrs", "label": "Category expertise" },
+      { "value": "1 system", "label": "Built for you, run without you" },
+      { "value": "10", "label": "Deliverables" },
+      { "value": "$X,X00", "label": "One-time, all-in" }
+    ],
+    "scenes": [
+      {
+        "id": "scene1",
+        "image_prompt": "Street-level view of an industrial workshop floor at blue hour, machines and workbenches under warm overhead work-lights, a worker walking across the wet concrete floor, moody and cinematic, photorealistic.",
+        "motion_prompt": "Very slow dolly push-in with a gentle upward crane, tilting up toward the ceiling lights, faint steam and dust drifting.",
+        "beat_headline": "25 years of craft.",
+        "beat_highlight": "Zero hours to spare.",
+        "beat_sub": "A system that turns your expertise into an industry-leading voice — built for you, run without you at a desk."
+      },
+      {
+        "id": "scene2",
+        "image_prompt": "A tidy home office at sunrise, warm golden light through a window, a laptop, notebook and coffee on a wooden desk, a workshop visible outside the window, calm and focused, photorealistic.",
+        "motion_prompt": "Slow push-in toward the desk and the bright window, dust motes drifting in the light beams, steam rising from the coffee.",
+        "beat_headline": "It builds your name",
+        "beat_highlight": "while you work.",
+        "beat_sub": "Trend intelligence finds the conversation. Your voice notes feed it. The engine writes, designs and publishes."
+      },
+      {
+        "id": "scene3",
+        "image_prompt": "Aerial view at dusk over a leafy suburban neighborhood, warm glowing windows, tree-lined streets, one welcoming home slightly in focus, peaceful evening, photorealistic.",
+        "motion_prompt": "Slow rising crane drifting forward over the rooftops, leaves swaying, warm light flickering in the windows.",
+        "beat_headline": "An asset that protects",
+        "beat_highlight": "what matters.",
+        "beat_sub": "An audience you own, guardrails that keep you safe, and a hedge against a changing industry."
+      },
+      {
+        "id": "scene4",
+        "image_prompt": "A sweeping golden-hour vista over open countryside with rolling green hills, a farmhouse and open land, luminous sky with the last sunlight breaking under the clouds, expansive and hopeful, photorealistic.",
+        "motion_prompt": "Slow forward aerial glide with a gentle rise revealing more of the golden hills and sky, warm sun glow breathing softly.",
+        "beat_headline": "The future,",
+        "beat_highlight": "on your own terms.",
+        "beat_sub": "Everything we build now is the foundation of the business you actually want."
+      }
+    ]
+  },
+  "body": {
+    "sections": [
+      {
+        "number": "0 1", "label": "The Goal",
+        "heading": "Your lifetime content engine",
+        "paragraphs": [
+          "A self-improving system that turns the hours you already spend working into an industry-leading presence — without asking for desk time you don't have."
+        ],
+        "bullets": [
+          "Become the recognized go-to voice in your niche.",
+          "Build the audience and assets that carry into your next chapter.",
+          "Run without you at a desk — your input is a few voice notes."
+        ]
+      },
+      {
+        "number": "0 2", "label": "Deliverables",
+        "heading": "Ten deliverables, each leading to your goal",
+        "deliverables": [
+          { "title": "Trend intelligence map", "detail": "Know exactly which conversation to own." },
+          { "title": "Tone-of-voice profile + guardrails", "detail": "Sounds like you; never off-brand." },
+          { "title": "Capture pipeline", "detail": "Voice notes → organized knowledge bank." },
+          { "title": "Content engine", "detail": "Long-form → posts, visuals, video." },
+          { "title": "Programmatic video editing", "detail": "Done for you — shorts + long form." },
+          { "title": "Blog + email capture", "detail": "An owned home base and list." },
+          { "title": "Distribution setup", "detail": "Publish consistently while you work." },
+          { "title": "Self-learning loop", "detail": "The system improves every month." },
+          { "title": "Launch-ready asset library", "detail": "Show up somewhere already known." },
+          { "title": "Lifetime updates", "detail": "Better in 18 months than on day one." }
+        ]
+      },
+      {
+        "number": "0 3", "label": "Investment",
+        "heading": "Two ways to begin",
+        "pricing": [
+          { "name": "One payment", "amount": "$X,X00", "sub": "one-time · all-in", "best": true,
+            "features": ["All ten deliverables", "Compute costs included", "Lifetime updates", "Fair-exit guarantee after month 1"] },
+          { "name": "Split payment", "amount": "$X00 × 2", "sub": "start · then day 45",
+            "features": ["Identical scope", "Identical lifetime updates", "Easier on the budget"] }
+        ]
+      }
+    ],
+    "cta": {
+      "headline": "Ready when you are.",
+      "sub": "Reply \"let's go\" and I'll send the kickoff details."
+    },
+    "footer": "Prepared for Acme Co. · Fictional demo proposal for story-telling-header."
+  }
+}

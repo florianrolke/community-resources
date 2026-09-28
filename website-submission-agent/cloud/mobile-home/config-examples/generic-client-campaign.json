@@ -1,0 +1,42 @@
+{
+  "campaign_name": "example-client",
+  "run_id_prefix": "example",
+  "queue": {
+    "source_csv": "/data/input/example-client-queue.csv",
+    "url": ""
+  },
+  "runtime": {
+    "run_mode": "loop",
+    "batch_limit": 25,
+    "loop_sleep_seconds": 300,
+    "agent_timeout_seconds": 1800,
+    "browser_channel": "chromium",
+    "headless": true,
+    "delay_seconds": 3,
+    "dry_run": true,
+    "review_before_submit": true
+  },
+  "sender": {
+    "name": "Sender Name",
+    "email": "sender@example.com",
+    "phone": "555-555-5555",
+    "address": "123 Main St",
+    "city": "Houston",
+    "state": "TX",
+    "postal_code": "77002"
+  },
+  "subject": "Partnership inquiry",
+  "template_flag": "none",
+  "message": "Hello [Company Name],\n\nApproved outreach message goes here.\n\n- Sender Name",
+  "results_root": "/data/runs",
+  "state_file": "/data/state/example-client-worker-state.json",
+  "summary_file": "/data/state/latest-summary.json",
+  "worker_status_file": "/data/state/latest-worker-status.json",
+  "worker_events_file": "/data/state/worker-events.jsonl",
+  "status": {
+    "enabled": false,
+    "host": "0.0.0.0",
+    "port": 8080,
+    "auth_token": ""
+  }
+}

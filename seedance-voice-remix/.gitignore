@@ -1,0 +1,37 @@
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+id_*
+*_ed25519*
+token*.json
+credentials*.json
+
+# Media and generated output
+assets/scenes/
+assets/vo/
+assets/broll/
+assets/voices.json
+output/
+.tmp/
+*.mp4
+*.mov
+*.mp3
+*.wav
+*.webm
+*.jpg
+*.png
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini

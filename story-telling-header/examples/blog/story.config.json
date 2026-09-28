@@ -1,0 +1,101 @@
+{
+  "style": "blog",
+  "lang": "en",
+  "brand": "Mountain Honey Co.",
+  "title": "Mountain Honey Co. — raw honey from the high valleys",
+  "description": "Raw, unfiltered mountain honey harvested by hand in the high valleys. A demo site for the story-telling-header scroll-scrub hero.",
+  "palette": {
+    "ink": "#1b1206",
+    "ink_2": "#241706",
+    "gold": "#e0a526",
+    "gold_bright": "#f6c453",
+    "cream": "#fdf7ec"
+  },
+  "fonts": { "serif": "Merriweather", "sans": "Source Sans 3", "display": "Playfair Display" },
+  "nav": [
+    { "label": "Our honey", "href": "#body" },
+    { "label": "The valley", "href": "#body" },
+    { "label": "Visit", "href": "#body" }
+  ],
+  "hero": {
+    "track_height": "520vh",
+    "eyebrow": "High Valley Apiary · Est. 1998",
+    "scroll_hint": "Scroll to follow the honey",
+    "scroll_hint_last": "Taste it below ↓",
+    "cta_primary": { "label": "Order a jar", "href": "#body" },
+    "cta_secondary": { "label": "Visit the apiary", "href": "#body" },
+    "stats": [
+      { "value": "1,600 m", "label": "High-valley altitude" },
+      { "value": "100%", "label": "Raw & unfiltered" },
+      { "value": "3", "label": "Single-origin varieties" },
+      { "value": "By hand", "label": "Every harvest" }
+    ],
+    "scenes": [
+      {
+        "id": "scene1",
+        "image_prompt": "Aerial golden-hour view of misty green mountains with a winding river valley below, small terraced fields, warm sunlight breaking through low clouds, photorealistic landscape.",
+        "motion_prompt": "Slow upward crane shot revealing more sky and the valley opening up, mist drifting between the ridges, treetops swaying gently.",
+        "beat_headline": "Raw honey from the",
+        "beat_highlight": "high valleys.",
+        "beat_sub": "Where the forest and the wildflowers meet, at sixteen hundred metres."
+      },
+      {
+        "id": "scene2",
+        "image_prompt": "Close-up of hands in light protective gloves holding a wooden frame of golden honeycomb dense with honeybees, warm backlight glowing through the wax cells, shallow depth of field, photorealistic.",
+        "motion_prompt": "Slow rise and gentle push-in toward the honeycomb, bees crawling and shimmering over the comb, a few bees flying slowly, warm backlight glowing.",
+        "beat_headline": "From our bees,",
+        "beat_highlight": "by hand.",
+        "beat_sub": "Harvested frame by frame and jarred without pasteurising. Real raw honey."
+      },
+      {
+        "id": "scene3",
+        "image_prompt": "A rustic wooden table by a sunlit window, fresh bread with honey drizzled over it, a jar of golden honey and a cup of tea, warm homely afternoon light, cozy and inviting, photorealistic.",
+        "motion_prompt": "Slow upward drift and soft push-in toward the table, steam curling up from the tea, honey glistening on the bread, warm afternoon light flickering.",
+        "beat_headline": "To your",
+        "beat_highlight": "table.",
+        "beat_sub": "Bread, tea and honey — the simplest good thing, the way it should be."
+      },
+      {
+        "id": "scene4",
+        "image_prompt": "A glass jar of glowing golden honey held up against a bright backlit mountain landscape at golden hour, a wooden honey dipper resting on top, green hills and sky behind, luminous and warm, photorealistic.",
+        "motion_prompt": "Slow rise toward the backlit jar, thick golden honey slowly swirling and catching the light, gentle sun flare breathing, dust motes drifting up.",
+        "beat_headline": "Honey you can trace",
+        "beat_highlight": "to the hive.",
+        "beat_sub": "Three single-origin varieties. Order a jar, or come visit the apiary yourself."
+      }
+    ]
+  },
+  "body": {
+    "answer_label": "In short",
+    "answer_q": "Where can I buy real raw mountain honey?",
+    "answer_a": "Mountain Honey Co. harvests raw, unfiltered honey by hand in the high valleys at ~1,600 m. Three single-origin varieties, jarred without pasteurising, shipped direct or picked up at the apiary.",
+    "sections": [
+      {
+        "heading": "Why high-valley honey is different",
+        "paragraphs": [
+          "At altitude, the forest and wildflower bloom give the honey an aroma and body you don't find in industrial honey. We harvest it ourselves and jar it without pasteurising or thinning it with syrups.",
+          "It's genuinely raw — which is why it crystallises over time, a natural sign of purity."
+        ]
+      },
+      {
+        "heading": "Our three varieties",
+        "bullets": [
+          "Wildflower: the everyday jar — floral and balanced.",
+          "Forest honeydew: darker, richer, less sweet.",
+          "Spring blossom: light, delicate and seasonal."
+        ]
+      },
+      {
+        "heading": "Order or visit",
+        "paragraphs": [
+          "Message us for the current jars, prices and shipping. Or come to the apiary, see the harvest, and taste honey straight from the frame."
+        ]
+      }
+    ],
+    "cta": {
+      "headline": "Want honey you can trace to the hive?",
+      "sub": "Order a jar direct, or book a visit to the high-valley apiary."
+    },
+    "footer": "Mountain Honey Co. — raw honey from the high valleys. (Fictional demo brand for story-telling-header.)"
+  }
+}

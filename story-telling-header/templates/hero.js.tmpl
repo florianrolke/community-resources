@@ -1,0 +1,112 @@
+<script>
+/* ============================================================================
+   story-telling-header — the scroll-scrub hero engine.
+
+   Technique: map the page's scroll position over the tall #ascent track (e.g. 520vh)
+   to the hero video's currentTime, so scrolling "scrubs" the footage frame-by-frame —
+   a continuous camera ascent through your 4 scenes. Text "beats" fade in per segment.
+
+   Two paths:
+   - VIDEO (the good one): scroll fraction -> video.currentTime, with a lerp for smoothness.
+   - STILLS FALLBACK: if there is no video (or it can't play / reduced-motion), cross-fade
+     the 4 scene images with a subtle zoom+pan. Also used when the file is opened over
+     file:// (the blob fetch below needs http://).
+
+   Two bugs this file already fixes (see docs/gotchas.md):
+   1. Never call video.load() after enabling the scrub — on a cached video it resets
+      duration to NaN and freezes the hero. We guard every seek with isFinite().
+   2. Some hosts serve mp4 without byte-range support -> video.seekable == [0,0] and every
+      seek snaps to 0. We fetch the whole file as a blob and use an object URL, which is
+      always fully seekable (and scrubs smoother). Falls back to the direct src on error.
+   ============================================================================ */
+(function () {
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ascent = document.getElementById('ascent');
+  if (!ascent) return;
+  var stage  = ascent.querySelector('.stage');
+  var video  = document.getElementById('ascentVid');
+  var rail   = document.getElementById('hero-rail');
+  var dots   = rail ? rail.querySelectorAll('i') : [];
+  var scenes = [].slice.call(ascent.querySelectorAll('.scene'));
+  var beats  = [].slice.call(ascent.querySelectorAll('.beat'));
+  var N = scenes.length;
+  function clamp(v, a, b) { return v < a ? a : (v > b ? b : v); }
+  function ease(t) { return t * t * (3 - 2 * t); }
+
+  /* ---- video scrub mode ---- */
+  var videoMode = false, currentTime = 0, targetTime = 0;
+  function enableVideo() {
+    if (reduced || videoMode || !video) return;
+    if (!isFinite(video.duration) || video.duration <= 0) return;  // guard against NaN duration
+    videoMode = true; video.pause(); currentTime = video.currentTime || 0;
+    stage.classList.add('video-on');
+  }
+  if (video) {
+    video.addEventListener('loadedmetadata', enableVideo);
+    video.addEventListener('loadeddata', enableVideo);
+    video.addEventListener('canplaythrough', enableVideo);
+    video.addEventListener('error', function () { videoMode = false; stage.classList.remove('video-on'); });
+    // Fetch as a blob for full seekability. If fetch fails (e.g. file://), use direct src.
+    fetch(video.dataset.src)
+      .then(function (r) { if (!r.ok) throw new Error('http ' + r.status); return r.blob(); })
+      .then(function (b) { video.src = URL.createObjectURL(b); })
+      .catch(function () { video.src = video.dataset.src; });
+  }
+
+  var p = 0, inView = true;
+  function readScroll() {
+    var vh = innerHeight, rect = ascent.getBoundingClientRect(), total = ascent.offsetHeight - vh;
+    var scrolled = clamp(-rect.top, 0, total);
+    p = total > 0 ? scrolled / total : 1;
+    inView = rect.bottom > 0 && rect.top < vh;
+    if (rail) rail.classList.toggle('show', rect.bottom > vh * 0.5 && rect.top <= 0);
+  }
+  function render() {
+    if (reduced) return;
+    var seg = 1 / N, FADE = 0.22, active = Math.min(N - 1, Math.floor(p / seg));
+    var dur = videoMode && video ? video.duration : NaN;
+    if (videoMode && isFinite(dur) && dur > 0) {
+      targetTime = p * Math.max(0, dur - 0.05);
+      if (!isFinite(currentTime)) currentTime = 0;       // self-heal, never stay poisoned
+      currentTime += (targetTime - currentTime) * 0.16;  // lerp -> smooth scrub
+      if (Math.abs(targetTime - currentTime) > 0.005) { try { video.currentTime = currentTime; } catch (e) {} }
+    } else {
+      scenes.forEach(function (s, i) {
+        var start = i * seg, end = start + seg, t = clamp((p - start) / seg, 0, 1), op;
+        if (i === 0) { op = p < end - seg * FADE ? 1 : clamp((end - p) / (seg * FADE), 0, 1); }
+        else {
+          var fi = clamp((p - (start - seg * FADE)) / (seg * FADE), 0, 1),
+              fo = (i === N - 1) ? 1 : clamp((end - p) / (seg * FADE), 0, 1);
+          op = Math.min(fi, fo);
+        }
+        s.style.opacity = op.toFixed(3);
+        var img = s.querySelector('img');
+        if (img) { var ty = (1 - t) * 4 - 2, sc = 1.12 - t * 0.07;
+          img.style.transform = 'translateY(' + ty.toFixed(2) + '%) scale(' + sc.toFixed(3) + ')'; }
+      });
+    }
+    beats.forEach(function (b, i) {
+      var start = i * seg, t = clamp((p - start) / seg, 0, 1), op;
+      if (i === 0) { op = p <= start + seg * 0.7 ? 1 : clamp((start + seg * 0.95 - p) / (seg * 0.25), 0, 1); }
+      else if (i === N - 1) { op = clamp((t - 0.18) / 0.22, 0, 1); }
+      else { var fi = clamp((t - 0.18) / 0.2, 0, 1), fo = clamp((0.95 - t) / 0.2, 0, 1); op = Math.min(fi, fo); }
+      op = ease(op); b.style.opacity = op.toFixed(3);
+      b.style.transform = 'translateY(' + ((1 - op) * 18).toFixed(1) + 'px)';
+      b.style.pointerEvents = op > 0.5 ? 'auto' : 'none';
+    });
+    dots.forEach(function (d, i) { d.classList.toggle('on', i === active); });
+  }
+  function loop() { if (inView) render(); requestAnimationFrame(loop); }
+  addEventListener('scroll', readScroll, { passive: true });
+  addEventListener('resize', readScroll, { passive: true });
+  readScroll(); render(); requestAnimationFrame(loop);
+})();
+
+/* scroll-reveal for document-body sections */
+(function () {
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.rv').forEach(function (el) { io.observe(el); });
+})();
+</script>

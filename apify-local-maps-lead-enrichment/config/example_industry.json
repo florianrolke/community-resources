@@ -1,0 +1,21 @@
+{
+  "industry_name": "example local service providers",
+  "maps_actor_id": "solidcode~google-maps-scraper-2-5-per-1-000-results",
+  "search_terms": [
+    "roofing company",
+    "roof repair",
+    "commercial roofing contractor"
+  ],
+  "include_category_terms": [
+    "roofing",
+    "contractor"
+  ],
+  "exclude_category_terms": [
+    "supplier",
+    "directory"
+  ],
+  "batch_size_locations": 50,
+  "max_results_per_batch": 20000,
+  "country_code": "US"
+}
+

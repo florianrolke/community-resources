@@ -1,0 +1,7 @@
+[program:run_upload_server]
+command=/exe/run_upload_server.sh
+environment=AGENTZERO_UPLOAD_DIR="/app/work_dir/assets/agentzero_uploads/shorts_test",AGENTZERO_UPLOAD_HOST="0.0.0.0",AGENTZERO_UPLOAD_PORT="8080"
+user=root
+stopwaitsecs=10
+stdout_logfile=/dev/stdout
+stderr_logfile=/dev/stderr

@@ -1,0 +1,67 @@
+version: "3.8"
+
+services:
+  # Apprise API — push notification gateway (90+ channels)
+  # Docs: https://github.com/caronc/apprise-api
+  apprise:
+    image: caronc/apprise:latest
+    container_name: apprise-api
+    ports:
+      - "8000:8000"
+    environment:
+      # Persistent config storage
+      - APPRISE_STATEFUL_MODE=simple
+    volumes:
+      - apprise-config:/config
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Skool Monitor — always-on daemon, default 3-minute polling interval
+  monitor:
+    build: .
+    container_name: skool-monitor
+    restart: unless-stopped
+    environment:
+      - SKOOL_AUTH_TOKEN=${SKOOL_AUTH_TOKEN}
+      - SKOOL_CLIENT_ID=${SKOOL_CLIENT_ID:-}
+      - MONITOR_INTERVAL_SECONDS=${MONITOR_INTERVAL_SECONDS:-180}
+      - NTFY_URL=${NTFY_URL:-https://push.florianrolke.com/skool-alerts}
+      - NTFY_ALL_POSTS_URL=${NTFY_ALL_POSTS_URL:-https://push.florianrolke.com/skool-all-posts}
+      - MENTION_KEYWORDS=${MENTION_KEYWORDS:-@florianrolke,@florian,florianrolke,florian rolke}
+      - INTRO_CATEGORY_KEYWORDS=${INTRO_CATEGORY_KEYWORDS:-intro,introduction,introductions,start here}
+      - ALERT_MEMBER_JOINS=${ALERT_MEMBER_JOINS:-true}
+      - ALERT_INTRO_POSTS=${ALERT_INTRO_POSTS:-true}
+      - ALERT_MENTIONS=${ALERT_MENTIONS:-true}
+      - NOTIFY_ALL_NEW_POSTS=${NOTIFY_ALL_NEW_POSTS:-false}
+      - ALL_NEW_POSTS_NOTIFY_LIMIT=${ALL_NEW_POSTS_NOTIFY_LIMIT:-10}
+      - MENTION_PREVIEW_CHARS=${MENTION_PREVIEW_CHARS:-30}
+      - ALERT_ICP_MEMBERS=${ALERT_ICP_MEMBERS:-false}
+      - ALERT_CHURN=${ALERT_CHURN:-false}
+      - ALERT_WINS=${ALERT_WINS:-false}
+      - ALERT_ANTIGRAVITY=${ALERT_ANTIGRAVITY:-false}
+      - ALERT_REAL_ESTATE_US=${ALERT_REAL_ESTATE_US:-false}
+      - ALERT_DAILY_DIGEST=${ALERT_DAILY_DIGEST:-false}
+      - COMMENT_SCAN_POST_LIMIT=${COMMENT_SCAN_POST_LIMIT:-20}
+      - COMMENT_PAGE_DELAY_SECONDS=${COMMENT_PAGE_DELAY_SECONDS:-1}
+      - APPRISE_URL=http://apprise:8000
+      - APPRISE_EMAIL_TO=${APPRISE_EMAIL_TO:you@example.com}
+      - SMTP_USER=${SMTP_USER:-}
+      - SMTP_PASS=${SMTP_PASS:-}
+      - SMTP_HOST=${SMTP_HOST:-smtp.gmail.com}
+      - APPRISE_URLS=${APPRISE_URLS:-}
+      - PERPLEXITY_API_KEY=${PERPLEXITY_API_KEY:-}
+      - TAVILY_API_KEY_5=${TAVILY_API_KEY_5:-}
+      - TAVILY_API_KEY_6=${TAVILY_API_KEY_6:-}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - SUPABASE_URL=${SUPABASE_URL:-}
+      - SUPABASE_KEY=${SUPABASE_KEY:-}
+    volumes:
+      - monitor-state:/app/state
+
+volumes:
+  apprise-config:
+  monitor-state:

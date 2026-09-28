@@ -1,0 +1,13 @@
+[project]
+name = "live-event-intelligence-skills"
+version = "0.1.0"
+description = "Codex skills and reusable scripts for local and niche live-event discovery, association research, and event-contact enrichment."
+requires-python = ">=3.10"
+dependencies = ["requests>=2.31.0", "python-dotenv>=1.0.0"]
+
+[project.optional-dependencies]
+test = ["pytest>=8.0.0"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

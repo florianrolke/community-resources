@@ -1,0 +1,15 @@
+[project]
+name = "podcast-linkedin-intelligence-skills"
+version = "0.1.0"
+description = "Codex skills and reusable scripts for niche podcast discovery and LinkedIn matching."
+requires-python = ">=3.10"
+dependencies = ["requests>=2.31.0", "python-dotenv>=1.0.0"]
+
+[project.optional-dependencies]
+vision = ["openai>=1.30.0"]
+browser = ["playwright>=1.44.0"]
+test = ["pytest>=8.0.0"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

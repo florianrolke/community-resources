@@ -1,0 +1,9 @@
+# Skool Intelligence System v2 — Python dependencies
+playwright==1.49.1
+requests>=2.31.0
+python-dotenv>=1.0.0
+openai>=1.0.0
+# anthropic not needed — using OpenRouter via openai package
+supabase>=2.0.0
+tavily-python>=0.3.0
+apprise>=1.7.0

@@ -1,0 +1,5 @@
+location_id,city,county,state,state_abbr,geo_text
+tx_houston,Houston,Harris County,Texas,TX,Houston Texas
+tx_san_antonio,San Antonio,Bexar County,Texas,TX,San Antonio Texas
+tx_dallas,Dallas,Dallas County,Texas,TX,Dallas Texas
+

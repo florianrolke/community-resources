@@ -1,0 +1,1310 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: Video Studio API — voice cloning, script-driven voiceovers, b-roll, rendering, delivery.
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: Auth
+    description: Browser and mobile authentication endpoints.
+  - name: Storage
+    description: Object storage upload and serving endpoints.
+  - name: Assets
+    description: Uploaded and generated media files.
+  - name: Scripts
+    description: Voiceover scripts.
+  - name: Voices
+    description: Cloned voices.
+  - name: Projects
+    description: Video projects tying source, script, voice, and outputs together.
+  - name: Jobs
+    description: Background processing jobs.
+  - name: Dashboard
+    description: Overview data.
+  - name: Settings
+    description: Provider configuration status.
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+  /auth/user:
+    get:
+      tags: [Auth]
+      operationId: getCurrentAuthUser
+      summary: Get the currently authenticated user
+      parameters:
+        - $ref: '#/components/parameters/AuthorizationSessionHeader'
+        - $ref: '#/components/parameters/SessionCookie'
+      responses:
+        '200':
+          description: Auth status resolved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthUserEnvelope'
+  /login:
+    get:
+      tags: [Auth]
+      operationId: beginBrowserLogin
+      summary: Start the browser OIDC login flow
+      parameters:
+        - name: returnTo
+          in: query
+          required: false
+          description: Relative path to redirect to after login (must start with `/`). Defaults to `/`.
+          schema:
+            type: string
+      responses:
+        '302':
+          description: Redirect to the OIDC authorization endpoint.
+  /callback:
+    get:
+      tags: [Auth]
+      operationId: handleBrowserLoginCallback
+      summary: Complete the browser OIDC login flow
+      parameters:
+        - name: code
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: state
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: iss
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uri
+      responses:
+        '302':
+          description: Redirect to the `returnTo` path on success (defaults to `/`) or `/api/login` on failure.
+  /logout:
+    get:
+      tags: [Auth]
+      operationId: logoutBrowserSession
+      summary: Clear the session and begin OIDC logout
+      parameters:
+        - $ref: '#/components/parameters/AuthorizationSessionHeader'
+        - $ref: '#/components/parameters/SessionCookie'
+        - name: returnTo
+          in: query
+          required: false
+          schema:
+            type: string
+            default: /
+      responses:
+        '302':
+          description: Redirect to the OIDC provider logout URL with a post-logout redirect back to the validated `returnTo` path.
+  /mobile-auth/token-exchange:
+    post:
+      tags: [Auth]
+      operationId: exchangeMobileAuthorizationCode
+      summary: Exchange a mobile OIDC code for a session token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MobileTokenExchangeRequest'
+      responses:
+        '200':
+          description: Session created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileTokenExchangeSuccess'
+        '400':
+          description: Missing or invalid required fields.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '401':
+          description: Token did not contain usable claims.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '500':
+          description: Token exchange failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+  /mobile-auth/logout:
+    post:
+      tags: [Auth]
+      operationId: logoutMobileSession
+      summary: Delete a mobile session token
+      parameters:
+        - $ref: '#/components/parameters/AuthorizationSessionHeader'
+      responses:
+        '200':
+          description: Logout processed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogoutSuccess'
+  /storage/uploads/request-url:
+    post:
+      tags: [Storage]
+      operationId: requestUploadUrl
+      summary: Request a presigned URL for file upload
+      description: |
+        Returns a presigned GCS URL for direct upload. The client sends JSON
+        metadata here, then uploads the file directly to the returned URL.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UploadUrlRequest'
+      responses:
+        '200':
+          description: Presigned upload URL generated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadUrlResponse'
+        '400':
+          description: Missing or invalid required fields.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '500':
+          description: Failed to generate upload URL.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+  /storage/public-objects/{filePath}:
+    get:
+      tags: [Storage]
+      operationId: getPublicObject
+      summary: Serve a public asset from PUBLIC_OBJECT_SEARCH_PATHS
+      description: |
+        Unconditionally public — no authentication or ACL checks.
+        Searches PUBLIC_OBJECT_SEARCH_PATHS for the given file path.
+      parameters:
+        - name: filePath
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Relative file path within the public search paths.
+      responses:
+        '200':
+          description: Object content streamed with correct Content-Type.
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: File not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '500':
+          description: Failed to serve public object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+  /storage/objects/{objectPath}:
+    get:
+      tags: [Storage]
+      operationId: getStorageObject
+      summary: Serve an object entity from PRIVATE_OBJECT_DIR
+      description: |
+        Serves object entities uploaded via presigned URLs. Protected — the
+        requesting user must be authenticated.
+      parameters:
+        - name: objectPath
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Object path within the private object dir (e.g. `uploads/some-uuid`).
+      responses:
+        '200':
+          description: Object content streamed with correct Content-Type.
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '500':
+          description: Failed to serve object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+  /assets:
+    get:
+      tags: [Assets]
+      operationId: listAssets
+      summary: List assets
+      parameters:
+        - name: kind
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/AssetKind'
+      responses:
+        '200':
+          description: Assets listed.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Asset'
+    post:
+      tags: [Assets]
+      operationId: createAsset
+      summary: Register an uploaded object as an asset
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssetCreate'
+      responses:
+        '201':
+          description: Asset registered.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Asset'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+  /assets/{assetId}:
+    get:
+      tags: [Assets]
+      operationId: getAsset
+      summary: Get an asset
+      parameters:
+        - $ref: '#/components/parameters/AssetIdParam'
+      responses:
+        '200':
+          description: Asset found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Asset'
+        '404':
+          description: Asset not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+    delete:
+      tags: [Assets]
+      operationId: deleteAsset
+      summary: Delete an asset
+      parameters:
+        - $ref: '#/components/parameters/AssetIdParam'
+      responses:
+        '204':
+          description: Asset deleted.
+        '404':
+          description: Asset not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '409':
+          description: Asset is referenced by a project or voice and cannot be deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+  /scripts:
+    get:
+      tags: [Scripts]
+      operationId: listScripts
+      summary: List scripts
+      responses:
+        '200':
+          description: Scripts listed.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Script'
+    post:
+      tags: [Scripts]
+      operationId: createScript
+      summary: Create a script
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScriptCreate'
+      responses:
+        '201':
+          description: Script created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Script'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+  /scripts/{scriptId}:
+    get:
+      tags: [Scripts]
+      operationId: getScript
+      summary: Get a script
+      parameters:
+        - $ref: '#/components/parameters/ScriptIdParam'
+      responses:
+        '200':
+          description: Script found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Script'
+        '404':
+          description: Script not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+    put:
+      tags: [Scripts]
+      operationId: updateScript
+      summary: Update a script
+      parameters:
+        - $ref: '#/components/parameters/ScriptIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScriptUpdate'
+      responses:
+        '200':
+          description: Script updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Script'
+        '404':
+          description: Script not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+    delete:
+      tags: [Scripts]
+      operationId: deleteScript
+      summary: Delete a script
+      parameters:
+        - $ref: '#/components/parameters/ScriptIdParam'
+      responses:
+        '204':
+          description: Script deleted.
+        '404':
+          description: Script not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+  /voices:
+    get:
+      tags: [Voices]
+      operationId: listVoices
+      summary: List voices
+      responses:
+        '200':
+          description: Voices listed.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Voice'
+    post:
+      tags: [Voices]
+      operationId: createVoice
+      summary: Create a cloned voice from uploaded samples
+      description: |
+        Queues a `create_voice` job that sends the referenced sample assets to
+        the voice provider for cloning. Returns the pending voice record.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VoiceCreate'
+      responses:
+        '201':
+          description: Voice created and clone job queued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Voice'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '409':
+          description: Voice provider not configured or out of credit.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+  /voices/{voiceId}:
+    get:
+      tags: [Voices]
+      operationId: getVoice
+      summary: Get a voice
+      parameters:
+        - $ref: '#/components/parameters/VoiceIdParam'
+      responses:
+        '200':
+          description: Voice found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Voice'
+        '404':
+          description: Voice not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+    delete:
+      tags: [Voices]
+      operationId: deleteVoice
+      summary: Delete a voice
+      description: Deletes the local record and best-effort deletes the provider model.
+      parameters:
+        - $ref: '#/components/parameters/VoiceIdParam'
+      responses:
+        '204':
+          description: Voice deleted.
+        '404':
+          description: Voice not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+  /voices/{voiceId}/preview:
+    post:
+      tags: [Voices]
+      operationId: previewVoice
+      summary: Generate a short test clip in this voice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VoicePreviewRequest'
+      parameters:
+        - $ref: '#/components/parameters/VoiceIdParam'
+      responses:
+        '202':
+          description: Preview job queued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '404':
+          description: Voice not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '409':
+          description: Voice is not ready yet.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+  /projects:
+    get:
+      tags: [Projects]
+      operationId: listProjects
+      summary: List projects
+      responses:
+        '200':
+          description: Projects listed.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+    post:
+      tags: [Projects]
+      operationId: createProject
+      summary: Create a project
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectCreate'
+      responses:
+        '201':
+          description: Project created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+  /projects/{projectId}:
+    get:
+      tags: [Projects]
+      operationId: getProject
+      summary: Get a project
+      parameters:
+        - $ref: '#/components/parameters/ProjectIdParam'
+      responses:
+        '200':
+          description: Project found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '404':
+          description: Project not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+    patch:
+      tags: [Projects]
+      operationId: updateProject
+      summary: Update a project
+      parameters:
+        - $ref: '#/components/parameters/ProjectIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectUpdate'
+      responses:
+        '200':
+          description: Project updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '404':
+          description: Project not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+    delete:
+      tags: [Projects]
+      operationId: deleteProject
+      summary: Delete a project
+      parameters:
+        - $ref: '#/components/parameters/ProjectIdParam'
+      responses:
+        '204':
+          description: Project deleted.
+        '404':
+          description: Project not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+  /projects/{projectId}/pipeline:
+    post:
+      tags: [Projects]
+      operationId: runProjectPipeline
+      summary: Queue the processing pipeline for a project
+      description: |
+        Queues the selected pipeline steps as chained jobs (each starts when the
+        previous one succeeds). Defaults to the full chain the project is ready
+        for: extract_audio → generate_voiceover → generate_broll → assemble.
+      parameters:
+        - $ref: '#/components/parameters/ProjectIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PipelineRunRequest'
+      responses:
+        '202':
+          description: Pipeline jobs queued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineRunResponse'
+        '400':
+          description: Project is missing inputs required by the requested steps.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '404':
+          description: Project not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '409':
+          description: Project already has active jobs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+  /jobs:
+    get:
+      tags: [Jobs]
+      operationId: listJobs
+      summary: List jobs
+      parameters:
+        - name: projectId
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uuid
+        - name: status
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/JobStatus'
+      responses:
+        '200':
+          description: Jobs listed, newest first.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Job'
+  /jobs/{jobId}:
+    get:
+      tags: [Jobs]
+      operationId: getJob
+      summary: Get a job
+      parameters:
+        - $ref: '#/components/parameters/JobIdParam'
+      responses:
+        '200':
+          description: Job found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '404':
+          description: Job not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+  /jobs/{jobId}/cancel:
+    post:
+      tags: [Jobs]
+      operationId: cancelJob
+      summary: Cancel a queued or running job
+      parameters:
+        - $ref: '#/components/parameters/JobIdParam'
+      responses:
+        '200':
+          description: Job canceled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '404':
+          description: Job not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '409':
+          description: Job already finished.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+  /jobs/{jobId}/retry:
+    post:
+      tags: [Jobs]
+      operationId: retryJob
+      summary: Re-queue a failed or canceled job
+      parameters:
+        - $ref: '#/components/parameters/JobIdParam'
+      responses:
+        '202':
+          description: New job queued with the same parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '404':
+          description: Job not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '409':
+          description: Job is not in a retryable state.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+  /dashboard/summary:
+    get:
+      tags: [Dashboard]
+      operationId: getDashboardSummary
+      summary: Get dashboard overview counts and recent activity
+      responses:
+        '200':
+          description: Summary computed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardSummary'
+  /settings/status:
+    get:
+      tags: [Settings]
+      operationId: getSettingsStatus
+      summary: Get provider configuration status
+      responses:
+        '200':
+          description: Status resolved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettingsStatus'
+components:
+  parameters:
+    AuthorizationSessionHeader:
+      name: Authorization
+      in: header
+      required: false
+      description: Opaque session token — `Bearer <sid>`.
+      schema:
+        type: string
+    SessionCookie:
+      name: sid
+      in: cookie
+      required: false
+      description: Browser session cookie.
+      schema:
+        type: string
+    AssetIdParam:
+      name: assetId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    ScriptIdParam:
+      name: scriptId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    VoiceIdParam:
+      name: voiceId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    ProjectIdParam:
+      name: projectId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    JobIdParam:
+      name: jobId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+    ErrorEnvelope:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+    AuthUser:
+      type: object
+      required: [id, email, firstName, lastName, profileImageUrl]
+      properties:
+        id:
+          type: string
+        email:
+          type: [string, 'null']
+          format: email
+        firstName:
+          type: [string, 'null']
+        lastName:
+          type: [string, 'null']
+        profileImageUrl:
+          type: [string, 'null']
+    AuthUserEnvelope:
+      type: object
+      required: [user]
+      properties:
+        user:
+          oneOf:
+            - $ref: '#/components/schemas/AuthUser'
+            - type: 'null'
+    MobileTokenExchangeRequest:
+      type: object
+      required: [code, code_verifier, redirect_uri, state]
+      properties:
+        code:
+          type: string
+          minLength: 1
+        code_verifier:
+          type: string
+          minLength: 1
+        redirect_uri:
+          type: string
+          minLength: 1
+          format: uri
+        state:
+          type: string
+          minLength: 1
+        nonce:
+          type: string
+          minLength: 1
+    MobileTokenExchangeSuccess:
+      type: object
+      required: [token]
+      properties:
+        token:
+          type: string
+    LogoutSuccess:
+      type: object
+      required: [success]
+      properties:
+        success:
+          type: boolean
+          const: true
+    UploadUrlRequest:
+      type: object
+      required: [name, size, contentType]
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Original file name.
+        size:
+          type: integer
+          minimum: 1
+          description: File size in bytes.
+        contentType:
+          type: string
+          minLength: 1
+          description: MIME type of the file (e.g. `video/mp4`).
+    UploadUrlResponse:
+      type: object
+      required: [uploadURL, objectPath]
+      properties:
+        uploadURL:
+          type: string
+          format: uri
+          description: Presigned GCS URL for PUT upload.
+        objectPath:
+          type: string
+          description: Normalized object path (e.g. `/objects/uploads/uuid`). Store this in your database.
+        metadata:
+          $ref: '#/components/schemas/UploadUrlRequest'
+    AssetKind:
+      type: string
+      enum: [source_video, voice_sample, audio, voiceover, broll, render]
+      description: >
+        source_video = uploaded raw recording; voice_sample = audio/video used
+        for voice cloning; audio = intermediate extracted/cleaned audio;
+        voiceover = generated narration track; broll = generated b-roll clip;
+        render = finished output video.
+    Asset:
+      type: object
+      required: [id, name, kind, objectPath, createdAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        kind:
+          $ref: '#/components/schemas/AssetKind'
+        objectPath:
+          type: string
+          description: Path servable via `GET /api/storage/objects/...`.
+        contentType:
+          type: [string, 'null']
+        size:
+          type: [integer, 'null']
+          description: Size in bytes.
+        durationSeconds:
+          type: [number, 'null']
+        width:
+          type: [integer, 'null']
+        height:
+          type: [integer, 'null']
+        projectId:
+          type: [string, 'null']
+          format: uuid
+          description: Set for generated assets that belong to a project.
+        createdAt:
+          type: string
+          format: date-time
+    AssetCreate:
+      type: object
+      required: [name, kind, objectPath]
+      properties:
+        name:
+          type: string
+          minLength: 1
+        kind:
+          $ref: '#/components/schemas/AssetKind'
+        objectPath:
+          type: string
+          minLength: 1
+          description: The `objectPath` returned by the upload URL request.
+        contentType:
+          type: string
+        size:
+          type: integer
+          minimum: 0
+    Script:
+      type: object
+      required: [id, title, body, createdAt, updatedAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        body:
+          type: string
+        wordCount:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    ScriptCreate:
+      type: object
+      required: [title, body]
+      properties:
+        title:
+          type: string
+          minLength: 1
+        body:
+          type: string
+          minLength: 1
+    ScriptUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+          minLength: 1
+        body:
+          type: string
+          minLength: 1
+    VoiceStatus:
+      type: string
+      enum: [pending, training, ready, failed]
+    Voice:
+      type: object
+      required: [id, name, provider, status, createdAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        provider:
+          type: string
+          description: Voice provider identifier (e.g. `fish`).
+        providerModelId:
+          type: [string, 'null']
+          description: Provider-side model id once the clone exists.
+        status:
+          $ref: '#/components/schemas/VoiceStatus'
+        statusMessage:
+          type: [string, 'null']
+          description: Human-readable detail, e.g. failure reason.
+        sampleAssetIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+        previewAssetId:
+          type: [string, 'null']
+          format: uuid
+          description: Most recent preview clip asset.
+        createdAt:
+          type: string
+          format: date-time
+    VoiceCreate:
+      type: object
+      required: [name, sampleAssetIds]
+      properties:
+        name:
+          type: string
+          minLength: 1
+        sampleAssetIds:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            format: uuid
+          description: Assets of kind `voice_sample` (or `source_video` — audio is extracted automatically).
+    VoicePreviewRequest:
+      type: object
+      required: [text]
+      properties:
+        text:
+          type: string
+          minLength: 1
+          maxLength: 1000
+    JobType:
+      type: string
+      enum: [extract_audio, transcribe, create_voice, voice_preview, generate_voiceover, generate_broll, assemble, deliver]
+    JobStatus:
+      type: string
+      enum: [queued, running, done, failed, canceled]
+    Job:
+      type: object
+      required: [id, type, status, progress, createdAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          $ref: '#/components/schemas/JobType'
+        status:
+          $ref: '#/components/schemas/JobStatus'
+        progress:
+          type: integer
+          minimum: 0
+          maximum: 100
+        message:
+          type: [string, 'null']
+          description: Current step description while running.
+        error:
+          type: [string, 'null']
+          description: Failure reason when status is `failed`.
+        projectId:
+          type: [string, 'null']
+          format: uuid
+        voiceId:
+          type: [string, 'null']
+          format: uuid
+        outputAssetId:
+          type: [string, 'null']
+          format: uuid
+          description: Asset produced by the job, when it has finished.
+        dependsOnJobId:
+          type: [string, 'null']
+          format: uuid
+          description: Job that must succeed before this one starts.
+        createdAt:
+          type: string
+          format: date-time
+        startedAt:
+          type: [string, 'null']
+          format: date-time
+        finishedAt:
+          type: [string, 'null']
+          format: date-time
+    ProjectStatus:
+      type: string
+      enum: [draft, processing, ready, delivered, failed]
+    Project:
+      type: object
+      required: [id, title, status, createdAt, updatedAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        status:
+          $ref: '#/components/schemas/ProjectStatus'
+        sourceAssetId:
+          type: [string, 'null']
+          format: uuid
+        scriptId:
+          type: [string, 'null']
+          format: uuid
+        voiceId:
+          type: [string, 'null']
+          format: uuid
+        voiceoverAssetId:
+          type: [string, 'null']
+          format: uuid
+        renderAssetId:
+          type: [string, 'null']
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    ProjectCreate:
+      type: object
+      required: [title]
+      properties:
+        title:
+          type: string
+          minLength: 1
+        sourceAssetId:
+          type: string
+          format: uuid
+        scriptId:
+          type: string
+          format: uuid
+        voiceId:
+          type: string
+          format: uuid
+    ProjectUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+          minLength: 1
+        sourceAssetId:
+          type: [string, 'null']
+          format: uuid
+        scriptId:
+          type: [string, 'null']
+          format: uuid
+        voiceId:
+          type: [string, 'null']
+          format: uuid
+    PipelineRunRequest:
+      type: object
+      properties:
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobType'
+          description: Subset of steps to run, in pipeline order. Omit for the full default chain.
+        brollCount:
+          type: integer
+          minimum: 0
+          maximum: 6
+          default: 0
+          description: Number of AI b-roll clips to generate and cut in.
+        deliver:
+          type: boolean
+          default: false
+          description: Append an FTP delivery step after assembly.
+    PipelineRunResponse:
+      type: object
+      required: [jobs]
+      properties:
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Job'
+    DashboardSummary:
+      type: object
+      required: [projects, voices, scripts, assets, activeJobs, recentJobs]
+      properties:
+        projects:
+          type: integer
+        voices:
+          type: integer
+        scripts:
+          type: integer
+        assets:
+          type: integer
+        activeJobs:
+          type: integer
+        recentJobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Job'
+    ProviderStatus:
+      type: object
+      required: [configured]
+      properties:
+        configured:
+          type: boolean
+        detail:
+          type: [string, 'null']
+          description: Extra info, e.g. provider name or error.
+        credit:
+          type: [number, 'null']
+          description: Remaining account credit, when the provider reports it.
+    SettingsStatus:
+      type: object
+      required: [voice, broll, ftp]
+      properties:
+        voice:
+          $ref: '#/components/schemas/ProviderStatus'
+        broll:
+          $ref: '#/components/schemas/ProviderStatus'
+        ftp:
+          $ref: '#/components/schemas/ProviderStatus'

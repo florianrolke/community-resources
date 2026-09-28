@@ -1,0 +1,32 @@
+# Environment & secrets
+.env
+credentials.json
+token.json
+token_gmail.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Temp & intermediate files
+.tmp/
+*.tmp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Playwright
+playwright-report/
+test-results/
+
+# Output data (user-generated, not part of the repo)
+output/

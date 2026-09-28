@@ -1,0 +1,4 @@
+interface:
+  display_name: "Luxury Video Overlays"
+  short_description: "Luxury Remotion overlays for long-form video"
+  default_prompt: "Use this skill to turn a talking-head video and transcript into a luxury green/gold Remotion edit with overlay cards, ticker, SFX cues, and held emphasis zooms."

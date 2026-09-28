@@ -1,0 +1,38 @@
+# Secrets — never commit these
+.env
+.env.local
+credentials.json
+token.json
+token_*.json
+*service-account*.json
+
+# Your scraped output. Yours, not the repo's.
+output/*
+!output/.gitkeep
+*.csv
+!samples/*.csv
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+dist/
+build/
+
+# Temp
+.tmp/
+*.tmp
+*.bak
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp

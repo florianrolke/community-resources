@@ -1,0 +1,60 @@
+[
+  {
+    "chapter": "Power Players",
+    "portal": "bni-nc.com",
+    "city": "Charlotte",
+    "state": "NC",
+    "members": [
+      {
+        "name": "James Patterson",
+        "company": "Patterson Wealth Advisory",
+        "category": "Financial Advisor",
+        "phone": "(704) 555-1001",
+        "website": "https://pattersonwealth.com",
+        "icp_tier": "A",
+        "linkedin": "https://www.linkedin.com/in/james-patterson-cfa",
+        "enriched": true
+      },
+      {
+        "name": "Lisa Moreno",
+        "company": "Moreno Marketing Group",
+        "category": "Digital Marketing",
+        "phone": "(704) 555-1002",
+        "website": "https://morenomg.com",
+        "icp_tier": "A",
+        "linkedin": "https://www.linkedin.com/in/lisa-moreno-marketing",
+        "enriched": true
+      },
+      {
+        "name": "Thomas Reynolds",
+        "company": "Reynolds & Associates Law",
+        "category": "Attorney - Business Law",
+        "phone": "(704) 555-1003",
+        "website": "https://reynoldslaw.com",
+        "icp_tier": "B",
+        "linkedin": "https://www.linkedin.com/in/thomas-reynolds-esq",
+        "enriched": true
+      },
+      {
+        "name": "Karen Blackwell",
+        "company": "Blackwell Insurance Solutions",
+        "category": "Commercial Insurance",
+        "phone": "(704) 555-1004",
+        "website": "https://blackwellins.com",
+        "icp_tier": "A",
+        "linkedin": "https://www.linkedin.com/in/karen-blackwell-insurance",
+        "enriched": true
+      },
+      {
+        "name": "Derek Hoffman",
+        "company": "Hoffman Roofing Co",
+        "category": "Roofing Contractor",
+        "phone": "(704) 555-1005",
+        "website": "https://hoffmanroofing.com",
+        "icp_tier": "C",
+        "linkedin": "https://www.linkedin.com/in/derek-hoffman-roofing",
+        "enriched": true
+      }
+    ]
+  }
+]

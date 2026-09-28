@@ -1,0 +1,23 @@
+{
+  "delta-vega": {
+    "slug": "delta-vega",
+    "agent_id": "agent_f7312a89e622f8bfd66842f9de",
+    "llm_id": "llm_0250e2db64ba85366e521ffdef0e",
+    "agent_name": "Delta Vega Assistant",
+    "voice_id": "11labs-Adrian"
+  },
+  "agentolog": {
+    "slug": "agentolog",
+    "agent_id": "agent_f53128195ffa5cd6594fd93179",
+    "llm_id": "llm_63bf7f7f3dc180678c3f5662355c",
+    "agent_name": "Agentolog Assistant",
+    "voice_id": "11labs-Adrian"
+  },
+  "dunkertons": {
+    "slug": "dunkertons",
+    "agent_id": "agent_5f2c1e257c34133c03d133a285",
+    "llm_id": "llm_5df313629a9c92e9fed09438add6",
+    "agent_name": "Dunkertons Assistant",
+    "voice_id": "11labs-Adrian"
+  }
+}

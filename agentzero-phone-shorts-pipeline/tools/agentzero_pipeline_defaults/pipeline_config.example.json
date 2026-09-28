@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "profile_name": "agentzero-phone-shorts-community",
+  "notes": "Mounted live config. Edit this file on the server to tune the editing flow without rebuilding the Docker image.",
+  "editing_preset": {
+    "name": "agentzero_hostinger_v2_locked_silence_2026_05_31",
+    "silence_cut": {
+      "detector": "ffmpeg silencedetect",
+      "noise": "-28dB",
+      "duration": 0.18,
+      "padding_seconds": 0.035,
+      "min_kept_segment_seconds": 0.12
+    },
+    "word_gap_fallback": {
+      "enabled": true,
+      "max_gap_seconds": 0.22,
+      "padding_seconds": 0.035,
+      "caption_timestamp_remap": true
+    },
+    "normalize": {
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "video_codec": "libx264",
+      "preset": "veryfast",
+      "crf": 20,
+      "audio_codec": "aac",
+      "audio_bitrate": "192k",
+      "audio_loudnorm": "I=-16:TP=-1.5:LRA=11"
+    },
+    "captions": {
+      "style": "bold white uppercase with black outline",
+      "font": "Arial",
+      "font_size": 86,
+      "alignment": "lower third center"
+    }
+  },
+  "intro_teaser": {
+    "enabled": true,
+    "max_nuggets": 3,
+    "target_seconds": 8.0,
+    "max_seconds": 8.5
+  },
+  "logo_interrupt_intro": {
+    "enabled": true,
+    "opening_phrases": [
+      "there are four factors when picking a market",
+      "there are four factors to consider when picking a market",
+      "the first one is"
+    ],
+    "resume_phrase": "is the market in pain",
+    "pre_padding_seconds": 0.0,
+    "post_padding_seconds": 0.035
+  },
+  "rapid_intro": {
+    "enabled": false,
+    "phrases": [
+      "four factors",
+      "pain",
+      "market growing"
+    ],
+    "min_matches": 2,
+    "padding_seconds": 0.035,
+    "pre_padding_seconds": 0.035,
+    "post_padding_seconds": 0.035,
+    "min_clip_seconds": 1.1,
+    "max_clip_seconds": 4.0,
+    "hold_after_phrase_seconds": {
+      "pain": 0.28,
+      "market growing": 0.45
+    },
+    "pause_after_clip_seconds": 0.0,
+    "whoosh_after_cut_delay_seconds": 0.0
+  },
+  "llm": {
+    "provider": "openrouter",
+    "model": "openai/gpt-4.1-mini",
+    "fallback_models": [
+      "google/gemini-2.5-flash",
+      "openai/gpt-5"
+    ],
+    "max_cost_per_job_usd": 0.2,
+    "prompt_price_per_million": 0.4,
+    "completion_price_per_million": 1.6
+  },
+  "audio": {
+    "asset_dir": "/app/work_dir/assets/agentzero_pipeline/audio",
+    "intro_chime": "/app/work_dir/assets/agentzero_pipeline/audio/brand/soft-bell-ding-485895.mp3",
+    "transition_whoosh": "/app/work_dir/assets/agentzero_pipeline/audio/brand/soundreality-whoosh-bamboo-389752.mp3",
+    "rapid_cut_whoosh": "/app/work_dir/assets/agentzero_pipeline/audio/brand/soundreality-whoosh-bamboo-389752.mp3",
+    "logo_whoosh": "/app/work_dir/assets/agentzero_pipeline/audio/brand/lordsonny-whoosh-cinematic-161021.mp3",
+    "logo_reveal_chime": "/app/work_dir/assets/agentzero_pipeline/audio/brand/soft-bell-ding-485895.mp3",
+    "alternate_logo_reveal_chime": "/app/work_dir/assets/agentzero_pipeline/audio/brand/intro-sound-2-269294.mp3",
+    "music_bed": "/app/work_dir/assets/agentzero_pipeline/audio/music_bed.wav",
+    "chime_volume": 0.26,
+    "whoosh_volume": 0.2,
+    "rapid_cut_whoosh_volume": 0.16,
+    "rapid_cut_whoosh_duration": 0.42,
+    "logo_whoosh_volume": 0.22,
+    "logo_whoosh_duration": 1.05,
+    "logo_reveal_chime_volume": 1.12,
+    "logo_reveal_chime_duration": 1.0,
+    "music_volume": 0.055,
+    "ducking_threshold": 0.03,
+    "ducking_ratio": 8
+  },
+  "logo": {
+    "enabled": true,
+    "asset_dir": "/app/work_dir/assets/agentzero_pipeline/logo",
+    "image_path": "/app/work_dir/assets/agentzero_pipeline/logo/logo.png",
+    "animation_path": "/app/work_dir/assets/agentzero_pipeline/logo/logo.png",
+    "reveal_duration": 1.35,
+    "fly_seconds": 0.52,
+    "width": 650,
+    "background": "0xf5f8fb",
+    "swoosh_pre_roll": 0.05,
+    "chime_offset": 0.36,
+    "reserved_for_remotion": true
+  },
+  "youtube": {
+    "upload_enabled": false,
+    "privacy_status": "private",
+    "category_id": "27",
+    "token_path": "/app/work_dir/assets/youtube/token.json",
+    "credentials_path": "/app/work_dir/assets/youtube/credentials.json"
+  }
+}

@@ -1,0 +1,108 @@
+[
+  {
+    "slug": "metro-chamber",
+    "name": "Metro Area Chamber of Commerce",
+    "city": "Metro City",
+    "state": "KS",
+    "platform": "GrowthZone",
+    "scraped_at": "2026-03-15T14:30:00",
+    "members": [
+      {
+        "company": "Pinnacle Financial Advisors",
+        "address": "1200 Commerce Dr, Suite 300, Metro City, KS 66210",
+        "phone": "(913) 555-0101",
+        "website": "https://pinnaclefa.com",
+        "category": "Financial Services, Wealth Management",
+        "detail_url": "https://example.growthzoneapp.com/memberdirectory/Details/pinnacle-financial-3814955",
+        "icp_tier": "A",
+        "icp_label": "High-Value Services",
+        "linkedin": "https://www.linkedin.com/company/pinnacle-financial-advisors",
+        "contacts": [{"name": "Sarah Mitchell", "title": "Managing Director", "phone": "(913) 555-0102"}]
+      },
+      {
+        "company": "BrightPath Digital Marketing",
+        "address": "450 Innovation Way, Metro City, KS 66211",
+        "phone": "(913) 555-0203",
+        "website": "https://brightpathdigital.com",
+        "category": "Marketing, Digital Marketing, Advertising Agency",
+        "detail_url": "https://example.growthzoneapp.com/memberdirectory/Details/brightpath-3815102",
+        "icp_tier": "A",
+        "icp_label": "High-Value Services",
+        "linkedin": "https://www.linkedin.com/company/brightpath-digital",
+        "contacts": [{"name": "David Chen", "title": "CEO", "phone": "(913) 555-0204"}]
+      },
+      {
+        "company": "Summit Legal Group",
+        "address": "800 Main St, Suite 1500, Metro City, KS 66202",
+        "phone": "(913) 555-0305",
+        "website": "https://summitlegalgroup.com",
+        "category": "Law, Attorney, Legal Services",
+        "detail_url": "https://example.growthzoneapp.com/memberdirectory/Details/summit-legal-3815200",
+        "icp_tier": "B",
+        "icp_label": "Professional Services",
+        "linkedin": "https://www.linkedin.com/company/summit-legal-group",
+        "contacts": [{"name": "Jennifer Walsh", "title": "Senior Partner"}]
+      },
+      {
+        "company": "TrueNorth IT Solutions",
+        "address": "2100 Tech Park Blvd, Metro City, KS 66213",
+        "phone": "(913) 555-0407",
+        "website": "https://truenorthit.com",
+        "category": "Technology, IT Services, Software",
+        "detail_url": "https://example.growthzoneapp.com/memberdirectory/Details/truenorth-3815303",
+        "icp_tier": "A",
+        "icp_label": "High-Value Services",
+        "linkedin": null,
+        "contacts": []
+      },
+      {
+        "company": "Heartland Roofing & Restoration",
+        "address": "900 Industrial Pkwy, Metro City, KS 66214",
+        "phone": "(913) 555-0509",
+        "website": "https://heartlandroofing.com",
+        "category": "Roofing, Restoration, Construction",
+        "detail_url": "https://example.growthzoneapp.com/memberdirectory/Details/heartland-3815401",
+        "icp_tier": "C",
+        "icp_label": "Local Trades",
+        "linkedin": null,
+        "contacts": [{"name": "Mike Rodriguez", "title": "Owner"}]
+      },
+      {
+        "company": "Metro City Dental Care",
+        "address": "555 Healthcare Ave, Metro City, KS 66215",
+        "phone": "(913) 555-0611",
+        "website": "https://metrodental.com",
+        "category": "Dental, Healthcare, Orthodontics",
+        "detail_url": "https://example.growthzoneapp.com/memberdirectory/Details/metro-dental-3815502",
+        "icp_tier": "B",
+        "icp_label": "Professional Services",
+        "linkedin": "https://www.linkedin.com/company/metro-dental-care",
+        "contacts": [{"name": "Dr. Emily Park", "title": "DDS, Owner"}]
+      },
+      {
+        "company": "Cascade Insurance Brokers",
+        "address": "1400 Elm Street, Metro City, KS 66216",
+        "phone": "(913) 555-0713",
+        "website": "https://cascadeinsurance.net",
+        "category": "Insurance, Business Insurance, Benefits",
+        "detail_url": "https://example.growthzoneapp.com/memberdirectory/Details/cascade-3815603",
+        "icp_tier": "A",
+        "icp_label": "High-Value Services",
+        "linkedin": "https://www.linkedin.com/company/cascade-insurance-brokers",
+        "contacts": [{"name": "Robert Nguyen", "title": "President"}]
+      },
+      {
+        "company": "The Coffee Spot",
+        "address": "123 First Ave, Metro City, KS 66217",
+        "phone": "(913) 555-0815",
+        "website": "https://thecoffeespot.com",
+        "category": "Restaurant, Coffee Shop, Food & Beverage",
+        "detail_url": "https://example.growthzoneapp.com/memberdirectory/Details/coffee-3815704",
+        "icp_tier": "D",
+        "icp_label": "Other",
+        "linkedin": null,
+        "contacts": []
+      }
+    ]
+  }
+]

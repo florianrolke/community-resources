@@ -1,0 +1,303 @@
+{
+  "manifest": {
+    "videoSrc": "your-source-video.mp4",
+    "fps": 30,
+    "width": 1920,
+    "height": 1080,
+    "durationFrames": 18660,
+    "depthMask": {
+      "enabled": false,
+      "xPct": 51,
+      "yPct": 35,
+      "widthPct": 19,
+      "heightPct": 31,
+      "opacity": 0.98
+    },
+    "captionBlocks": [
+      {
+        "id": "hs001",
+        "startFrame": 690,
+        "durationFrames": 132,
+        "mode": "highlight_stack",
+        "text": "Validate demand / before you build",
+        "lines": [
+          "Validate demand",
+          "before you build"
+        ],
+        "highlightLines": [
+          1
+        ],
+        "circleWord": "build",
+        "circleLeftPct": 72,
+        "circleWidth": 270
+      },
+      {
+        "id": "hs002",
+        "startFrame": 2298,
+        "durationFrames": 126,
+        "mode": "highlight_stack",
+        "text": "Not Upwork / go in person",
+        "lines": [
+          "Not Upwork",
+          "go in person"
+        ],
+        "highlightLines": [
+          1
+        ],
+        "circleWord": "person",
+        "circleLeftPct": 72,
+        "circleWidth": 300
+      },
+      {
+        "id": "hs003",
+        "startFrame": 2730,
+        "durationFrames": 135,
+        "mode": "highlight_stack",
+        "text": "Don't sell AI / sell the outcome",
+        "lines": [
+          "Don't sell AI",
+          "sell the outcome"
+        ],
+        "highlightLines": [
+          1
+        ],
+        "circleWord": "outcome",
+        "circleLeftPct": 71,
+        "circleWidth": 340
+      },
+      {
+        "id": "hs004",
+        "startFrame": 8010,
+        "durationFrames": 135,
+        "mode": "highlight_stack",
+        "text": "It's not 2018 / digital outreach changed",
+        "lines": [
+          "It's not 2018",
+          "digital outreach changed"
+        ],
+        "highlightLines": [
+          1
+        ],
+        "circleWord": "changed",
+        "circleLeftPct": 76,
+        "circleWidth": 330
+      },
+      {
+        "id": "hs005",
+        "startFrame": 13440,
+        "durationFrames": 135,
+        "mode": "highlight_stack",
+        "text": "You don't need / to be unique",
+        "lines": [
+          "You don't need",
+          "to be unique"
+        ],
+        "highlightLines": [
+          1
+        ],
+        "circleWord": "unique",
+        "circleLeftPct": 73,
+        "circleWidth": 300
+      },
+      {
+        "id": "hs006",
+        "startFrame": 16920,
+        "durationFrames": 141,
+        "mode": "highlight_stack",
+        "text": "Validate first / build last",
+        "lines": [
+          "Validate first",
+          "build last"
+        ],
+        "highlightLines": [
+          0,
+          1
+        ],
+        "circleWord": "first",
+        "circleLeftPct": 68,
+        "circleWidth": 260
+      }
+    ],
+    "titleCards": [],
+    "lightLeaks": [],
+    "flashTransitions": [
+      {
+        "id": "f001",
+        "startFrame": 780,
+        "durationFrames": 10,
+        "intensity": 0.72,
+        "coolWash": true
+      },
+      {
+        "id": "f002",
+        "startFrame": 2388,
+        "durationFrames": 10,
+        "intensity": 0.72,
+        "coolWash": true
+      },
+      {
+        "id": "f003",
+        "startFrame": 2820,
+        "durationFrames": 10,
+        "intensity": 0.72,
+        "coolWash": true
+      },
+      {
+        "id": "f004",
+        "startFrame": 8100,
+        "durationFrames": 10,
+        "intensity": 0.72,
+        "coolWash": true
+      },
+      {
+        "id": "f006",
+        "startFrame": 17010,
+        "durationFrames": 10,
+        "intensity": 0.72,
+        "coolWash": true
+      }
+    ],
+    "pushTransitions": [],
+    "zoomEvents": [
+      {
+        "id": "z001",
+        "startFrame": 700,
+        "durationFrames": 102,
+        "zoom": 1.085,
+        "mode": "punch"
+      },
+      {
+        "id": "z002",
+        "startFrame": 2308,
+        "durationFrames": 102,
+        "zoom": 1.085,
+        "mode": "punch"
+      },
+      {
+        "id": "z003",
+        "startFrame": 2740,
+        "durationFrames": 102,
+        "zoom": 1.085,
+        "mode": "punch"
+      },
+      {
+        "id": "slow-01",
+        "startFrame": 4566,
+        "durationFrames": 168,
+        "zoom": 1.055,
+        "mode": "slow",
+        "outFrames": 20
+      },
+      {
+        "id": "z004",
+        "startFrame": 8020,
+        "durationFrames": 102,
+        "zoom": 1.085,
+        "mode": "punch"
+      },
+      {
+        "id": "slow-02",
+        "startFrame": 10920,
+        "durationFrames": 168,
+        "zoom": 1.055,
+        "mode": "slow",
+        "outFrames": 20
+      },
+      {
+        "id": "z005",
+        "startFrame": 13450,
+        "durationFrames": 102,
+        "zoom": 1.085,
+        "mode": "punch"
+      },
+      {
+        "id": "z006",
+        "startFrame": 16930,
+        "durationFrames": 102,
+        "zoom": 1.085,
+        "mode": "punch"
+      }
+    ],
+    "behindGraphics": [],
+    "sfxCues": [
+      {
+        "id": "sf001-ding",
+        "startFrame": 702,
+        "file": "sfx/course-ding.mp3",
+        "volume": 0.32
+      },
+      {
+        "id": "sf001-whoosh",
+        "startFrame": 780,
+        "file": "sfx/course-whoosh.mp3",
+        "volume": 0.3
+      },
+      {
+        "id": "sf002-ding",
+        "startFrame": 2310,
+        "file": "sfx/course-ding.mp3",
+        "volume": 0.32
+      },
+      {
+        "id": "sf002-whoosh",
+        "startFrame": 2388,
+        "file": "sfx/course-whoosh.mp3",
+        "volume": 0.3
+      },
+      {
+        "id": "sf003-ding",
+        "startFrame": 2742,
+        "file": "sfx/course-ding.mp3",
+        "volume": 0.32
+      },
+      {
+        "id": "sf003-whoosh",
+        "startFrame": 2820,
+        "file": "sfx/course-whoosh.mp3",
+        "volume": 0.3
+      },
+      {
+        "id": "sf-slow-01",
+        "startFrame": 4566,
+        "file": "sfx/course-whoosh.mp3",
+        "volume": 0.25
+      },
+      {
+        "id": "sf004-ding",
+        "startFrame": 8022,
+        "file": "sfx/course-ding.mp3",
+        "volume": 0.32
+      },
+      {
+        "id": "sf004-whoosh",
+        "startFrame": 8100,
+        "file": "sfx/course-whoosh.mp3",
+        "volume": 0.3
+      },
+      {
+        "id": "sf-slow-02",
+        "startFrame": 10920,
+        "file": "sfx/course-whoosh.mp3",
+        "volume": 0.25
+      },
+      {
+        "id": "sf005-ding",
+        "startFrame": 13452,
+        "file": "sfx/course-ding.mp3",
+        "volume": 0.32
+      },
+      {
+        "id": "sf006-ding",
+        "startFrame": 16932,
+        "file": "sfx/course-ding.mp3",
+        "volume": 0.32
+      },
+      {
+        "id": "sf006-whoosh",
+        "startFrame": 17010,
+        "file": "sfx/course-whoosh.mp3",
+        "volume": 0.3
+      }
+    ]
+  }
+}

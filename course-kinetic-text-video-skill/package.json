@@ -1,0 +1,10 @@
+{
+  "name": "course-kinetic-text-video-skill",
+  "version": "1.0.0",
+  "description": "Remotion/Codex skill for course-style kinetic text talking-head video edits.",
+  "type": "module",
+  "scripts": {
+    "build:example": "node scripts/build-course-props.mjs examples/moment-plan.example.json examples/generated-props.example.json"
+  },
+  "license": "MIT"
+}

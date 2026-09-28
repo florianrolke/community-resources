@@ -1,0 +1,545 @@
+{
+  "name": "2) Scraper: Google Maps",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        480,
+        208
+      ],
+      "id": "6e72a50c-8574-4955-869e-5b33281bfb3d",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/compass~google-maps-extractor/run-sync-get-dataset-items",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "token",
+              "value": "INSERT_APIFY_KEY"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"language\": \"en\",\n  \"locationQuery\": \"leeds\",\n  \"maxCrawledPlacesPerSearch\": 10,\n  \"searchStringsArray\": [\n    \"dentist\"\n  ],\n  \"skipClosedPlaces\": false,\n  \"placeMinimumStars\": \"\",\n  \"website\": \"allPlaces\",\n  \"searchMatching\": \"all\"\n}",
+        "options": {
+          "allowUnauthorizedCerts": true,
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        928,
+        112
+      ],
+      "id": "dee3f72e-dfa0-489b-b8c0-9e755fbe4b62",
+      "name": "Scrape Google Maps"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Input is your HTTP Request output\n// It looks like: [ { body: [ {...place}, {...place}, ... ], headers: {...}, ... } ]\n\nconst root = items[0].json;\nconst container = Array.isArray(root) ? root[0] : root;\nconst places = container.body || [];\n\n// Helper to strip empty fields\nconst stripEmpty = (obj) =>\n  Object.fromEntries(Object.entries(obj).filter(([_, v]) => v != null && v !== ''));\n\nconst cleaned = places.map(p => stripEmpty({\n  name: p.title || p.name || null,\n  address: p.address || null,\n  email: p.email || p.emailAddress || (p.emails?.[0] ?? null) || null,  // often not present in Maps\n  phone: p.phone || p.phoneNumber || null,\n  website: p.website || null,\n}));\n\n// Optionally also create a human-readable bullet list (handy for Slack/Email)\nconst summary = cleaned.map(b => {\n  return [\n    `- ${b.name ?? 'N/A'}`,\n    `- ${b.address ?? 'N/A'}`,\n    `- ${b.email ?? 'N/A'}`,\n    `- ${b.phone ?? 'N/A'}`,\n    b.website ? `- ${b.website}` : null,\n  ].filter(Boolean).join('\\n');\n}).join('\\n\\n');\n\n// Return two outputs:\n// 1) one item per business (structured fields)\n// 2) a single item with a `summary` string (nice for copy/paste)\nreturn [\n  ...cleaned.map(x => ({ json: x })),\n  { json: { summary } },\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1152,
+        112
+      ],
+      "id": "ab72d1e2-684c-4f3b-9a4b-3de0f1efd1f7",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "formTitle": "Google Maps Scraper",
+        "formDescription": "Find businesses on Google Maps. ",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "🧑‍💻 Search term",
+              "placeholder": "Leeds+Mechanics (use this format)"
+            },
+            {
+              "fieldLabel": "📊 How many results?",
+              "fieldType": "number",
+              "placeholder": "eg, '20' or '100' (price is $6/1,000 Leads)"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        480,
+        48
+      ],
+      "id": "74c223d8-7822-43a3-b6f0-1772872903b3",
+      "name": "On form submission",
+      "webhookId": "3e653b7f-abe5-47f0-990b-c5ec07f0d783"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2521843c-890a-4106-b4d4-56d1da919153",
+              "name": "Query",
+              "value": "=Leeds+Dentist {{ $json['🧑‍💻 Search term'] }}",
+              "type": "string"
+            },
+            {
+              "id": "b81d80fa-3d61-415b-a262-3d7f541f85ef",
+              "name": "Volume",
+              "value": "=10 {{ $json['📊 How many results?'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        704,
+        112
+      ],
+      "id": "81f7d5c6-af02-49ee-a351-ecd7097002ed",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1392,
+        112
+      ],
+      "id": "97368bee-338c-4ab5-b5c4-f860a0c658dc",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.website }}",
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1632,
+        192
+      ],
+      "id": "1c892ba6-cab4-4d32-99f2-9a537f42c3bb",
+      "name": "Scrape Site",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "amount": 3
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2080,
+        224
+      ],
+      "id": "12ba3daf-aefc-43f4-9365-417512318ddd",
+      "name": "Wait",
+      "webhookId": "19cc6ed4-4fe7-485b-b879-c679e4b3374d"
+    },
+    {
+      "parameters": {
+        "jsCode": "// --- Extract visible text from HTML ---\n// Input: HTML string in $json.data or $json.body (depending on your HTTP node)\nconst htmlRaw =\n  typeof $json?.data === 'string' ? $json.data :\n  typeof $json?.body === 'string' ? $json.body :\n  (typeof $json === 'string' ? $json : '');\n\nif (!htmlRaw) {\n  return [{ json: { text: '', note: 'no HTML detected in input' } }];\n}\n\n// 1. Remove <script>, <style>, and <noscript> blocks\nlet text = htmlRaw\n  .replace(/<script[\\s\\S]*?>[\\s\\S]*?<\\/script>/gi, '')\n  .replace(/<style[\\s\\S]*?>[\\s\\S]*?<\\/style>/gi, '')\n  .replace(/<noscript[\\s\\S]*?>[\\s\\S]*?<\\/noscript>/gi, '');\n\n// 2. Replace <br> and <p> with newlines for structure\ntext = text.replace(/<br\\s*\\/?>/gi, '\\n').replace(/<\\/p>/gi, '\\n');\n\n// 3. Strip remaining HTML tags\ntext = text.replace(/<[^>]+>/g, '');\n\n// 4. Decode common HTML entities (&amp; → &, etc.)\ntext = text\n  .replace(/&nbsp;/gi, ' ')\n  .replace(/&amp;/gi, '&')\n  .replace(/&lt;/gi, '<')\n  .replace(/&gt;/gi, '>')\n  .replace(/&quot;/gi, '\"')\n  .replace(/&#39;/gi, \"'\");\n\n// 5. Clean up whitespace and line breaks\ntext = text.replace(/\\s{2,}/g, ' ').replace(/\\n{2,}/g, '\\n').trim();\n\n// Return extracted text\nreturn [{ json: { text } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1856,
+        192
+      ],
+      "id": "9f07ba62-0237-4221-94fc-836b80face43",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.text }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an AI assistant tasked with analyzing website content. You will receive text extracted from a website.\n\nYour task:\n\n1. SUMMARY (50 words maximum)\nWrite a concise summary of the company/organization, including what they do, who they serve, and their main value proposition.\n\n2. FACTS (up to 5 bullet points)\nIdentify distinctive characteristics such as:\n- Recent awards or recognition\n- Unique selling propositions\n- Notable achievements or milestones\n- Specialized services or products\n- Industry differentiators\n\nYou MUST respond with ONLY valid JSON in this exact format:\n\n{\n  \"summary\": \"Your 50-word summary here\",\n  \"facts\": [\n    \"Fact 1\",\n    \"Fact 2\",\n    \"Fact 3\",\n    \"Fact 4\",\n    \"Fact 5\"\n  ]\n}\n\nDo not include any text before or after the JSON. If fewer than 5 facts are found, include only what's available.\n\n---\n\nEXAMPLE OUTPUT:\n\n{\n  \"summary\": \"GreenTech Solutions is a sustainable energy company founded in 2018, specializing in solar panel installation for residential and commercial properties across California. They offer end-to-end services including consultation, installation, and maintenance, with a focus on reducing carbon footprints while lowering energy costs for their 5,000+ clients.\",\n  \"facts\": [\n    \"Winner of the 2024 California Clean Energy Award\",\n    \"Proprietary AI-powered energy optimization system that increases efficiency by 30%\",\n    \"First solar company in the state to achieve B-Corp certification\",\n    \"25-year warranty on all installations, 5 years above industry standard\",\n    \"Partnership with local schools to provide free solar education programs\"\n  ]\n}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        2288,
+        96
+      ],
+      "id": "9f04194f-24e6-4e36-8577-a107e935ce5a",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        2288,
+        352
+      ],
+      "id": "26adb2b1-b215-421f-b174-716d7cbf419f",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": null,
+          "name": "Use this API key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Your Lead Database",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 634571816,
+          "mode": "list",
+          "cachedResultName": "Google Maps",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/edit#gid=634571816"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Company ": "={{ $('Code in JavaScript').item.json.name }}",
+            "Website": "={{ $('Code in JavaScript').item.json.website }}",
+            "Address": "={{ $('Code in JavaScript').item.json.address }}",
+            "Phone": "={{ $('Code in JavaScript').item.json.phone }}",
+            "Summary": "={{ $json.output }}",
+            "Fact 1": "={{ $json.output.facts[0] }}",
+            "Fact 2": "={{ $json.output.facts[1] }}",
+            "Fact 3": "={{ $json.output.facts[2] }}",
+            "Fact 4": "={{ $json.output.facts[3] }}",
+            "Fact 5": "={{ $json.output.facts[4] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Company ",
+              "displayName": "Company ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Website",
+              "displayName": "Website",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Address",
+              "displayName": "Address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Summary",
+              "displayName": "Summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Fact 1",
+              "displayName": "Fact 1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Fact 2",
+              "displayName": "Fact 2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Fact 3",
+              "displayName": "Fact 3",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Fact 4",
+              "displayName": "Fact 4",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Fact 5",
+              "displayName": "Fact 5",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2672,
+        96
+      ],
+      "id": "9bf9922b-ddaa-4cb6-bb5f-bb668dbd10c3",
+      "name": "Append row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": null,
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"summary\": \"Your 50-word summary here\",\n  \"facts\": [\n    \"Fact 1\",\n    \"Fact 2\",\n    \"Fact 3\",\n    \"Fact 4\",\n    \"Fact 5\"\n  ]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        2448,
+        352
+      ],
+      "id": "7ee04224-8702-4d2c-a56d-1b511c1aedca",
+      "name": "Structured Output Parser"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scrape Google Maps": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Scrape Google Maps",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Scrape Site",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scrape Site": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "",
+  "meta": {},
+  "tags": [
+    {
+      "createdAt": "2025-10-15T08:48:08.047Z",
+      "updatedAt": "2025-10-15T08:48:08.047Z",
+      "id": "9KReBwwNhO9J8p72",
+      "name": "N8N Course"
+    }
+  ]
+}

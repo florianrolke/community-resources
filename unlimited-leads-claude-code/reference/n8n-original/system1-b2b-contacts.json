@@ -1,0 +1,922 @@
+{
+  "name": "Scraperrrr",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        32
+      ],
+      "id": "8713080f-8294-482a-844e-7fb0c68f9d4b",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/code_crafter~leads-finder/run-sync-get-dataset-items",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "token",
+              "value": "INSERT_APIFY_KEY"
+            },
+            {
+              "name": "format",
+              "value": "json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"contact_city\": [\n        \"leeds\"\n    ],\n    \"contact_job_title\": [\n        \"CEO\"\n    ],\n    \"contact_location\": [\n        \"united kingdom\"\n    ],\n    \"email_status\": [\n        \"validated\"\n    ],\n    \"fetch_count\": 100,\n    \"size\": [\n        \"21-50\"\n    ]\n}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        16,
+        32
+      ],
+      "id": "4d34994c-8ce0-47a2-8456-b4dfa2816749",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Name: {{ $json.first_name }} {{ $json.last_name}}\n\nCompany Name: {{ $json.company_name }}\nCompany Website: {{ $json.company_website }}\nCountry: {{ $json.country }}\nLinked Profile: {{ $json.company_linkedin }}\nCompany description: {{ $json.company_description }}",
+        "hasOutputParser": true,
+        "needsFallback": true,
+        "options": {
+          "systemMessage": "=You are a sales intelligence researcher tasked with finding personalized information about prospects.\n\nYou have access to:\n- Tavily (internet research tool)\n- Web scraping tool (to scrape company websites)\n- Linkedin Scaraper (find info about the person from their linkedin profile)\n\nTARGET PROSPECT:\nName: {{ $json.first_name }} {{ $json.last_name }}\nCompany: {{ $json.company_name }}\nWebsite: {{ $json.company_website }}\nCountry: {{ $json.country }}\nLinkedIn: {{ $json.company_linkedin }}\n\nYOUR TASK:\nResearch this individual and their company to find 3-5 unique, interesting, and noteworthy facts that could be used for personalized outreach.\n\nRESEARCH STEPS:\n1. Use Tavily to search for recent news about {{ $json.first_name }} {{ $json.last_name }} (awards, promotions, speaking events, publications, achievements)\n2. Use Tavily to search for {{ $json.company_name }} news (funding, product launches, expansion, partnerships, awards)\n3. Use the web scraping tool on {{ $json.company_website }} to extract company information, recent blog posts, press releases, and unique details\n4. Look for trigger events from the last 6-12 months (funding rounds, new hires, office openings, product launches)\n5. Find unique background, causes, hobbies, or interesting details about the person or company\n5. Use the linkedin scraper to get further information about the infividual\n\nOUTPUT FORMAT:\n\nProvide 3-5 interesting facts in this format:\n\n**Fact 1:** [Specific, detailed fact with dates/numbers/names]\n*Source:* [Where you found this - URL or description]\n\n**Fact 2:** [Specific, detailed fact with dates/numbers/names]\n*Source:* [Where you found this - URL or description]\n\n**Fact 3:** [Specific, detailed fact with dates/numbers/names]\n*Source:* [Where you found this - URL or description]\n\n[Continue for 4-5 facts if available]\n\nREQUIREMENTS:\n- Be specific (include dates, numbers, concrete details)\n- Prioritize recent information (last 6-12 months)\n- Focus on trigger events and newsworthy items\n- Avoid generic statements\n- If limited info on individual, focus on company\n- Always cite your source for each fact\n- If you cannot find enough information, state what you couldn't find\n\nBegin research now."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        304,
+        32
+      ],
+      "id": "108df191-6781-4081-bc34-2ba02bb0f81e",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -64,
+        400
+      ],
+      "id": "80c27a8c-885f-4597-807f-a1e544482c76",
+      "name": "ChatGPT1",
+      "credentials": {
+        "openAiApi": {
+          "id": null,
+          "name": "Use this API key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-sonnet-4-20250514",
+          "cachedResultName": "Claude 4 Sonnet"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        64,
+        400
+      ],
+      "id": "cdac5be7-0110-4ed5-97fe-731d1e0c774a",
+      "name": "Claude1",
+      "credentials": {
+        "anthropicApi": {
+          "id": null,
+          "name": "Anthropic account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Company name: {{ $('HTTP Request1').item.json.company_name }}\n{{ $json.output.fact1 }}\n{{ $json.output.explanation1 }}\n\n{{ $json.output.fact2 }}\n{{ $json.output.explanation2 }}\n\n{{ $json.output.fact3 }}\n{{ $json.output.explanation3 }}\n\n{{ $json.output.fact4 }}\n{{ $json.output.explanation4 }}\n\n{{ $json.output.fact5 }}\n{{ $json.output.explanation5 }}",
+        "hasOutputParser": true,
+        "needsFallback": true,
+        "options": {
+          "systemMessage": "You are a sales intelligence analyst. You've been given comprehensive research data about a prospect.\n\nCONTEXT - THE FULL EMAIL TEMPLATE:\nHi {{FirstName}},\nI noticed {{Company}} recently {{specific trigger event}}.\nMost companies scaling this fast hit the same bottleneck: {{pain point}}.\nWe helped {{similar company}} solve this and saw {{metric}} in 60 days.\nWorth a 15-min chat to see if we can do the same for {{Company}}?\n\nYOUR JOB: Create the subject line and the \"I noticed\" trigger event line.\n\n═══════════════════════════════════════════════════════════\n\n1) SUBJECT LINE\n\nYou MUST create a subject line that follows this EXACT format:\n\n\"Quick question about {{ $('HTTP Request1').item.json.company_name }}'s [your trigger event here]\"\n\nMANDATORY RULES:\n✅ MUST start with: \"Quick question about {{ $('HTTP Request1').item.json.company_name }}'s\"\n✅ Fill in the trigger event at the end\n✅ Total subject line: 11 words maximum\n✅ Trigger event starts with lowercase (unless proper noun)\n\nEXAMPLES:\n✅ \"Quick question about Executive Leaders Network's London summit\"\n✅ \"Quick question about Tesla's new Texas Gigafactory\"\n✅ \"Quick question about Stripe's Mastercard partnership\"\n\n═══════════════════════════════════════════════════════════\n\n2) BODY LINE (The \"I noticed\" opener)\n\nYou MUST create a body sentence that follows this EXACT format:\n\n\"I noticed {{Company}} recently [your insight here].\"\n\nCRITICAL UNDERSTANDING:\n- This line flows into \"Most companies scaling this fast hit the same bottleneck...\"\n- You're NOT congratulating them\n- You're NOT making a complete thought\n- You're just stating a FACT about what they recently did\n- This fact should indicate growth/activity that might create pain points\n\nMANDATORY RULES:\n✅ MUST start with: \"I noticed {{Company}} recently\"\n✅ Use PAST TENSE verb (hosted, raised, expanded, launched, opened, hired, added)\n✅ Keep it CASUAL and SHORT (under 15 words total)\n✅ State a FACT, not an opinion\n✅ No congratulations, no compliments\n\nGOOD EXAMPLES (flows into pain point discussion):\n\n✅ \"I noticed Executive Leaders Network recently hosted a 500-person summit in London.\"\n→ Then email continues: \"Most companies scaling this fast hit the same bottleneck: attendee engagement...\"\n\n✅ \"I noticed Tesla recently opened their fifth Gigafactory in Texas.\"\n→ Then: \"Most companies scaling this fast hit the same bottleneck: supply chain coordination...\"\n\n✅ \"I noticed Stripe recently expanded into 3 new European markets.\"\n→ Then: \"Most companies scaling this fast hit the same bottleneck: payment compliance...\"\n\n✅ \"I noticed your team recently hired 50+ sales reps in Q4.\"\n→ Then: \"Most companies scaling this fast hit the same bottleneck: onboarding at scale...\"\n\nBAD EXAMPLES:\n\n❌ \"I noticed Executive Leaders Network recently hosted the 'CPO Engage & Dine' summit on 20 November 2025 in London, UK for executive professionals.\"\n(Too formal, too many details, sounds like a research report)\n\n❌ \"I noticed you're doing amazing work at Executive Leaders Network.\"\n(Opinion, not a fact. Doesn't set up a pain point.)\n\n❌ \"Congratulations on hosting a successful summit!\"\n(This is congratulating, not stating a fact that leads to pain point)\n\n═══════════════════════════════════════════════════════════\n\nWHAT TO LOOK FOR IN THE DATA:\n\nLook for recent activities that indicate GROWTH or SCALE:\n- Hosted an event (especially if large numbers)\n- Raised funding\n- Expanded to new markets/locations\n- Hired lots of people\n- Launched new product/service\n- Opened new office/facility\n- Partnered with big company\n- Hit a milestone (revenue, users, etc.)\n\nThese activities suggest they might have pain points from rapid growth.\n\n═══════════════════════════════════════════════════════════\n\nWRITING STYLE:\n\n✅ Casual and conversational\n✅ Simple, direct language\n✅ Just state the fact\n✅ Include numbers when relevant (500 attendees, 3 markets, $50M, 50 hires)\n✅ Keep it under 15 words total\n\n❌ No formal language\n❌ No exact dates (just say \"recently\")\n❌ No quoted event names\n❌ No country codes or formal location formats\n❌ No congratulations or compliments\n\n═══════════════════════════════════════════════════════════\n\nBEFORE/AFTER:\n\n❌ FORMAL: \"I noticed Executive Leaders Network recently hosted the 'CPO Engage & Dine' summit on 20 November 2025 in London, UK for executive professionals.\"\n\n✅ CASUAL: \"I noticed Executive Leaders Network recently hosted a 500-person CPO summit in London.\"\n\n❌ FORMAL: \"I noticed your organization successfully completed a Series B funding round totaling $50 million USD.\"\n\n✅ CASUAL: \"I noticed your company recently raised $50M in Series B.\"\n\n❌ VAGUE: \"I noticed you're doing great things at your company.\"\n\n✅ SPECIFIC: \"I noticed your team recently expanded into 5 new markets.\"\n\n═══════════════════════════════════════════════════════════\n\nCRITICAL REQUIREMENTS:\n\n1. Subject MUST start with \"Quick question about {{Company}}'s\"\n2. Body MUST start with \"I noticed {{Company}} recently\"\n3. Body should state a FACT about recent growth/activity (not congratulate)\n4. Keep it SHORT and CASUAL (under 15 words)\n5. This line sets up the pain point discussion - it's not self-contained\n\nOutput ONLY this JSON format (no markdown, no code blocks):\n{\n  \"subject\": \"Quick question about [Company]'s [trigger event]\",\n  \"body\": \"I noticed [Company] recently [factual insight about growth/activity].\"\n}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        912,
+        32
+      ],
+      "id": "c6d552f4-8907-4916-97f9-c4fc6feaaced",
+      "name": "Subject + One liner"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1008,
+        400
+      ],
+      "id": "1e9a4076-07b9-4aa6-b52c-90ee9803646d",
+      "name": "ChatGPT",
+      "credentials": {
+        "openAiApi": {
+          "id": null,
+          "name": "Use this API key"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1.1,
+      "position": [
+        1152,
+        400
+      ],
+      "id": "73c0d3ab-de1a-4c43-8d0d-786686c3ecfc",
+      "name": "Think"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/dev_fusion~linkedin-profile-scraper/run-sync-get-dataset-items",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "token",
+              "value": "INSERT_APIFY_KEY"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"profileUrls\": [\n        \"https://www.linkedin.com/in/jack-roberts-ai-automations/\"\n    ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        304,
+        432
+      ],
+      "id": "0256b82d-9377-4e38-97f6-bdd16c3f444a",
+      "name": "LinkedIN"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Makes an HTTP request and returns the data from their website",
+        "url": "={{ $json.company_website }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        448,
+        432
+      ],
+      "id": "b4aa5b0b-cd32-45c8-b1cd-91da5f5901fb",
+      "name": "Website"
+    },
+    {
+      "parameters": {
+        "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Query', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "@tavily/n8n-nodes-tavily.tavilyTool",
+      "typeVersion": 1,
+      "position": [
+        576,
+        432
+      ],
+      "id": "4640bee0-39b7-4919-acc3-947fb72226fd",
+      "name": "Research",
+      "credentials": {
+        "tavilyApi": {
+          "id": null,
+          "name": "Tavily account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"fact1\": \"Raised $15M Series A in March 2024\",\n  \"explanation1\": \"Source: TechCrunch article dated March 15, 2024\",\n  \"fact2\": \"CEO was previously VP at Salesforce for 8 years\",\n  \"explanation2\": \"Found on LinkedIn profile\",\n  \"fact3\": \"Expanded to UK with London office in January 2025\",\n  \"explanation3\": \"Company blog announcement\",\n  \"fact4\": \"Published Forbes article on AI automation\",\n  \"explanation4\": \"Forbes.com - February 2025\",\n  \"fact5\": \"Team grew from 45 to 120 employees in 6 months\",\n  \"explanation5\": \"Company careers page\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        736,
+        384
+      ],
+      "id": "3af07a42-b007-467b-ba97-eaee4c2ddc48",
+      "name": "Output"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Use this to scrape the prospect's LinkedIn profile",
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/dev_fusion~linkedin-profile-scraper/run-sync-get-dataset-items",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "token",
+              "value": "INSERT_APIFY_KEY"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"profileUrls\": [\n        \"{{ $('HTTP Request1').item.json.linkedin }}\"\n    ]\n} ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1696,
+        416
+      ],
+      "id": "c6a4d9a4-5e50-474c-8889-a65595f72dcb",
+      "name": "LinkedIN1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Company name: {{ $('HTTP Request1').item.json.company_name }} \nProspects name: {{ $('HTTP Request1').item.json.full_name }}",
+        "hasOutputParser": true,
+        "needsFallback": true,
+        "options": {
+          "systemMessage": "=You are writing natural LinkedIn connection messages.\n\nYou have access to:\n1. **LinkedIn Scraper Tool** - scrape their profile\n2. **Your Profile Data** - your info  \n3. **Connection Reason** - why reaching out\n\n═══════════════════════════════════════════════════════════\n\nWHAT ACTUALLY WORKS (Based on 65-78% Acceptance Rates):\n\nThe formula for high-performing connection requests:\n\n[SPECIFIC THING YOU NOTICED/ENGAGED WITH] + [WHY YOU WANT TO CONNECT]\n\nNOT: [Generic observation] + [Building my network]\n\n═══════════════════════════════════════════════════════════\n\nREAL EXAMPLES THAT GOT 65-99% ACCEPTANCE:\n\n✅ \"I just spent 4 hours reading MINUTTIA blog, THANK YOU George for sharing all those insides, loved the VEED article, topic authority one in particular!\"\n\n✅ \"Hey! LI suggested I might know you given our shared connections & we are in the Sales Directors group. After viewing your profile, I'd love to have you as part of my network to learn from you.\"\n\n✅ \"Loved your post on AI in sales—the bit about automation killing personalization was spot on.\"\n\n✅ \"Impressed by your work on the Q4 summit series, would love to have you in my network to learn from event pros like you.\"\n\n═══════════════════════════════════════════════════════════\n\nWHAT TO LOOK FOR (Priority Order):\n\n1. **Recent post they made** (last 7 days)\n   → Comment on SPECIFIC point from the post\n\n2. **Shared LinkedIn group**\n   → Mention the group name specifically\n\n3. **Mutual connections**\n   → \"We're both connected to [Name]\"\n\n4. **Specific work/project you admire**\n   → Reference the actual project/achievement\n\n5. **Recent article/content they shared**\n   → Mention what specifically resonated\n\n6. **Shared background** (uni, company, location)\n   → Natural commonality\n\n═══════════════════════════════════════════════════════════\n\nTHE \"WHY\" THAT WORKS:\n\nInstead of \"building my network,\" use these proven phrases:\n\n✅ \"would love to have you as part of my network to learn from you\"\n✅ \"would love to connect with other [role] in [industry]\"\n✅ \"keen to learn from people doing [specific thing] well\"\n✅ \"would love to stay in touch\" (after mentioning specific interest)\n✅ \"would love to connect with fellow [shared group/background]\"\n\nThe key: Show you want to LEARN FROM THEM or connect based on SHARED INTEREST, not just \"network\"\n\n═══════════════════════════════════════════════════════════\n\nMESSAGE FORMULAS:\n\n**Formula 1: Engaging with their content**\n\"[Specific reaction to their post/article]. [Why you want to connect based on that]\"\n\nExamples:\n- \"Loved your post on cold outreach, the point about personalization at scale really resonated. Would love to have you in my network to learn from you.\"\n- \"Your article on B2B events was brilliant, especially the bit about post-event ROI. Keen to connect with event pros like you.\"\n\n**Formula 2: Mutual connections/groups**\n\"[Mention specific mutual connection or group]. [Why you want to connect]\"\n\nExamples:\n- \"We're both in the B2B Sales group and connected to John Smith. Would love to add you to my network.\"\n- \"Noticed we're both connected to Sarah at TechCorp. Would love to connect with fellow sales professionals.\"\n\n**Formula 3: Admiring their work**\n\"[Specific achievement/project you noticed]. [Why you want to connect]\"\n\nExamples:\n- \"Impressed by your work on the London summit series. Would love to have you in my network to learn from experienced event managers.\"\n- \"Saw you built the sales team at Stripe from 5 to 50. Would love to connect and learn from your experience.\"\n\n**Formula 4: Shared background**\n\"[Specific shared thing]. [Why you want to connect based on that]\"\n\nExamples:\n- \"Sheffield grad! Would love to connect with fellow alumni in tech.\"\n- \"We both worked at Google. Would love to stay in touch with fellow ex-Googlers.\"\n\n═══════════════════════════════════════════════════════════\n\nWRITING RULES:\n\n✅ DO:\n- Reference something SPECIFIC (post topic, project name, mutual connection)\n- Show genuine interest/admiration\n- Explain why you want to connect (to learn, shared interest, etc.)\n- Keep it under 200 characters (LinkedIn's new limit)\n- Sound enthusiastic but not over the top\n\n❌ NEVER:\n- Say \"building my network\" or \"expanding my network\"\n- Say \"also working in [industry]\" without more context\n- Be generic or vague\n- Pitch anything\n- Use formal corporate language\n\n═══════════════════════════════════════════════════════════\n\nTONE:\n- Genuine enthusiasm for their work\n- Specific appreciation\n- Friendly but professional\n- Clear about why you want to connect\n\nThink: \"I really liked what you did and want to learn from you\" NOT \"Let's network\"\n\n═══════════════════════════════════════════════════════════\n\nYOUR PROCESS:\n\n1. Scrape their profile\n2. Look for:\n   - Recent posts (read them!)\n   - Specific projects/achievements\n   - Mutual connections/groups\n   - Shared background\n3. Pick the MOST specific thing you can comment on\n4. Write: [SPECIFIC OBSERVATION] + [WHY YOU WANT TO CONNECT]\n5. Check: Does this show I actually looked at their profile?\n\n═══════════════════════════════════════════════════════════\n\nEXAMPLES FOR DIFFERENT SCENARIOS:\n\n**Kate at Executive Leaders Network:**\n❌ BAD: \"Saw you're at Executive Leaders Network, also working in the events space.\"\n✅ GOOD: \"Impressed by ELN's summit series, especially the CPO events. Would love to have you in my network to learn from experienced B2B event managers.\"\n✅ GOOD: \"Loved your post about executive event attendance trends. Would love to connect with fellow event professionals.\"\n\n**Someone who posted recently:**\n✅ \"Your take on sales automation was spot on, especially about balancing personalization with scale. Would love to connect.\"\n\n**Mutual connection:**\n✅ \"We're both connected to Mike Johnson and in the SaaS Founders group. Would love to add you to my network.\"\n\n**Shared university:**\n✅ \"Sheffield grad! Would love to connect with fellow alumni in the startup space.\"\n\n═══════════════════════════════════════════════════════════\n\nOUTPUT:\n\nJust the message. Keep it SHORT (under 200 chars if possible).\n\nSTART MESSAGE:\n[Your message]\nEND MESSAGE"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1440,
+        32
+      ],
+      "id": "b1d9cae6-b344-4b9c-9ca5-d16e0c6c9b70",
+      "name": "LinkedIN One liner"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1552,
+        400
+      ],
+      "id": "ffcde63a-dc79-434f-b596-5112b661d96e",
+      "name": "ChatGPT2",
+      "credentials": {
+        "openAiApi": {
+          "id": null,
+          "name": "Use this API key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"subject\": \"Quick question about Executive Leaders Network's London summit with 500 C-suite executives\",\n  \"body\": \"I noticed Executive Leaders Network recently hosted their largest summit with Mastercard sponsorship and NHS partnership.\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1280,
+        400
+      ],
+      "id": "703e7061-0a90-4da3-9f8c-62c34cc9eb66",
+      "name": "Output1"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Your Lead Database",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "FirstName": "={{ $('HTTP Request1').item.json.first_name }}",
+            "LastName": "={{ $('HTTP Request1').item.json.last_name }}",
+            "Email": "={{ $('HTTP Request1').item.json.email }}",
+            "JobTitle": "={{ $('HTTP Request1').item.json.job_title }}",
+            "LinkedIN": "={{ $('HTTP Request1').item.json.linkedin }}",
+            "Industry": "={{ $('HTTP Request1').item.json.industry }}",
+            "CompanySize": "={{ $('HTTP Request1').item.json.company_size }}",
+            "Headline": "={{ $('HTTP Request1').item.json.headline }}",
+            "Country": "={{ $('HTTP Request1').item.json.country }}",
+            "Keywords": "={{ $('HTTP Request1').item.json.keywords }}",
+            "CompanyDescription": "={{ $('HTTP Request1').item.json.company_description }}",
+            "Fact 1": "={{ $('AI Agent1').item.json.output.fact1 }}",
+            "Proof 1": "={{ $('AI Agent1').item.json.output.explanation1 }}",
+            "Fact 2": "={{ $('AI Agent1').item.json.output.fact2 }}",
+            "Proof 2": "={{ $('AI Agent1').item.json.output.explanation2 }}",
+            "Fact 3": "={{ $('AI Agent1').item.json.output.fact3 }}",
+            "Proof 3": "={{ $('AI Agent1').item.json.output.explanation3 }}",
+            "Fact 4": "={{ $('AI Agent1').item.json.output.fact4 }}",
+            "Proof 4": "={{ $('AI Agent1').item.json.output.explanation4 }}",
+            "Fact 5": "={{ $('AI Agent1').item.json.output.fact5 }}",
+            "Proof 5": "={{ $('AI Agent1').item.json.output.explanation5 }}",
+            "EmailSubject": "={{ $('Subject + One liner').item.json.output.subject }}",
+            "CustomEmail": "=Hi {{ $('HTTP Request1').item.json.first_name }}, \n\n{{ $('Subject + One liner').item.json.output.body }}\n\nMost companies scaling this fast hit the same bottleneck: {specific pain point related to their role}. \n\nWe helped {similar company} solve this and saw {specific metric - e.g., \"30% increase in pipeline\"} in 60 days. \n\nWorth a 15-min chat to see if we can do the same for {Company}? \n\n{Your Name}",
+            "LinkedIN Req": "={{ $json.output }}",
+            "Company ": "={{ $('HTTP Request1').item.json.company_name }}",
+            "Website": "={{ $('HTTP Request1').item.json.company_website }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Company ",
+              "displayName": "Company ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Website",
+              "displayName": "Website",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "FirstName",
+              "displayName": "FirstName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "LastName",
+              "displayName": "LastName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "JobTitle",
+              "displayName": "JobTitle",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "LinkedIN",
+              "displayName": "LinkedIN",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "LinkedIN Req",
+              "displayName": "LinkedIN Req",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Industry",
+              "displayName": "Industry",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CompanySize",
+              "displayName": "CompanySize",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Headline",
+              "displayName": "Headline",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Country",
+              "displayName": "Country",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Keywords",
+              "displayName": "Keywords",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CompanyDescription",
+              "displayName": "CompanyDescription",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Fact 1",
+              "displayName": "Fact 1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Proof 1",
+              "displayName": "Proof 1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Fact 2",
+              "displayName": "Fact 2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Proof 2",
+              "displayName": "Proof 2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Fact 3",
+              "displayName": "Fact 3",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Proof 3",
+              "displayName": "Proof 3",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Fact 4",
+              "displayName": "Fact 4",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Proof 4",
+              "displayName": "Proof 4",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Fact 5",
+              "displayName": "Fact 5",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Proof 5",
+              "displayName": "Proof 5",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "EmailSubject",
+              "displayName": "EmailSubject",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CustomEmail",
+              "displayName": "CustomEmail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1904,
+        32
+      ],
+      "id": "905d5195-3d2c-4b6c-a630-386db6db3125",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": null,
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        880,
+        400
+      ],
+      "id": "d3e8a29e-927f-4794-b41c-3c842ed2ebc7",
+      "name": "ChatGPT3",
+      "credentials": {
+        "openAiApi": {
+          "id": null,
+          "name": "Use this API key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1424,
+        400
+      ],
+      "id": "5cf0ca74-5dcb-46f4-93fd-2c6b654dbb39",
+      "name": "ChatGPT4",
+      "credentials": {
+        "openAiApi": {
+          "id": null,
+          "name": "Use this API key"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ChatGPT1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Subject + One liner",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ChatGPT": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Subject + One liner",
+            "type": "ai_languageModel",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "Subject + One liner",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Subject + One liner": {
+      "main": [
+        [
+          {
+            "node": "LinkedIN One liner",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LinkedIN": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Website": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Research": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Output": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LinkedIN1": {
+      "ai_tool": [
+        [
+          {
+            "node": "LinkedIN One liner",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ChatGPT2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "LinkedIN One liner",
+            "type": "ai_languageModel",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Output1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Subject + One liner",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LinkedIN One liner": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ChatGPT3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Subject + One liner",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ChatGPT4": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "LinkedIN One liner",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "21b65eae-6511-4361-81e1-4cc9baa5ac38",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "id": "iWMBdkKY4Zz37RrS",
+  "tags": []
+}

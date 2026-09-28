@@ -1,0 +1,72 @@
+﻿<!--
+Archived May 30, 2026.
+
+This JavaScript powered the experimental left-to-right scroll cards and
+right-side progress rail. It is intentionally inactive now because the active
+blog direction is a normal, readable article experience. Keep this file as a
+future implementation reference.
+-->
+<script>
+(function () {
+  var article = document.querySelector('.fr-article-shell');
+  if (!article) return;
+
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var scrollers = Array.prototype.slice.call(document.querySelectorAll('.fr-scroll-cards'));
+  var milestones = Array.prototype.slice.call(document.querySelectorAll('[data-fr-milestone]'));
+  var railFill = document.querySelector('.fr-progress-rail__fill');
+
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+  }
+
+  function updateHorizontalCards() {
+    if (reducedMotion || window.innerWidth < 960) return;
+
+    scrollers.forEach(function (section) {
+      var cards = Array.prototype.slice.call(section.querySelectorAll('.fr-scroll-card'));
+      if (!cards.length) return;
+
+      var rect = section.getBoundingClientRect();
+      var maxScroll = Math.max(1, rect.height - window.innerHeight);
+      var progress = clamp((0 - rect.top) / maxScroll, 0, 1);
+      var firstCard = cards[0];
+      var cardWidth = firstCard.getBoundingClientRect().width + 16;
+      var maxX = -cardWidth * Math.max(0, cards.length - 1);
+      var x = maxX * progress;
+
+      cards.forEach(function (card) {
+        card.style.setProperty('--fr-scroll-x', x + 'px');
+      });
+    });
+  }
+
+  function updateProgressRail() {
+    var rect = article.getBoundingClientRect();
+    var total = Math.max(1, rect.height - window.innerHeight);
+    var progress = clamp((0 - rect.top) / total, 0, 1);
+
+    if (railFill) {
+      railFill.style.height = (progress * 100).toFixed(2) + '%';
+    }
+
+    milestones.forEach(function (marker) {
+      var target = document.querySelector(marker.getAttribute('data-fr-milestone'));
+      if (!target) return;
+      if (target.getBoundingClientRect().top < window.innerHeight * 0.55) {
+        marker.classList.add('is-unlocked');
+      }
+    });
+  }
+
+  function update() {
+    updateHorizontalCards();
+    updateProgressRail();
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+</script>
+

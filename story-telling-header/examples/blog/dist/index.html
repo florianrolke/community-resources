@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mountain Honey Co. — raw honey from the high valleys</title>
+<meta name="description" content="Raw, unfiltered mountain honey harvested by hand in the high valleys. A demo site for the story-telling-header scroll-scrub hero.">
+<meta name="theme-color" content="#1b1206">
+<meta property="og:title" content="Mountain Honey Co. — raw honey from the high valleys">
+<meta property="og:description" content="Raw, unfiltered mountain honey harvested by hand in the high valleys. A demo site for the story-telling-header scroll-scrub hero.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Source+Sans+3:wght@400;600;700&family=Playfair+Display:wght@800&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#top"><span class="brand-mark">&#9670;</span> Mountain Honey Co.</a>
+    <nav class="main-nav"><a href="#body">Our honey</a><a href="#body">The valley</a><a href="#body">Visit</a></nav>
+    <a class="header-cta" href="#body">Order a jar</a>
+  </div>
+</header>
+<header id="ascent" role="banner">
+  <div class="stage" id="top">
+    <video id="ascentVid" muted playsinline preload="auto" poster="assets/hero/scene1.jpg" data-src="assets/hero/ascent.mp4"></video>
+    <div class="scene" data-scene="0"><img src="assets/hero/scene1.jpg" alt="Raw honey from the"></div><div class="scene" data-scene="1"><img src="assets/hero/scene2.jpg" alt="From our bees," loading=lazy></div><div class="scene" data-scene="2"><img src="assets/hero/scene3.jpg" alt="To your" loading=lazy></div><div class="scene" data-scene="3"><img src="assets/hero/scene4.jpg" alt="Honey you can trace" loading=lazy></div>
+    <div class="veil"></div><div class="vignette"></div><div class="grain"></div>
+    <div class="beat" data-beat="0"><div class="beat-tag"><span>High Valley Apiary · Est. 1998</span></div><h1>Raw honey from the <span class="gold">high valleys.</span></h1><p class="sub">Where the forest and the wildflowers meet, at sixteen hundred metres.</p><div class="hero-ctas"><a class="btn btn-primary" href="#body">Order a jar</a><a class="btn btn-ghost" href="#body">Visit the apiary</a></div><div class="scroll-hint">Scroll to follow the honey</div></div><div class="beat beat-center" data-beat="1"><h2>From our bees, <span class="gold">by hand.</span></h2><p class="sub">Harvested frame by frame and jarred without pasteurising. Real raw honey.</p></div><div class="beat beat-center" data-beat="2"><h2>To your <span class="gold">table.</span></h2><p class="sub">Bread, tea and honey — the simplest good thing, the way it should be.</p></div><div class="beat beat-center" data-beat="3"><h2>Honey you can trace <span class="gold">to the hive.</span></h2><p class="sub">Three single-origin varieties. Order a jar, or come visit the apiary yourself.</p><div class="scroll-hint">Taste it below ↓</div></div>
+  </div>
+</header>
+<div class="hero-rail" id="hero-rail" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+<section class="stat-band"><div class="stat"><b>1,600 m</b><span>High-valley altitude</span></div><div class="stat"><b>100%</b><span>Raw &amp; unfiltered</span></div><div class="stat"><b>3</b><span>Single-origin varieties</span></div><div class="stat"><b>By hand</b><span>Every harvest</span></div></section>
+<main>
+  <section class="answer-box rv">
+    <p class="answer-label">In short</p>
+    <h2 class="answer-q">Where can I buy real raw mountain honey?</h2>
+    <p class="answer-a">Mountain Honey Co. harvests raw, unfiltered honey by hand in the high valleys at ~1,600 m. Three single-origin varieties, jarred without pasteurising, shipped direct or picked up at the apiary.</p>
+  </section>
+  <section class="sec rv"><h2>Why high-valley honey is different</h2><p>At altitude, the forest and wildflower bloom give the honey an aroma and body you don&#x27;t find in industrial honey. We harvest it ourselves and jar it without pasteurising or thinning it with syrups.</p><p>It&#x27;s genuinely raw — which is why it crystallises over time, a natural sign of purity.</p></section><section class="sec rv"><h2>Our three varieties</h2><ul><li>Wildflower: the everyday jar — floral and balanced.</li><li>Forest honeydew: darker, richer, less sweet.</li><li>Spring blossom: light, delicate and seasonal.</li></ul></section><section class="sec rv"><h2>Order or visit</h2><p>Message us for the current jars, prices and shipping. Or come to the apiary, see the harvest, and taste honey straight from the frame.</p></section>
+  <section class="cta-band rv">
+    <h2>Want honey you can trace to the hive?</h2>
+    <p>Order a jar direct, or book a visit to the high-valley apiary.</p>
+    <div class="cta-actions">
+      <a class="btn btn-primary" href="#body">Order a jar</a>
+      <a class="btn btn-ghost" href="#body">Visit the apiary</a>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <p>Mountain Honey Co. — raw honey from the high valleys. (Fictional demo brand for story-telling-header.)</p>
+</footer>
+
+<script>
+/* ============================================================================
+   story-telling-header — the scroll-scrub hero engine.
+
+   Technique: map the page's scroll position over the tall #ascent track (e.g. 520vh)
+   to the hero video's currentTime, so scrolling "scrubs" the footage frame-by-frame —
+   a continuous camera ascent through your 4 scenes. Text "beats" fade in per segment.
+
+   Two paths:
+   - VIDEO (the good one): scroll fraction -> video.currentTime, with a lerp for smoothness.
+   - STILLS FALLBACK: if there is no video (or it can't play / reduced-motion), cross-fade
+     the 4 scene images with a subtle zoom+pan. Also used when the file is opened over
+     file:// (the blob fetch below needs http://).
+
+   Two bugs this file already fixes (see docs/gotchas.md):
+   1. Never call video.load() after enabling the scrub — on a cached video it resets
+      duration to NaN and freezes the hero. We guard every seek with isFinite().
+   2. Some hosts serve mp4 without byte-range support -> video.seekable == [0,0] and every
+      seek snaps to 0. We fetch the whole file as a blob and use an object URL, which is
+      always fully seekable (and scrubs smoother). Falls back to the direct src on error.
+   ============================================================================ */
+(function () {
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ascent = document.getElementById('ascent');
+  if (!ascent) return;
+  var stage  = ascent.querySelector('.stage');
+  var video  = document.getElementById('ascentVid');
+  var rail   = document.getElementById('hero-rail');
+  var dots   = rail ? rail.querySelectorAll('i') : [];
+  var scenes = [].slice.call(ascent.querySelectorAll('.scene'));
+  var beats  = [].slice.call(ascent.querySelectorAll('.beat'));
+  var N = scenes.length;
+  function clamp(v, a, b) { return v < a ? a : (v > b ? b : v); }
+  function ease(t) { return t * t * (3 - 2 * t); }
+
+  /* ---- video scrub mode ---- */
+  var videoMode = false, currentTime = 0, targetTime = 0;
+  function enableVideo() {
+    if (reduced || videoMode || !video) return;
+    if (!isFinite(video.duration) || video.duration <= 0) return;  // guard against NaN duration
+    videoMode = true; video.pause(); currentTime = video.currentTime || 0;
+    stage.classList.add('video-on');
+  }
+  if (video) {
+    video.addEventListener('loadedmetadata', enableVideo);
+    video.addEventListener('loadeddata', enableVideo);
+    video.addEventListener('canplaythrough', enableVideo);
+    video.addEventListener('error', function () { videoMode = false; stage.classList.remove('video-on'); });
+    // Fetch as a blob for full seekability. If fetch fails (e.g. file://), use direct src.
+    fetch(video.dataset.src)
+      .then(function (r) { if (!r.ok) throw new Error('http ' + r.status); return r.blob(); })
+      .then(function (b) { video.src = URL.createObjectURL(b); })
+      .catch(function () { video.src = video.dataset.src; });
+  }
+
+  var p = 0, inView = true;
+  function readScroll() {
+    var vh = innerHeight, rect = ascent.getBoundingClientRect(), total = ascent.offsetHeight - vh;
+    var scrolled = clamp(-rect.top, 0, total);
+    p = total > 0 ? scrolled / total : 1;
+    inView = rect.bottom > 0 && rect.top < vh;
+    if (rail) rail.classList.toggle('show', rect.bottom > vh * 0.5 && rect.top <= 0);
+  }
+  function render() {
+    if (reduced) return;
+    var seg = 1 / N, FADE = 0.22, active = Math.min(N - 1, Math.floor(p / seg));
+    var dur = videoMode && video ? video.duration : NaN;
+    if (videoMode && isFinite(dur) && dur > 0) {
+      targetTime = p * Math.max(0, dur - 0.05);
+      if (!isFinite(currentTime)) currentTime = 0;       // self-heal, never stay poisoned
+      currentTime += (targetTime - currentTime) * 0.16;  // lerp -> smooth scrub
+      if (Math.abs(targetTime - currentTime) > 0.005) { try { video.currentTime = currentTime; } catch (e) {} }
+    } else {
+      scenes.forEach(function (s, i) {
+        var start = i * seg, end = start + seg, t = clamp((p - start) / seg, 0, 1), op;
+        if (i === 0) { op = p < end - seg * FADE ? 1 : clamp((end - p) / (seg * FADE), 0, 1); }
+        else {
+          var fi = clamp((p - (start - seg * FADE)) / (seg * FADE), 0, 1),
+              fo = (i === N - 1) ? 1 : clamp((end - p) / (seg * FADE), 0, 1);
+          op = Math.min(fi, fo);
+        }
+        s.style.opacity = op.toFixed(3);
+        var img = s.querySelector('img');
+        if (img) { var ty = (1 - t) * 4 - 2, sc = 1.12 - t * 0.07;
+          img.style.transform = 'translateY(' + ty.toFixed(2) + '%) scale(' + sc.toFixed(3) + ')'; }
+      });
+    }
+    beats.forEach(function (b, i) {
+      var start = i * seg, t = clamp((p - start) / seg, 0, 1), op;
+      if (i === 0) { op = p <= start + seg * 0.7 ? 1 : clamp((start + seg * 0.95 - p) / (seg * 0.25), 0, 1); }
+      else if (i === N - 1) { op = clamp((t - 0.18) / 0.22, 0, 1); }
+      else { var fi = clamp((t - 0.18) / 0.2, 0, 1), fo = clamp((0.95 - t) / 0.2, 0, 1); op = Math.min(fi, fo); }
+      op = ease(op); b.style.opacity = op.toFixed(3);
+      b.style.transform = 'translateY(' + ((1 - op) * 18).toFixed(1) + 'px)';
+      b.style.pointerEvents = op > 0.5 ? 'auto' : 'none';
+    });
+    dots.forEach(function (d, i) { d.classList.toggle('on', i === active); });
+  }
+  function loop() { if (inView) render(); requestAnimationFrame(loop); }
+  addEventListener('scroll', readScroll, { passive: true });
+  addEventListener('resize', readScroll, { passive: true });
+  readScroll(); render(); requestAnimationFrame(loop);
+})();
+
+/* scroll-reveal for document-body sections */
+(function () {
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.rv').forEach(function (el) { io.observe(el); });
+})();
+</script>
+
+</body>
+</html>

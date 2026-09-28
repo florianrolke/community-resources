@@ -1,0 +1,110 @@
+[
+  {
+    "company": "Pinnacle Financial Advisors",
+    "city": "Metro City",
+    "website": "https://pinnaclefa.com",
+    "linkedin": "https://www.linkedin.com/in/sarah-mitchell-cfp",
+    "research": {
+      "description": "Pinnacle Financial Advisors provides comprehensive wealth management, retirement planning, and investment advisory services to high-net-worth individuals and business owners.",
+      "industry": "Financial Services / Wealth Management",
+      "estimated_size": "11-50",
+      "years_in_business": "12",
+      "founders_owners": [
+        {"name": "Sarah Mitchell", "role": "Managing Director & Founder", "linkedin_url": "https://www.linkedin.com/in/sarah-mitchell-cfp"}
+      ],
+      "notable_info": "Named Top 100 Financial Advisors in Kansas by Forbes 2025",
+      "source": "perplexity_sonar"
+    },
+    "email": "sarah@pinnaclefa.com",
+    "email_source": "website_scrape",
+    "email_verification": {"is_reachable": "safe", "can_connect_smtp": true, "is_deliverable": true},
+    "icp_tier": "A",
+    "icp_label": "High-Value Services",
+    "source": "chamber",
+    "enriched_at": "2026-03-15T18:45:00Z"
+  },
+  {
+    "company": "BrightPath Digital Marketing",
+    "city": "Metro City",
+    "website": "https://brightpathdigital.com",
+    "linkedin": "https://www.linkedin.com/in/david-chen-marketing",
+    "research": {
+      "description": "BrightPath Digital Marketing is a full-service digital agency specializing in SEO, PPC, social media management, and web design for small-to-medium businesses.",
+      "industry": "Digital Marketing / Advertising Agency",
+      "estimated_size": "5-10",
+      "years_in_business": "6",
+      "founders_owners": [
+        {"name": "David Chen", "role": "CEO & Founder"}
+      ],
+      "source": "perplexity_sonar"
+    },
+    "email": "david@brightpathdigital.com",
+    "email_source": "pattern_generated",
+    "email_verification": {"is_reachable": "risky", "can_connect_smtp": true, "is_deliverable": false},
+    "icp_tier": "A",
+    "icp_label": "High-Value Services",
+    "source": "chamber",
+    "enriched_at": "2026-03-15T18:47:30Z"
+  },
+  {
+    "company": "Summit Legal Group",
+    "city": "Metro City",
+    "website": "https://summitlegalgroup.com",
+    "linkedin": "https://www.linkedin.com/in/jennifer-walsh-attorney",
+    "research": {
+      "description": "Summit Legal Group is a business law firm providing corporate formation, contract negotiation, M&A advisory, and intellectual property services.",
+      "industry": "Legal Services / Business Law",
+      "estimated_size": "11-50",
+      "years_in_business": "18",
+      "founders_owners": [
+        {"name": "Jennifer Walsh", "role": "Senior Partner"}
+      ],
+      "source": "perplexity_sonar"
+    },
+    "email": "jwalsh@summitlegalgroup.com",
+    "email_source": "website_scrape",
+    "email_verification": {"is_reachable": "safe", "can_connect_smtp": true, "is_deliverable": true},
+    "icp_tier": "B",
+    "icp_label": "Professional Services",
+    "source": "chamber",
+    "enriched_at": "2026-03-15T18:50:15Z"
+  },
+  {
+    "company": "TrueNorth IT Solutions",
+    "city": "Metro City",
+    "website": "https://truenorthit.com",
+    "linkedin": null,
+    "research": {
+      "description": "TrueNorth IT Solutions provides managed IT services, cybersecurity consulting, and cloud migration for businesses in the Kansas City metro area.",
+      "industry": "Information Technology / Managed Services",
+      "estimated_size": "11-50",
+      "source": "perplexity_sonar"
+    },
+    "email": "info@truenorthit.com",
+    "email_source": "website_scrape_generic",
+    "email_verification": {"is_reachable": "safe", "can_connect_smtp": true, "is_deliverable": true},
+    "icp_tier": "A",
+    "icp_label": "High-Value Services",
+    "source": "chamber",
+    "enriched_at": "2026-03-15T18:52:45Z"
+  },
+  {
+    "company": "Heartland Roofing & Restoration",
+    "city": "Metro City",
+    "website": "https://heartlandroofing.com",
+    "linkedin": "https://www.linkedin.com/in/mike-rodriguez-roofing",
+    "research": {
+      "description": "Heartland Roofing & Restoration is a full-service roofing and storm damage restoration company serving the greater Kansas City area.",
+      "industry": "Construction / Roofing",
+      "estimated_size": "1-10",
+      "source": "perplexity_sonar"
+    },
+    "email": "mike@heartlandroofing.com",
+    "email_source": "pattern_generated",
+    "email_verification": {"is_reachable": "unknown", "note": "REACHER_API_URL not configured"},
+    "icp_tier": "C",
+    "icp_label": "Local Trades",
+    "source": "chamber",
+    "enriched_at": "2026-03-15T18:55:00Z"
+  }
+]

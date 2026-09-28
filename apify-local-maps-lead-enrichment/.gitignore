@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+data/
+leads/
+outputs/
+checkpoints/
+*.log
+

@@ -1,0 +1,11 @@
+# Core pipeline
+requests>=2.31
+numpy>=1.24
+Pillow>=10.0
+
+# Optional: separating a voice from background music before cloning.
+# Needs torch; CPU is fine (~5-8 min per 4-minute chunk).
+#   python -m demucs --two-stems=vocals -o out/ input.wav
+# demucs>=4.0
+
+# ffmpeg and ffprobe must be installed separately and on your PATH.

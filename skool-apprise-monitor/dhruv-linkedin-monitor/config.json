@@ -1,0 +1,34 @@
+{
+  "tenant_id": "dhruv",
+  "display_name": "Dhruv — LinkedIn Post Alerts",
+  "community_slug": "aiautomationsbyjack",
+  "monitor_type": "posts_only",
+
+  "ntfy": {
+    "url": "https://push.florianrolke.com/dhruv-linkedin-alerts",
+    "priority": "default",
+    "tags": "linkedin"
+  },
+
+  "keywords": [
+    "linkedin", "linked in", "linkedin profile", "linkedin strategy",
+    "linkedin content", "linkedin growth", "linkedin post",
+    "linkedin engagement", "linkedin outreach", "linkedin leads",
+    "linkedin connections", "linkedin algorithm", "linkedin marketing",
+    "linkedin brand", "linkedin networking", "linkedin funnel",
+    "linkedin dms", "linkedin automation", "personal branding",
+    "linkedin creator", "linkedin followers", "linkedin impressions",
+    "linkedin carousel", "linkedin newsletter", "linkedin articles",
+    "linkedin reach", "linkedin views", "linkedin banner",
+    "linkedin headline", "linkedin bio", "linkedin summary",
+    "linkedin hook", "linkedin tips"
+  ],
+
+  "scraping": {
+    "max_pages_per_run": 2,
+    "interval_seconds": 180,
+    "rate_limit_between_pages": 5
+  },
+
+  "notes": "Standalone monitor for Dhruv. Runs alongside main skool_apprise_monitor in same Docker container. Sends only to ntfy (no email). Uses shared SKOOL_AUTH_TOKEN."
+}

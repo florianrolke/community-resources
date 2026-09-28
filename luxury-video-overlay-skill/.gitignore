@@ -1,0 +1,33 @@
+# Secrets
+.env
+.env.*
+!.env.example
+credentials.json
+token.json
+*.pem
+*.key
+
+# Private media and generated renders
+*.mp4
+*.mov
+*.m4v
+*.avi
+*.wav
+*.mp3
+*.aac
+out/
+.tmp/
+render-logs/
+
+# Dependencies and caches
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+.cache/
+.DS_Store
+
+# Local editor state
+.idea/
+.vscode/

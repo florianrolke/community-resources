@@ -1,0 +1,21 @@
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+.tmp/
+data/*.csv
+data/*.json
+reports/*.csv
+reports/*.json
+reports/*.html
+reports/*.md
+!data/.gitkeep
+!reports/.gitkeep
+
+# Client deliverables and scraped output — yours, not the repo's
+dist/
+data/*.csv
+data/*.json
+!data/apify-payloads/*.json
+.tmp*

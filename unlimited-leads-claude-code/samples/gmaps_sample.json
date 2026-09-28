@@ -1,0 +1,40 @@
+[
+  {
+    "business_name": "Sawtooth Barbers",
+    "category": "Barber shop",
+    "address": "114 Example St, Tuscaloosa, AL 35401",
+    "city": "Tuscaloosa",
+    "state": "AL",
+    "phone": "+1 205-555-0142",
+    "website": "https://sawtoothbarbers.example.com",
+    "rating": 4.8,
+    "review_count": 214,
+    "emails": "hello@sawtoothbarbers.example.com",
+    "instagram": "https://instagram.com/example_sawtooth",
+    "summary": "A three-chair barber shop in downtown Tuscaloosa focused on classic cuts and hot-towel shaves, serving students and local professionals. Open six days a week with online booking.",
+    "fact_1": "Three chairs, walk-ins welcome",
+    "fact_2": "Online booking available",
+    "fact_3": "Open six days a week",
+    "fact_4": "Specialises in hot-towel shaves",
+    "fact_5": ""
+  },
+  {
+    "business_name": "Crimson Cuts",
+    "category": "Barber shop",
+    "address": "2201 Example Ave, Tuscaloosa, AL 35404",
+    "city": "Tuscaloosa",
+    "state": "AL",
+    "phone": "+1 205-555-0178",
+    "website": "",
+    "rating": 4.5,
+    "review_count": 89,
+    "emails": "",
+    "instagram": "",
+    "summary": "",
+    "fact_1": "",
+    "fact_2": "",
+    "fact_3": "",
+    "fact_4": "",
+    "fact_5": ""
+  }
+]

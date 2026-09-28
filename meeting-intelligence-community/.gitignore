@@ -1,0 +1,9 @@
+.env
+data/
+credentials/
+token*.json
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.pyc
+neo4j_data/

@@ -1,0 +1,23 @@
+# secrets — never commit
+.env
+.env.*
+!.env.example
+*.token
+token*.json
+credentials.json
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# generation output (regenerated; can be large)
+kie-pipeline/output/
+*.task.json
+
+# os / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

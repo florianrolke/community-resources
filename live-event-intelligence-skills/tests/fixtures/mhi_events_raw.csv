@@ -1,0 +1,5 @@
+name,date,venue,city,state,country,type,url,organizer,source,description
+MHI 2026 Congress & Expo,2026-04-07,MGM Grand,Las Vegas,NV,US,conference,https://www.manufacturedhousing.org/events/congress-expo/,Manufactured Housing Institute,official,"Premier annual gathering for manufactured housing professionals"
+MHI 2026 Congress & Expo,2026-04-07,MGM Grand,Las Vegas,NV,US,conference,https://www.manufacturedhousing.org/events/congress-expo/,Manufactured Housing Institute,duplicate,"Duplicate row to test URL dedupe"
+MHI Annual Meeting,2026-09-27,,Tucson,AZ,US,annual meeting,https://www.manufacturedhousing.org/events-landing/annual-meeting/,Manufactured Housing Institute,official,"Members-only annual meeting"
+WMA Convention & Expo,2026-10-26,M Resort,Henderson,NV,US,convention,https://www.wma.org/convention-expo,Western Manufactured Housing Communities Association,official,"Manufactured housing communities convention"

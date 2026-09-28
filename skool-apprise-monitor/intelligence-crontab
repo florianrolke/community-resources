@@ -1,0 +1,13 @@
+# Skool Intelligence System v2 — Cron Schedule (all times EST → UTC)
+SHELL=/bin/bash
+
+# 3x/day intelligence runs at 8am, 2pm, 8pm EST (13:00, 19:00, 01:00 UTC)
+0 13 * * * root source /app/.env && cd /app && python execution/skool_intelligence_orchestrator_v2.py --tenant aiautomationsbyjack >> /var/log/intelligence.log 2>&1
+0 19 * * * root source /app/.env && cd /app && python execution/skool_intelligence_orchestrator_v2.py --tenant aiautomationsbyjack >> /var/log/intelligence.log 2>&1
+0 1  * * * root source /app/.env && cd /app && python execution/skool_intelligence_orchestrator_v2.py --tenant aiautomationsbyjack >> /var/log/intelligence.log 2>&1
+
+# Daily digest at 11pm EST (04:00 UTC)
+0 4  * * * root source /app/.env && cd /app && python execution/skool_daily_digest_v2.py --tenant aiautomationsbyjack >> /var/log/intelligence.log 2>&1
+
+# Weekly report on Sunday 10pm EST (03:00 UTC Monday)
+0 3  * * 1 root source /app/.env && cd /app && python execution/skool_weekly_report_v2.py --tenant aiautomationsbyjack >> /var/log/intelligence.log 2>&1

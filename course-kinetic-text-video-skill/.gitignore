@@ -1,0 +1,39 @@
+# Secrets
+.env
+.env.*
+*.pem
+*.key
+id_rsa
+id_ed25519
+credentials.json
+token.json
+
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build/render outputs
+out/
+dist/
+build/
+.next/
+.cache/
+.render-cache/
+.render-tmp/
+
+# Large/private media
+*.mp4
+*.mov
+*.mkv
+*.avi
+*.webm
+*.wav
+*.mp3
+*.aac
+*.m4a
+
+# OS/editor
+.DS_Store
+Thumbs.db
+*.log
+

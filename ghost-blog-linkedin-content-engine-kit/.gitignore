@@ -1,0 +1,16 @@
+.env
+linkedin-setup/.env
+linkedin-setup/data/
+.tmp/
+__pycache__/
+*.pyc
+.venv/
+venv/
+content-drafts/*.html
+theme-notes/**/*.json
+theme-notes/**/*.jsonl
+theme-notes/**/*-source-notes.md
+theme-notes/**/*-questions.md
+theme-notes/**/*-faqs.md
+!theme-notes/.gitkeep
+!theme-notes/**/.gitkeep

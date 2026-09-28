@@ -1,0 +1,17 @@
+.env
+.env.*
+!.env.example
+!.env.template
+*.pem
+*.key
+*.ppk
+token*.json
+!token*.json.example
+credentials.json
+client_secret*.json
+node_modules/
+.venv/
+venv/
+__pycache__/
+.tmp/
+*.log

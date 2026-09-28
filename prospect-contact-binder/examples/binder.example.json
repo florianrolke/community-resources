@@ -1,0 +1,80 @@
+{
+  "title": "Behavioral Health Tech 2026",
+  "subtitle": "Your Company · Private Binder",
+  "owner": "Your Client · Their Company",
+  "event_dates": "September 22–24, 2026",
+  "venue": "Gaylord Opryland Resort & Convention Center",
+  "city": "Nashville, TN",
+  "hero_image": "assets/nashville-hero.jpg",
+  "hero_credit": "Nashville skyline — Quintin Soloviev, CC BY 4.0. Swap in your own host city, see README",
+  "intro": "A real example: everyone publicly listed for Behavioral Health Tech 2026, scraped from the conference's own site. Swap in your own conference and CSVs.",
+  "sections": [
+    {
+      "id": "speakers",
+      "label": "2026 Speakers",
+      "icon": "&#127908;",
+      "accent": "blue",
+      "csv": "examples/speakers-sample.csv",
+      "blurb": "Everyone on stage, with title, company and a LinkedIn link where the profile was verified on both first and last name.",
+      "columns": [
+        "person_name",
+        "title",
+        "organization",
+        "linkedin_url",
+        "confidence"
+      ],
+      "console": true,
+      "pitch": "speaker",
+      "console_sub": "One-click Gmail drafts + LinkedIn messages. Nothing sends automatically — you review each draft.",
+      "legend": "<b>Speakers</b> publicly listed for the event. The <b>speaker pitch</b> leads with shared attendance. Your <b>signature is appended automatically</b>. Pace sends at ~20–40/day."
+    },
+    {
+      "id": "contacts",
+      "label": "Sponsor Decision-Makers",
+      "icon": "&#127919;",
+      "accent": "green",
+      "csv": "examples/sponsor-contacts-sample.csv",
+      "blurb": "Marketing and brand leadership found inside the sponsor companies. Check the Confidence column before reaching out.",
+      "columns": [
+        "person_name",
+        "title",
+        "organization",
+        "linkedin_url",
+        "website",
+        "confidence"
+      ]
+    },
+    {
+      "id": "sponsors",
+      "label": "Sponsors & Exhibitors",
+      "icon": "&#127970;",
+      "accent": "amber",
+      "csv": "examples/sponsors-sample.csv",
+      "blurb": "Companies from the sponsor logo wall, with websites. They already pay for visibility at events.",
+      "columns": [
+        "organization",
+        "website",
+        "role_type",
+        "confidence"
+      ]
+    }
+  ],
+  "splash_title": "BEHAVIORAL<br>HEALTH TECH",
+  "splash_sub": "Every speaker, sponsor and decision-maker publicly listed — with drafts, LinkedIn messages and verified profiles in one place.",
+  "sender": {
+    "name": "Your Name",
+    "signature": "Your Name\nYour Company\nyourcompany.com"
+  },
+  "pitches": {
+    "speaker": {
+      "subject": "Your {event} session — quick question",
+      "body": "Hi {first},\n\nI saw you're speaking at {event} in {city}. I'll be there too.\n\n[One or two lines on what you do and the closest thing you've done before.]\n\n[One line on what they'd get out of it.]\n\nWorth fifteen minutes before then?\n\n{signature}",
+      "linkedin": "Hi {first} — saw you're speaking at {event}. I'll be there too. [One line on what you do.] Would value connecting beforehand."
+    },
+    "default": {
+      "subject": "{company} — {event} in {city}",
+      "body": "Hi {first},\n\nI saw {company} on the {event} list. I'll be there in {city}.\n\n[What you do, and the closest relevant thing you've done.]\n\nWorth a short call before the event?\n\n{signature}",
+      "linkedin": "Hi {first} — saw {company} on the {event} list. I'll be there too. [What you do.] Would value connecting."
+    }
+  }
+}

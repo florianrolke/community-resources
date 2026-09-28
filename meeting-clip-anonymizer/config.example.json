@@ -1,0 +1,49 @@
+{
+  "_comment": "Copy to config.json and edit. Times are seconds in the ORIGINAL recording.",
+  "source_video": "recording.mp4",
+  "transcript_json": "transcript.json",
+  "_transcript_note": "Word-level transcript: {\"words\":[{\"word\":\"...\",\"start\":s,\"end\":s}, ...]} (e.g. OpenAI whisper-1, word timestamps).",
+
+  "voice": {
+    "anonymize": true,
+    "pitch": 0.82,
+    "_pitch_note": "<1 deeper (anonymized). 0.80-0.86 = clear but natural for male voices.",
+    "shift_rule": "speaker_view",
+    "_shift_rule_note": "speaker_view = shift when the OTHER person is the on-screen tile >=0.8s; or 'intervals' to list manually."
+  },
+
+  "face": {
+    "hide_other_person": true,
+    "method": "branded_card",
+    "_method_note": "branded_card = cover with logo + animated bullets when the other person is shown."
+  },
+
+  "brand": {
+    "logo_png": "assets/logo.png",
+    "forest": [9, 36, 15],
+    "gold": [201, 169, 110],
+    "music": "assets/background-music.mp3",
+    "tagline": "Your Tagline Here"
+  },
+
+  "pii_bleep_words": ["partner-name", "client-name", "city"],
+  "bleep_financial_figures": true,
+
+  "clips": {
+    "example-clip": {
+      "start": 946.0,
+      "end": 1020.0,
+      "broll_theme": "outreach",
+      "card_bullets": ["Key point one", "Key point two", "Key point three"],
+      "circles": [["spoken phrase anchor", "DISPLAY TEXT"], ["another phrase", "CIRCLED PHRASE"]],
+      "cards": [["spoken anchor", "full_screen_statement", {"eyebrow": "Section", "title": "Setup", "goldTitle": "the payoff", "body": "one line"}]]
+    }
+  },
+
+  "render": {
+    "remote": "root@YOUR_SERVER_IP",
+    "ssh_key": "~/.ssh/your_key",
+    "remotion_composition": "LuxuryCourseHybridEdit",
+    "_note": "Optional. Omit to stop after the local/base cut and edit elsewhere."
+  }
+}

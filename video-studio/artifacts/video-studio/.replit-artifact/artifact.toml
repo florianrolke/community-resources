@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Video Studio"
+description = "A personal video post-production pipeline for a creator: upload raw videos and scripts, strip or extract audio, transcribe existing voiceovers, generate new voiceovers in the creator's own cloned voice (Fish Audio), insert AI-generated b-roll, render finished MP4s, and deliver them automatically. Jobs run in a background queue in the cloud."
+version = "1.0.0"
+id = "artifacts/video-studio"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23687
+
+[services.development]
+run = "pnpm --filter @workspace/video-studio run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/video-studio", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/video-studio/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23687"
+BASE_PATH = "/"

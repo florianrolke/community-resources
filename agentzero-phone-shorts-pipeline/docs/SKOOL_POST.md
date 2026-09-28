@@ -1,0 +1,7 @@
+# Skool Post Draft
+
+I finally got a phone-to-server Shorts pipeline working with AgentZero. The workflow is simple: record on iPhone, open a tiny upload page, upload the clip, and the server renders the short. The render does silence removal, local Whisper transcription, transcript-based intro selection, burned-in captions, a logo stinger, branded whoosh/chime sound effects, a ducked music bed, metadata/title generation, and optional YouTube upload. The big win is that my laptop no longer has to render anything; a normal VPS can process the clips in the background.
+
+The repo includes the upload app, render worker, editable pipeline config, Docker/supervisor launcher, and a Codex/AgentZero skill that explains the operating procedure. The editing config lives in a mounted server folder, so you can tune the SOP, logo, SFX, music bed, and YouTube settings without rebuilding the Docker image every time. It also validates uploads before rendering, so partial iPhone uploads or broken MOV files get rejected instead of wasting render time.
+
+I intentionally did not include any `.env` files, API keys, OAuth tokens, private videos, rendered outputs, logos, or licensed audio files. You bring your own AgentZero deployment, your own OpenRouter key if you want LLM metadata, your own logo/SFX/music assets, and your own YouTube OAuth token if you want publishing. The goal is to give people the installation pattern and the working server-side architecture, not leak anyone’s private setup.

@@ -1,0 +1,86 @@
+{
+  "videoSrc": "your-source-video.mp4",
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "durationSeconds": 622,
+  "moments": [
+    {
+      "start": 23.0,
+      "duration": 4.4,
+      "lines": ["Validate demand", "before you build"],
+      "highlightLines": [1],
+      "circleWord": "build",
+      "circleLeftPct": 72,
+      "circleWidth": 270,
+      "zoom": 1.085,
+      "flash": true
+    },
+    {
+      "start": 76.6,
+      "duration": 4.2,
+      "lines": ["Not Upwork", "go in person"],
+      "highlightLines": [1],
+      "circleWord": "person",
+      "circleLeftPct": 72,
+      "circleWidth": 300,
+      "zoom": 1.085,
+      "flash": true
+    },
+    {
+      "start": 91.0,
+      "duration": 4.5,
+      "lines": ["Don't sell AI", "sell the outcome"],
+      "highlightLines": [1],
+      "circleWord": "outcome",
+      "circleLeftPct": 71,
+      "circleWidth": 340,
+      "zoom": 1.085,
+      "flash": true
+    },
+    {
+      "start": 267.0,
+      "duration": 4.5,
+      "lines": ["It's not 2018", "digital outreach changed"],
+      "highlightLines": [1],
+      "circleWord": "changed",
+      "circleLeftPct": 76,
+      "circleWidth": 330,
+      "zoom": 1.085,
+      "flash": true
+    },
+    {
+      "start": 448.0,
+      "duration": 4.5,
+      "lines": ["You don't need", "to be unique"],
+      "highlightLines": [1],
+      "circleWord": "unique",
+      "circleLeftPct": 73,
+      "circleWidth": 300,
+      "zoom": 1.085
+    },
+    {
+      "start": 564.0,
+      "duration": 4.7,
+      "lines": ["Validate first", "build last"],
+      "highlightLines": [0, 1],
+      "circleWord": "first",
+      "circleLeftPct": 68,
+      "circleWidth": 260,
+      "zoom": 1.085,
+      "flash": true
+    }
+  ],
+  "slowPushIns": [
+    {
+      "start": 152.2,
+      "duration": 5.6,
+      "zoom": 1.055
+    },
+    {
+      "start": 364.0,
+      "duration": 5.6,
+      "zoom": 1.055
+    }
+  ]
+}

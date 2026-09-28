@@ -1,0 +1,26 @@
+# secrets
+.env
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# generated build output (users build their own)
+/dist/
+
+# the user's OWN working media in the repo-root assets/hero (not committed).
+# NOTE: anchored with a leading slash so example media under
+# examples/*/assets/hero/ IS committed (that's the free preview).
+/assets/hero/*.jpg
+/assets/hero/ascent.mp4
+
+# raw per-scene clips + happyhorse checkpoint — never ship these ANYWHERE
+# (only the stitched ascent.mp4 is used). Unanchored = matches every folder.
+clip*.mp4
+.happyhorse_jobs.json
+
+# OS
+.DS_Store
+Thumbs.db
