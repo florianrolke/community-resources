@@ -1,0 +1,32 @@
+{
+  "site_url": "https://example.com",
+  "site_name": "Example Bike Workshop",
+  "description": "Sample bicycle maintenance guides. Replace this fictional business and its example content before publishing.",
+  "language": "en-US",
+  "entity_type": "Organization",
+  "author_name": "Example author",
+  "phone": "",
+  "email": "",
+  "areas_served": [],
+  "social_profiles": [],
+  "brand_person": null,
+  "sections": {
+    "": "Home",
+    "guides": "Guides"
+  },
+  "cta": {
+    "heading": "Have a maintenance question?",
+    "body": "Read our contact page for the next step.",
+    "label": "Contact",
+    "url": "/contact/"
+  },
+  "audience": "People preparing a bicycle for a workshop visit",
+  "voice": "Write directly. Explain technical terms. Do not invent first-hand experience or business facts.",
+  "country_code": "us",
+  "language_code": "en",
+  "subreddits": [],
+  "seed_queries": [
+    "what to bring to a bicycle service appointment",
+    "how to describe a bicycle problem to a mechanic"
+  ]
+}

@@ -45,7 +45,7 @@ in your own `.env`. No resource ships with credentials.
 
 | Folder | What it does |
 |---|---|
-| [aeo-blog-template](aeo-blog-template/) | Reusable AEO local-blog template - original styling (clone of the AEO blog engine before client-specific restyle) (link to its own repo) |
+| [aeo-blog-template](aeo-blog-template/) | AEO blog workflow, research scripts, configurable static-site engine, FAQ enrichment, scheduling, and a generic example |
 | [exact-website-clone](exact-website-clone/) | Clone any prospect's website header + deploy with personalized copy. Cold outreach infrastructure. |
 | [headshot-hero-website](headshot-hero-website/) | Find a prospect's photo, remove background, float as hero on redesigned website. ~$0.15/prospect. |
 | [leadmagnet-pipeline-api](leadmagnet-pipeline-api/) | Lead Magnet Pipeline API - Self-hosted FastAPI server for website redesign, voice widget, and landing page generation |
