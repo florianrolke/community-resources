@@ -99,9 +99,11 @@ def replicate(item, model, dry):
     r = post(f"https://api.replicate.com/v1/models/{model}/predictions", {"input": inp}, headers, dry, item["name"])
     if r is None:
         return None
+    poll = r.get("urls", {}).get("get", "")
+    assert poll.startswith("https://api.replicate.com/"), "unexpected status address; the key is only sent to api.replicate.com"
     while r.get("status") not in ("succeeded", "failed", "canceled"):
         time.sleep(3)
-        with urllib.request.urlopen(urllib.request.Request(r["urls"]["get"], headers=headers), timeout=60) as resp:
+        with urllib.request.urlopen(urllib.request.Request(poll, headers=headers), timeout=60) as resp:
             r = json.loads(resp.read())
     assert r["status"] == "succeeded", r.get("error")
     out = r["output"][0] if isinstance(r["output"], list) else r["output"]
