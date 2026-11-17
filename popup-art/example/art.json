@@ -1,0 +1,35 @@
+{
+  "popup": {
+    "kind": "dialog",
+    "root": "#offer-popup",
+    "card": ".offer-card",
+    "width": "560px",
+    "button": "#offer-popup .offer-cta"
+  },
+  "source_dir": "source-art",
+  "out_dir": "popup-art",
+  "public_url": "popup-art/popup-art.js",
+  "version": "1",
+  "backdrop": "lighter",
+  "card_css": "background:linear-gradient(180deg,#fffdf6,#f8f1e1);border:1.5px solid transparent;border-image:linear-gradient(180deg,#c59a35,#f7e3a0 30%,#c9a03a 55%,#f0d98f 80%,#b88a2a) 1;box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 0 0 5px #fffdf6,inset 0 0 0 6px rgba(197,154,53,.55)",
+  "hover_scale": 1.06,
+  "pieces": [
+    {"name": "canopy", "layer": "back", "css_w": 960,
+     "cutout": {"fade": [0, 0.1, 0, 0.1], "lo": 10, "hi": 60, "solid": 30, "free": true},
+     "style": "width:960px;left:50%;margin-left:-480px;top:-178px", "depth": 6, "from": [0, -26], "delay": 0.05, "shadow": ""},
+    {"name": "jaguar", "layer": "front", "css_w": 380,
+     "cutout": {"fade": [0.05, 0, 0.1, 0], "solid": 20},
+     "style": "width:auto;height:min(680px,82vh);left:-318px;bottom:-96px", "depth": 20, "from": [-36, 0], "delay": 0.2,
+     "shadow": "drop-shadow(18px 22px 26px rgba(0,0,0,.55))"},
+    {"name": "frog", "layer": "front", "css_w": 200,
+     "cutout": {"fade": [0, 0.16, 0.05, 0], "solid": 20},
+     "style": "width:200px;right:-92px;bottom:-66px", "depth": 28, "from": [0, 20], "delay": 0.55,
+     "shadow": "drop-shadow(-8px 14px 14px rgba(0,0,0,.5))"}
+  ],
+  "media": [
+    "@media(max-width:1180px){.rp-art .jaguar{height:560px;left:-262px;bottom:-80px}.rp-art .canopy{width:820px;margin-left:-410px;top:-150px}}",
+    "@media(max-width:900px){.rp-art .jaguar{display:none}.rp-art .frog{width:150px;right:-30px;bottom:-52px}}",
+    "@media(max-width:600px){.rp-art .canopy{width:640px;margin-left:-320px;top:-112px}.rp-art .frog{width:112px;right:-8px;bottom:-40px}}",
+    "@media(max-height:620px){.rp-art .jaguar,.rp-art .frog{display:none}}"
+  ]
+}

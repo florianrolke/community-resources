@@ -49,6 +49,7 @@ in your own `.env`. No resource ships with credentials.
 | [exact-website-clone](exact-website-clone/) | Clone any prospect's website header + deploy with personalized copy. Cold outreach infrastructure. |
 | [headshot-hero-website](headshot-hero-website/) | Find a prospect's photo, remove background, float as hero on redesigned website. ~$0.15/prospect. |
 | [leadmagnet-pipeline-api](leadmagnet-pipeline-api/) | Lead Magnet Pipeline API - Self-hosted FastAPI server for website redesign, voice widget, and landing page generation |
+| [popup-art](popup-art/) | Photorealistic cutout art around your website pop-up, loaded after the page so speed never suffers. Any image model (OpenAI, Gemini, Replicate, Floot or your own pictures), automatic cutouts, five-size browser check, demo included. |
 | [story-telling-header](story-telling-header/) | Cinematic scroll-scrub video storytelling header — describe 4 scenes, get a continuous camera-ascent AI hero. Blog + proposal skins. Powered by OpenRouter (Nano |
 | [website-leadmagnet-examples](website-leadmagnet-examples/) | Curated website lead magnet examples with hosted example1-example8 references. (link to its own repo) |
 

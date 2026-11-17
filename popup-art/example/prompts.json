@@ -1,0 +1,8 @@
+[
+  {"name": "canopy", "file": "source-art/canopy.jpg",
+   "prompt": "Photorealistic editorial photograph. A lush rainforest vine canopy seen from below: thick lianas, monstera and philodendron leaves and hanging orchids forming a natural arch, warm golden light filtering through. Isolated cutout on a pure black background (#000000), pure black at the left, right and bottom edges and in every gap between the leaves: no glow, no haze, no bokeh. No text, no logos."},
+  {"name": "jaguar", "file": "source-art/jaguar.jpg",
+   "prompt": "Photorealistic wildlife photograph. A calm jaguar walking down a vine-wrapped rainforest tree trunk, full body from head to tail completely inside the frame with empty black margin on every side. Isolated cutout on a pure black background (#000000). Warm golden side light. No text, no logos."},
+  {"name": "frog", "file": "source-art/frog.jpg",
+   "prompt": "Photorealistic macro photograph of a bright green Amazon tree frog sitting on a large leaf, whole frog and leaf inside the frame with empty black margin on every side. Isolated cutout on a pure black background (#000000). No text, no logos."}
+]

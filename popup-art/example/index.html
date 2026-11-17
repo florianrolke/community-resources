@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pop-up art demo</title>
+<style>
+  body{margin:0;font:18px/1.6 Georgia,"Times New Roman",serif;color:#2a241c;background:#f6f1e7}
+  main{max-width:720px;margin:0 auto;padding:56px 22px 120px}
+  h1{font-size:2.4rem;line-height:1.15;margin:0 0 18px}
+  .lead{font-size:1.15rem;color:#5a4c3c}
+  .open-btn{font:inherit;padding:12px 20px;border:1px solid #6b4a1e;background:#fff;color:#6b4a1e;cursor:pointer}
+  /* the site's own pop-up, before any art */
+  #offer-popup{border:0;padding:0;width:min(560px,calc(100% - 32px));background:#fffdf7;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+  #offer-popup::backdrop{background:rgba(0,0,0,.6)}
+  .offer-card{padding:34px 36px 26px;position:relative}
+  .offer-close{position:absolute;right:12px;top:8px;font-size:1.8rem;background:none;border:0;cursor:pointer;color:#5a4c3c}
+  .offer-eyebrow{font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:#7a5320;margin:0}
+  #offer-popup h2{font-size:1.8rem;font-weight:400;line-height:1.2;margin:14px 24px 14px 0}
+  .offer-cta{display:block;text-align:center;margin:22px 0 6px;padding:15px;background:linear-gradient(180deg,#8a6126,#674820);color:#fffaf2;text-decoration:none;font-size:1.05rem}
+  .offer-later{display:block;margin:4px auto 0;background:none;border:0;font:inherit;text-decoration:underline;cursor:pointer;color:#2a241c;padding:10px}
+</style>
+</head>
+<body>
+<main>
+  <h1>How to choose a rainforest retreat</h1>
+  <p class="lead">A demo article. The pop-up opens when the pointer leaves the window after five seconds, from the button below, or at once with #preview-popup at the end of the address.</p>
+  <p><button class="open-btn" type="button" data-open-offer>Open the pop-up</button></p>
+  <p>Lorem ipsum stands in for the article. Scroll, read, then move the pointer to the top edge of the window. The pictures around the pop-up are fetched only after this page has finished loading, so they never slow it down.</p>
+  <p>Every picture is a cutout generated on pure black, placed against the edges of the card, and moved a few pixels with the pointer for depth. Small screens drop pieces step by step.</p>
+</main>
+
+<dialog id="offer-popup" aria-labelledby="offer-title">
+  <div class="offer-card">
+    <button class="offer-close" type="button" aria-label="Close" data-close-offer>&times;</button>
+    <p class="offer-eyebrow">Rainforest retreats</p>
+    <h2 id="offer-title">What would you like to understand more deeply?</h2>
+    <p>Some questions deserve more time than daily life allows. Tell us what you are looking for and we will answer personally.</p>
+    <a class="offer-cta" href="#">Ask a question</a>
+    <button class="offer-later" type="button" data-close-offer>Keep reading</button>
+  </div>
+</dialog>
+
+<script>
+  // the site's own pop-up rules (unchanged by the art): exit intent after 5 s, once per visit, or from a button
+  (function(){
+    var d=document.getElementById('offer-popup'), armed=false, shown=false;
+    function open(){ if(d.open) return; shown=true; d.showModal(); var c=d.querySelector('.offer-cta'); if(c) c.focus({preventScroll:true}); }
+    setTimeout(function(){ armed=true; },5000);
+    document.addEventListener('mouseout',function(e){ if(armed&&!shown&&!e.relatedTarget&&e.clientY<=0) open(); });
+    document.querySelectorAll('[data-open-offer]').forEach(function(b){ b.addEventListener('click',open); });
+    d.addEventListener('click',function(e){ if(e.target.closest('[data-close-offer]')) d.close(); });
+    if(location.hash==='#preview-popup') open();
+  })();
+  /* popup-art: the art around the pop-up is fetched only after the page has finished loading */
+  (function(){function a(){var s=document.createElement('script');s.src='popup-art/popup-art.js?v=1';s.async=true;document.head.appendChild(s);}if(document.readyState==='complete')a();else window.addEventListener('load',a);})();
+</script>
+</body>
+</html>
